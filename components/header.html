@@ -1,0 +1,52 @@
+<!-- HEADER COMPONENT -->
+<header class="main-header">
+    <!-- Banner Superior con Imagen Real -->
+    <div class="top-banner">
+        <img src="https://www.supereduc.cl/wp-content/uploads/2026/08/header-atencionSIE@300x-scaled.png" 
+             alt="Superintendencia de Educación" 
+             class="banner-img">
+    </div>
+
+    <!-- Navegación Pública (NO Logueado) -->
+    <nav class="public-nav" id="publicNav">
+        <button class="nav-tab active" data-page="competencias">Competencias Supereduc</button>
+        <button class="nav-tab" data-page="otros-organismos">Competencias de otros organismos</button>
+        <button class="nav-tab" data-page="preguntas">Preguntas frecuentes</button>
+        <button class="nav-tab" data-page="fiscalizamos">Cómo fiscalizamos</button>
+        <button class="nav-tab" data-page="requerimientos">Proceso de requerimientos</button>
+    </nav>
+
+    <!-- Barra de Usuario (Logueado) -->
+    <nav class="user-nav" id="userNav" style="display: none;">
+        <div class="user-nav-container">
+            <div class="breadcrumb">
+                <a href="/index.html">Inicio</a> 
+                <span class="separator">&gt;</span> 
+                <span class="current-page" id="currentPage">Actualizar Datos</span>
+            </div>
+            
+            <div class="user-actions">
+                <div class="user-profile">
+                    <div class="user-icon">
+                        <i class="bi bi-person-fill"></i>
+                    </div>
+                    <span class="user-name" id="userName">Jaime Alberto Galleguillos Araya</span>
+                </div>
+                <div class="user-buttons">
+                    <button class="btn-user" onclick="window.location.href='/index.html'">
+                        <i class="bi bi-house-door-fill"></i> Inicio
+                    </button>
+                    <button class="btn-user dropdown-toggle">
+                        <i class="bi bi-bell-fill"></i> Notificaciones
+                    </button>
+                    <button class="btn-user active-page-btn" onclick="window.location.href='/pages/actualizar-datos.html'">
+                        <i class="bi bi-person-lines-fill"></i> Actualizar datos
+                    </button>
+                    <button class="btn-user btn-logout" onclick="logout()">
+                        <i class="bi bi-power"></i> Cerrar sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

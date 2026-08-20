@@ -1,0 +1,391 @@
+/* =========================================
+   VARIABLES Y RESET
+   ========================================= */
+:root {
+  --color-primary: #1b3a6b;
+  --color-secondary: #c84654;
+  --color-secondary-dark: #a83242;
+  --color-bg-light: #f4f6f9;
+  --color-text: #333333;
+  --color-text-muted: #6c757d;
+  --color-border: #dee2e6;
+  --font-body: "Roboto", sans-serif;
+  --font-heading: "Roboto Slab", serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg-light);
+  color: var(--color-text);
+  line-height: 1.5;
+  padding-top: 35px; /* Espacio para el banner de maqueta */
+}
+
+/* Banner de maqueta */
+.mockup-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ff9800;
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+  z-index: 9999;
+  font-size: 0.9rem;
+}
+
+/* =========================================
+   HEADER & BANNER
+   ========================================= */
+.main-header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.top-banner {
+  background: linear-gradient(135deg, #e8f0fe 0%, #fce8eb 100%);
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-placeholder {
+  text-align: center;
+  color: var(--color-primary);
+  opacity: 0.7;
+}
+
+.logo-supereduc {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+}
+
+.logo-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bar-blue {
+  width: 40px;
+  height: 6px;
+  background: #2d7dd2;
+  border-radius: 2px;
+}
+.bar-red {
+  width: 40px;
+  height: 6px;
+  background: var(--color-secondary);
+  border-radius: 2px;
+}
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.2;
+  text-align: left;
+}
+
+.logo-text span {
+  font-weight: 400;
+  color: var(--color-secondary);
+}
+
+/* =========================================
+   NAVEGACIÓN PÚBLICA (NO LOGUEADO)
+   ========================================= */
+.public-nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 20px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.nav-tab {
+  background-color: var(--color-secondary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-tab:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+.nav-tab.active {
+  background-color: var(--color-primary);
+  box-shadow: 0 2px 4px rgba(27, 58, 107, 0.3);
+}
+
+/* =========================================
+   NAVEGACIÓN DE USUARIO (LOGUEADO) - REFINADO
+   ========================================= */
+.user-nav {
+  background-color: #d5d7dd;
+  padding: 10px 0;
+  border-bottom: 1px solid #c0c3ca;
+}
+
+.user-nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 1rem;
+  color: #5a5f6b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+}
+
+.breadcrumb a {
+  color: #1a5fa8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb .separator {
+  color: #8a8f99;
+  font-size: 0.9rem;
+}
+
+.breadcrumb .current-page {
+  color: #5a5f6b;
+  font-weight: 400;
+}
+
+/* Acciones de usuario */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+/* Perfil de usuario */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: #2c3038;
+  font-size: 1rem;
+}
+
+.user-profile .user-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #2d7dd2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.user-profile .user-name {
+  font-size: 0.95rem;
+  color: #2c3038;
+}
+
+/* Botones de navegación */
+.user-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-user {
+  background-color: #b56b7a;
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+  box-shadow: 0 2px 4px rgba(181, 107, 122, 0.2);
+}
+
+.btn-user:hover {
+  background-color: #9b5565;
+  box-shadow: 0 3px 6px rgba(181, 107, 122, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-user i {
+  font-size: 1rem;
+}
+
+/* Botón Cerrar sesión - tono más oscuro */
+.btn-user.btn-logout {
+  background-color: #9b4f5e;
+  box-shadow: 0 2px 4px rgba(155, 79, 94, 0.2);
+}
+
+.btn-user.btn-logout:hover {
+  background-color: #7d3d4b;
+  box-shadow: 0 3px 6px rgba(155, 79, 94, 0.3);
+}
+
+/* Dropdown de notificaciones */
+.btn-user.dropdown-toggle::after {
+  content: "▾";
+  margin-left: 4px;
+  font-size: 0.8rem;
+}
+
+/* =========================================
+   CONTENIDO Y CONTROLES DE DEMO
+   ========================================= */
+.main-content {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  min-height: 300px;
+}
+
+.main-content h1 {
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  margin-bottom: 15px;
+}
+
+.demo-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-border);
+  z-index: 1000;
+  text-align: center;
+}
+
+.demo-controls p {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.demo-btn {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: 1px solid var(--color-border);
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.demo-btn:hover {
+  background: #f8f9fa;
+}
+
+.demo-btn.primary {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.demo-btn.primary:hover {
+  background: #152d55;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 1024px) {
+  .user-nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .user-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .user-buttons {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .btn-user {
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .btn-user {
+    min-width: 100%;
+  }
+
+  .user-profile {
+    width: 100%;
+  }
+
+  .public-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-tab {
+    width: 100%;
+  }
+}

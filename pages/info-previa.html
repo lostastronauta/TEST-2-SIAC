@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información Previa - Sistema Integral de Atención Ciudadana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --color-primary: #1B3A6B;
+            --color-secondary: #C84654;
+            --color-secondary-dark: #A83242;
+            --color-bg-light: #F4F6F9;
+            --color-text: #333333;
+            --color-text-muted: #6C757D;
+            --color-border: #DEE2E6;
+            --color-footer-bg: #0a1628;
+            --color-box: #2a4a8a;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg-light);
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+
+        /* HEADER AZUL */
+        .main-header {
+            background: linear-gradient(135deg, #1a2d5a 0%, #2a4a8a 100%);
+            padding: 30px 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: var(--color-primary);
+            text-align: center;
+            padding: 5px;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            flex: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* TABS ROJOS */
+        .nav-tabs-custom {
+            background: white;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            padding: 12px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-tabs-custom .tab-btn {
+            background: var(--color-secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 500;
+        }
+
+        .nav-tabs-custom .tab-btn:hover { background: var(--color-secondary-dark); }
+
+        /* BARRA USUARIO */
+        .user-bar {
+            background: #D5D7DD;
+            padding: 12px 0;
+            border-bottom: 1px solid #C0C3CA;
+        }
+
+        .user-bar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .breadcrumb {
+            font-size: 1rem;
+            color: #5A5F6B;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .breadcrumb a {
+            color: #1A5FA8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #2C3038;
+        }
+
+        .user-profile .user-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #2D7DD2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .user-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .btn-user {
+            background-color: #B56B7A;
+            border: none;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-body);
+            text-decoration: none;
+        }
+
+        .btn-user:hover { background-color: #9B5565; }
+        .btn-user.btn-logout { background-color: #9B4F5E; }
+
+        /* CONTENIDO INFO PREVIA */
+        .info-content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .info-box-large {
+            background: #f0f4ff;
+            border-left: 8px solid var(--color-primary);
+            padding: 40px;
+            border-radius: 4px;
+        }
+
+        .info-box-large-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .info-icon-large {
+            width: 40px;
+            height: 40px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .info-box-large h2 {
+            color: var(--color-primary);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .info-box-large ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .info-box-large ol li {
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 1.05rem;
+        }
+
+        .info-box-large .important {
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 20px 0;
+            font-size: 1.05rem;
+        }
+
+        .info-box-large p {
+            color: #444;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* BOTONES */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .btn-action {
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: var(--font-body);
+            border: none;
+        }
+
+        .btn-volver {
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-volver:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-continuar {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-continuar:hover {
+            background: #152D55;
+        }
+
+        /* SECCIÓN AZUL INFERIOR */
+        .blue-section {
+            background: var(--color-primary);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .blue-section .btn-footer {
+            background: white;
+            color: var(--color-primary);
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-family: var(--font-body);
+            font-weight: 500;
+        }
+
+        .blue-section p {
+            margin: 20px 0;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* FOOTER OSCURO */
+        .footer-dark {
+            background: var(--color-footer-bg);
+            color: white;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h5 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .footer-section ul { list-style: none; padding: 0; }
+        .footer-section ul li { margin-bottom: 10px; }
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .footer-section ul li a:hover { color: white; }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .social-links a .social-icon {
+            background: var(--color-secondary);
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .footer-bottom .contact-info {
+            font-size: 0.85rem;
+            color: #ccc;
+        }
+
+        .footer-logo-box {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #333;
+            font-size: 0.85rem;
+        }
+
+        .footer-logo-box .doc-icon {
+            background: #888;
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .supereduc-logo-footer {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+        }
+
+        .supereduc-logo-footer .barra {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 5px;
+        }
+
+        .supereduc-logo-footer .barra span {
+            height: 6px;
+            width: 60px;
+        }
+
+        .barra-blue { background: #3b82f6; }
+        .barra-red { background: var(--color-secondary); }
+
+        .footer-orgs {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding-top: 25px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-orgs p {
+            font-size: 0.85rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .orgs-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .org-btn {
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-weight: 500;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .org-btn.agencia { background: #5ba3d9; }
+        .org-btn.mineduc { background: #e04f3f; }
+        .org-btn.consejo { background: #f4c44a; color: #333; }
+
+        .barra-footer-final {
+            height: 15px;
+            background: var(--color-footer-bg);
+            display: flex;
+        }
+
+        .barra-footer-final .bf-blue { background: #3b82f6; flex: 1; }
+        .barra-footer-final .bf-red { background: var(--color-secondary); flex: 1; }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .footer-content { grid-template-columns: 1fr; }
+            .footer-bottom { grid-template-columns: 1fr; }
+            .orgs-buttons { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .header-title { font-size: 1.3rem; }
+            .logo-icon { width: 60px; height: 60px; }
+            .nav-tabs-custom { flex-direction: column; align-items: stretch; }
+            .nav-tabs-custom .tab-btn { width: 100%; margin-bottom: 5px; }
+            .user-bar-container { flex-direction: column; align-items: flex-start; }
+            .user-actions { width: 100%; flex-direction: column; align-items: flex-start; }
+            .user-buttons { width: 100%; flex-direction: column; }
+            .btn-user { width: 100%; justify-content: center; }
+            .info-box-large { padding: 25px; }
+            .info-box-large h2 { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER AZUL -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-icon">
+                <strong>Superintendencia<br>de Educación<br><br>Ministerio de<br>Educación<br><br>Gobierno de Chile</strong>
+            </div>
+            <h1 class="header-title">SISTEMA INTEGRAL DE<br>ATENCIÓN CIUDADANA</h1>
+            <div style="width: 80px;"></div>
+        </div>
+    </header>
+
+    <!-- TABS ROJOS -->
+    <nav class="nav-tabs-custom">
+        <button class="tab-btn">Competencias Supereduc</button>
+        <button class="tab-btn">Competencias de otros organismos</button>
+        <button class="tab-btn">Preguntas frecuentes</button>
+        <button class="tab-btn">Cómo fiscalizamos</button>
+        <button class="tab-btn">Proceso de requerimientos</button>
+    </nav>
+
+    <!-- BARRA USUARIO -->
+    <nav class="user-bar">
+        <div class="user-bar-container">
+            <div class="breadcrumb">
+                <a href="dashboard.html">Inicio</a> 
+                <span>&gt;</span> 
+                <span>Información Previa</span>
+            </div>
+            
+            <div class="user-actions">
+                <div class="user-profile">
+                    <div class="user-icon"><i class="bi bi-person-fill"></i></div>
+                    <span>Jaime Alberto Galleguillos Araya</span>
+                </div>
+                <div class="user-buttons">
+                    <a href="dashboard.html" class="btn-user"><i class="bi bi-house-door-fill"></i> Inicio</a>
+                    <a href="#" class="btn-user"><i class="bi bi-bell-fill"></i> Notificaciones</a>
+                    <a href="actualizar-datos.html" class="btn-user"><i class="bi bi-person-lines-fill"></i> Actualizar datos</a>
+                    <a href="login.html" class="btn-user btn-logout"><i class="bi bi-power"></i> Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO INFO PREVIA -->
+    <main class="info-content">
+        
+        <div class="info-box-large">
+            <div class="info-box-large-header">
+                <div class="info-icon-large">i</div>
+                <div style="flex: 1;">
+                    <h2>Antes de ingresar tu requerimiento. Si tienes un problema, te recomendamos:</h2>
+                    
+                    <ol>
+                        <li>Plantear la situación al establecimiento.</li>
+                        <li>Esperar su respuesta.</li>
+                        <li>Si no responde o consideras que no solucionó tu problema, puedes acudir a la Superintendencia.</li>
+                    </ol>
+
+                    <p class="important">*Importante: Continúa con tu solicitud si necesitas la intervención de la Superintendencia.</p>
+
+                    <p>Ten presente que, en las denuncias referidas a convivencia escolar, se priorizará siempre la gestión colaborativa para gestionar el conflicto planteado.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTONES VOLVER/CONTINUAR (INVERTIDOS) -->
+        <div class="action-buttons">
+            <a href="dashboard.html" class="btn-action btn-volver">Volver</a>
+            <a href="denuncia.html" class="btn-action btn-continuar">Continuar</a>
+        </div>
+
+    </main>
+
+    <!-- SECCIÓN AZUL INFERIOR -->
+    <section class="blue-section">
+        <button class="btn-footer">Preguntas frecuentes</button>
+        <p>Si tienes dudas respecto a la normativa educacional vigente, no olvides que puedes revisar toda la información de forma simple en nuestra sección de preguntas frecuentes.</p>
+        <button class="btn-footer">Busca tu oficina regional más cercana</button>
+        <p>Si tienes consultas, puedes contactarnos a nuestro servicio telefónico al <strong>600 3600 390</strong><br>Atención telefónica de lunes a viernes de 09:00 a 13:00 horas.</p>
+    </section>
+
+    <!-- FOOTER OSCURO -->
+    <footer class="footer-dark">
+        <div class="footer-content">
+            <div class="footer-section">
+                <ul>
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                    <li><a href="#">Mapa del Sitio</a></li>
+                    <li><a href="#">Políticas de privacidad</a></li>
+                    <li><a href="#">Políticas de Seguridad de la Información</a></li>
+                    <li><a href="#">Trabaja con nosotros</a></li>
+                    <li><a href="#">Estados Financieros</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h5>Síganos en redes sociales</h5>
+                <div class="social-links">
+                    <a href="#"><span class="social-icon">f</span> Facebook / supereducCL</a>
+                    <a href="#"><span class="social-icon">🐦</span> Twitter / supereduc_cl</a>
+                    <a href="#"><span class="social-icon">▶</span> Youtube / Superintendencia Educación</a>
+                    <a href="#"><span class="social-icon">📷</span> Instagram / supereduc_cl</a>
+                    <a href="#"><span class="social-icon">in</span> Linkedin / Superintendencia de Educación</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h5>Sitios Relacionados</h5>
+                <ul>
+                    <li><a href="#">Ayuda Mineduc</a></li>
+                    <li><a href="#">JUNJI</a></li>
+                    <li><a href="#">Integra</a></li>
+                    <li><a href="#">CONICYT</a></li>
+                    <li><a href="#">Empleos Públicos</a></li>
+                    <li><a href="#">Chile Atiende</a></li>
+                    <li><a href="#">Ciudadanía y Escuela</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="contact-info">
+                <p><strong>Contáctenos 600 3600 390</strong></p>
+                <p>Versión 1.1.5</p>
+                <div class="supereduc-logo-footer">
+                    <div class="barra">
+                        <span class="barra-blue"></span>
+                        <span class="barra-red"></span>
+                    </div>
+                    Superintendencia<br>de Educación
+                </div>
+            </div>
+            <div class="footer-logo-box">
+                <div class="doc-icon"></div>
+                <div>Registro de<br><strong>Trámites Digitales</strong></div>
+            </div>
+            <div class="footer-logo-box">
+                <div class="doc-icon">📋</div>
+                <div>Solicitud de datos<br><strong>Ley de Transparencia</strong></div>
+            </div>
+            <div class="footer-logo-box" style="background: white; color: var(--color-primary); font-weight: bold;">
+                ayuda MINEDUC<br><small>atención ciudadana</small>
+            </div>
+        </div>
+
+        <div class="footer-orgs">
+            <p>Sistema de Aseguramiento de la Calidad de la Educación</p>
+            <div class="orgs-buttons">
+                <div class="org-btn agencia">Agencia de la Calidad<br>de la Educación</div>
+                <div class="org-btn mineduc">Ministerio de<br>de Educación</div>
+                <div class="org-btn consejo">Consejo Nacional<br>de Educación</div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="barra-footer-final">
+        <div class="bf-blue"></div>
+        <div class="bf-red"></div>
+    </div>
+
+</body>
+</html>
