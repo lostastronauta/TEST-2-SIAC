@@ -55,13 +55,13 @@
       .main-header {
         background-color: #ffffff;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        margin-top: 34px; /* Espacio para el banner naranja fijo */
+        margin-top: 34px;
       }
 
       .top-banner {
         position: relative;
         width: 100%;
-        background-color: var(--color-primary); /* Azul oscuro de respaldo */
+        background-color: var(--color-primary);
         overflow: hidden;
         line-height: 0;
       }
@@ -76,7 +76,6 @@
         min-height: 180px;
       }
 
-      /* Fallback si la imagen no carga — replica el banner azul institucional */
       .banner-fallback {
         display: none;
         width: 100%;
@@ -89,9 +88,7 @@
         justify-content: flex-start;
       }
 
-      .banner-fallback .fallback-content {
-        color: white;
-      }
+      .banner-fallback .fallback-content { color: white; }
 
       .banner-fallback .fallback-content .inst-label {
         font-size: 0.75rem;
@@ -117,14 +114,12 @@
 
       .banner-fallback .fallback-bar {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        bottom: 0; left: 0; right: 0;
         height: 4px;
         background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 100%);
       }
 
-      /* Navegación Pública — Botones rojos tipo pills */
+      /* Navegación Pública */
       .public-nav {
         display: flex;
         justify-content: center;
@@ -155,7 +150,7 @@
         box-shadow: 0 2px 4px rgba(27, 58, 107, 0.3);
       }
 
-      /* Navegación de Usuario */
+      /* Barra de Usuario (logueado) */
       .user-nav {
         background-color: #d5d7dd;
         padding: 10px 0;
@@ -190,8 +185,6 @@
       }
 
       .breadcrumb a:hover { text-decoration: underline; }
-      .breadcrumb .separator { color: #8a8f99; font-size: 0.9rem; }
-      .breadcrumb .current-page { color: #5a5f6b; font-weight: 400; }
 
       .user-actions {
         display: flex;
@@ -241,6 +234,7 @@
         transition: all 0.2s ease;
         font-family: var(--font-body);
         box-shadow: 0 2px 4px rgba(181, 107, 122, 0.2);
+        text-decoration: none;
       }
 
       .btn-user:hover {
@@ -258,7 +252,6 @@
 
       .btn-user.active-page-btn:hover {
         background-color: #152d55;
-        box-shadow: 0 3px 6px rgba(27, 58, 107, 0.4);
       }
 
       .btn-user.btn-logout {
@@ -268,11 +261,10 @@
 
       .btn-user.btn-logout:hover {
         background-color: #7d3d4b;
-        box-shadow: 0 3px 6px rgba(155, 79, 94, 0.3);
       }
 
       /* =========================================
-         LOGIN CARD
+         CONTENIDO PRINCIPAL
          ========================================= */
       .main-content {
         max-width: 1200px;
@@ -285,6 +277,9 @@
         flex: 1;
       }
 
+      /* =========================================
+         LOGIN CARD
+         ========================================= */
       .login-card {
         background: white;
         border-radius: 8px;
@@ -425,6 +420,104 @@
       .btn-clave-unica:hover { background: #2563eb; }
 
       /* =========================================
+         SESIÓN ACTIVA CARD (cuando está logueado)
+         ========================================= */
+      .session-card {
+        background: white;
+        border-radius: 8px;
+        padding: 40px 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        display: none;
+      }
+
+      .session-card .session-icon {
+        width: 72px;
+        height: 72px;
+        background: #E8F5E9;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: #2E7D32;
+        font-size: 2rem;
+      }
+
+      .session-card h2 {
+        color: var(--color-primary);
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+
+      .session-card .session-user {
+        font-size: 1.05rem;
+        color: #444;
+        margin-bottom: 6px;
+      }
+
+      .session-card .session-rut {
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+        margin-bottom: 6px;
+      }
+
+      .session-card .session-method {
+        display: inline-block;
+        background: #E8F0FE;
+        color: #0B5394;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-bottom: 24px;
+      }
+
+      .session-card .btn-go-dashboard {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: background 0.2s, box-shadow 0.2s;
+        text-decoration: none;
+      }
+
+      .session-card .btn-go-dashboard:hover {
+        background: #152d55;
+        box-shadow: 0 4px 12px rgba(27, 58, 107, 0.3);
+      }
+
+      .session-card .btn-end-session {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: none;
+        border: 1px solid var(--color-border);
+        color: #666;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        font-family: var(--font-body);
+        transition: all 0.2s;
+        margin-top: 12px;
+      }
+
+      .session-card .btn-end-session:hover {
+        border-color: var(--color-secondary);
+        color: var(--color-secondary);
+      }
+
+      /* =========================================
          INFO PANEL
          ========================================= */
       .info-panel { padding: 20px; }
@@ -473,7 +566,71 @@
       }
 
       /* =========================================
-         FOOTER OFICIAL STYLES
+         TOAST
+         ========================================= */
+      .toast-container {
+        position: fixed;
+        top: 50px;
+        right: 20px;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .toast {
+        background: white;
+        border-radius: 8px;
+        padding: 14px 18px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 300px;
+        max-width: 420px;
+        transform: translateX(120%);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        border-left: 4px solid #2E7D32;
+      }
+
+      .toast.show { transform: translateX(0); }
+      .toast.toast-error { border-left-color: #D32F2F; }
+      .toast.toast-info { border-left-color: #0B5394; }
+
+      .toast-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+
+      .toast-icon.success { background: #2E7D32; }
+      .toast-icon.error { background: #D32F2F; }
+      .toast-icon.info { background: #0B5394; }
+
+      .toast-body { flex: 1; }
+      .toast-body strong { display: block; font-size: 0.88rem; margin-bottom: 1px; }
+      .toast-body span { font-size: 0.82rem; color: #666; }
+
+      .toast-close {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: #999;
+        padding: 0 4px;
+        line-height: 1;
+      }
+
+      .toast-close:hover { color: #333; }
+
+      /* =========================================
+         FOOTER
          ========================================= */
       .blue-section {
         background: var(--color-primary);
@@ -680,24 +837,20 @@
          ========================================= */
       @media (max-width: 1024px) {
         .banner-img { max-height: 240px; }
-
         .user-nav-container {
           flex-direction: column;
           align-items: flex-start;
           gap: 12px;
           padding: 0 15px;
         }
-
         .user-actions {
           width: 100%;
           flex-direction: column;
           align-items: flex-start;
           gap: 12px;
         }
-
         .user-buttons { width: 100%; flex-wrap: wrap; }
         .btn-user { flex: 1; min-width: 140px; justify-content: center; }
-
         .footer-content { grid-template-columns: repeat(2, 1fr); }
         .footer-bottom { grid-template-columns: repeat(2, 1fr); }
       }
@@ -708,16 +861,13 @@
 
       @media (max-width: 768px) {
         .banner-img { max-height: 180px; object-position: center 30%; }
-
         .public-nav {
           flex-direction: column;
           align-items: stretch;
           padding: 10px 15px;
         }
-
         .nav-tab { width: 100%; margin-bottom: 5px; }
         .nav-tab:last-child { margin-bottom: 0; }
-
         .user-profile .user-name { display: none; }
         .user-buttons { flex-direction: column; }
         .btn-user {
@@ -726,12 +876,12 @@
           font-size: 0.85rem;
           padding: 8px 12px;
         }
-
         .breadcrumb { font-size: 0.9rem; }
-
         .footer-content { grid-template-columns: 1fr; }
         .footer-bottom { grid-template-columns: 1fr; text-align: center; }
+        .footer-bottom .footer-logo-box { justify-content: center; }
         .orgs-buttons { grid-template-columns: 1fr; }
+        .toast { min-width: 260px; max-width: calc(100vw - 40px); }
       }
 
       @media (max-width: 480px) {
@@ -745,29 +895,21 @@
     <!-- Banner de maqueta -->
     <div class="mockup-banner">MAQUETA DE PRUEBA / PROTOTIPO — No es el sitio oficial</div>
 
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
+
     <!-- ========================================== -->
     <!-- HEADER                                     -->
     <!-- ========================================== -->
     <header class="main-header">
 
-      <!-- Banner con imagen institucional -->
       <div class="top-banner" id="topBanner">
-        <!--
-          ====================================================
-          ACCIÓN REQUERIDA:
-          Reemplaza "header.png" por el nombre EXACTO de tu
-          archivo dentro de la carpeta img/
-          Verifica mayúsculas, minúsculas, espacios y extensión.
-          Ejemplo: img/Header-Banner.png
-          ====================================================
-        -->
         <img
           id="bannerImage"
           src="img/header.png"
           alt="Superintendencia de Educación - Ministerio de Educación - Gobierno de Chile"
           class="banner-img"
         >
-        <!-- Fallback: se muestra solo si la imagen no se encuentra -->
         <div class="banner-fallback" id="bannerFallback">
           <div class="fallback-content">
             <div class="inst-label">Gobierno de Chile</div>
@@ -778,7 +920,6 @@
         </div>
       </div>
 
-      <!-- Navegación Pública — 5 botones rojos -->
       <nav class="public-nav" id="publicNav">
         <button class="nav-tab active" data-page="competencias">Competencias Supereduc</button>
         <button class="nav-tab" data-page="otros-organismos">Competencias de otros organismos</button>
@@ -787,46 +928,43 @@
         <button class="nav-tab" data-page="requerimientos">Proceso de requerimientos</button>
       </nav>
 
-      <!-- Barra de Usuario (solo visible cuando está logueado) -->
+      <!-- Barra de Usuario (visible solo cuando está logueado) -->
       <nav class="user-nav" id="userNav" style="display: none;">
         <div class="user-nav-container">
           <div class="breadcrumb">
-            <a href="index.html">Inicio</a>
-            <span class="separator">&gt;</span>
-            <span class="current-page" id="currentPage">Actualizar Datos</span>
+            <span>Inicio</span>
           </div>
           <div class="user-actions">
             <div class="user-profile">
               <div class="user-icon"><i class="bi bi-person-fill"></i></div>
-              <span class="user-name" id="userName">Jaime Alberto Galleguillos Araya</span>
+              <span class="user-name" id="userNameDisplay">—</span>
             </div>
             <div class="user-buttons">
-              <button class="btn-user" onclick="window.location.href='index.html'">
+              <a href="pages/dashboard.html" class="btn-user">
                 <i class="bi bi-house-door-fill"></i> Inicio
-              </button>
-              <button class="btn-user" id="btnNotificaciones">
+              </a>
+              <a href="pages/notificaciones.html" class="btn-user">
                 <i class="bi bi-bell-fill"></i> Notificaciones
-              </button>
-              <button class="btn-user active-page-btn" onclick="window.location.href='pages/actualizar-datos.html'">
+              </a>
+              <a href="pages/actualizar-datos.html" class="btn-user">
                 <i class="bi bi-person-lines-fill"></i> Actualizar datos
-              </button>
-              <button class="btn-user btn-logout" id="btnLogout">
+              </a>
+              <a href="#" class="btn-user btn-logout" id="btnLogout">
                 <i class="bi bi-power"></i> Cerrar sesión
-              </button>
+              </a>
             </div>
           </div>
         </div>
       </nav>
     </header>
-    <!-- ========================================== -->
-    <!-- FIN HEADER                                 -->
-    <!-- ========================================== -->
 
-
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- ========================================== -->
+    <!-- CONTENIDO PRINCIPAL                         -->
+    <!-- ========================================== -->
     <main class="main-content">
-      <!-- Formulario de Login -->
-      <div class="login-card">
+
+      <!-- LOGIN CARD — se oculta cuando está logueado -->
+      <div class="login-card" id="loginCard">
         <h2>Iniciar Sesión</h2>
         <div class="login-tabs">
           <button class="active" id="tabCiudadano">Ciudadano</button>
@@ -858,13 +996,33 @@
             <a href="#">¿Olvidaste tu clave?</a>
             <a href="#">¿No estás registrado?</a>
           </div>
+          <!-- ✅ FIX: Ahora apunta a la página correcta -->
           <button type="button" class="btn-clave-unica" id="btnClaveUnica">
             <i class="bi bi-key-fill"></i> Clave Única
           </button>
         </form>
       </div>
 
-      <!-- Panel Informativo -->
+      <!-- SESIÓN ACTIVA CARD — se muestra cuando está logueado -->
+      <div class="session-card" id="sessionCard">
+        <div class="session-icon">
+          <i class="bi bi-check-circle-fill"></i>
+        </div>
+        <h2>Sesión activa</h2>
+        <p class="session-user" id="sessionUserName">—</p>
+        <p class="session-rut" id="sessionUserRut">—</p>
+        <div class="session-method" id="sessionMethod">—</div>
+        <br>
+        <a href="pages/dashboard.html" class="btn-go-dashboard">
+          <i class="bi bi-arrow-right-circle"></i> Ir al Sistema
+        </a>
+        <br>
+        <button class="btn-end-session" id="btnEndSession">
+          <i class="bi bi-box-arrow-right"></i> Cerrar sesión aquí
+        </button>
+      </div>
+
+      <!-- Panel Informativo (siempre visible) -->
       <div class="info-panel">
         <p>La Superintendencia de Educación tiene como misión contribuir al aseguramiento de la calidad y equidad de la educación parvularia y escolar, resguardando los derechos de la comunidad educativa a través de la promoción del cumplimiento de la normativa educacional.</p>
         <h3>En este portal usted podrá:</h3>
@@ -967,14 +1125,11 @@
     <!-- JAVASCRIPT -->
     <script>
       // ==========================================
-      // 1. Detección de imagen del banner
-      //    Si la imagen no existe, muestra el fallback
-      //    y avisa en consola con la ruta exacta
+      // 1. Fallback de imagen del banner
       // ==========================================
       (function() {
         var img = document.getElementById("bannerImage");
         var fallback = document.getElementById("bannerFallback");
-
         if (!img || !fallback) return;
 
         function showFallback() {
@@ -983,8 +1138,7 @@
           console.warn(
             "=== IMAGEN DEL BANNER NO ENCONTRADA ===\n" +
             "Ruta intentada: " + img.src + "\n" +
-            "Acción: Abre la carpeta 'img/', copia el nombre exacto del archivo\n" +
-            "y reemplaza 'header.png' en el atributo src del <img> del banner.\n" +
+            "Reemplaza 'header.png' por el nombre exacto en la carpeta img/\n" +
             "======================================="
           );
         }
@@ -995,11 +1149,7 @@
           img.style.display = "block";
         });
 
-        // Si la imagen ya falló antes de que se attaching el listener
-        // (cacheo de error en algunos navegadores)
-        if (img.complete && img.naturalWidth === 0) {
-          showFallback();
-        }
+        if (img.complete && img.naturalWidth === 0) showFallback();
       })();
 
       // ==========================================
@@ -1016,17 +1166,83 @@
       })();
 
       // ==========================================
-      // 3. Verificar sesión activa al cargar
+      // 3. Sistema de toasts
       // ==========================================
-      document.addEventListener("DOMContentLoaded", function() {
-        var isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-        if (isLoggedIn) {
-          window.location.href = "pages/dashboard.html";
-        }
-      });
+      function showToast(type, title, message) {
+        var container = document.getElementById("toastContainer");
+        var toast = document.createElement("div");
+        toast.className = "toast" + (type !== "success" ? " toast-" + type : "");
+
+        var iconMap = { success: "success", error: "error", info: "info" };
+        var iconCharMap = { success: "\u2713", error: "!", info: "i" };
+
+        toast.innerHTML =
+          '<div class="toast-icon ' + iconMap[type] + '">' + iconCharMap[type] + '</div>' +
+          '<div class="toast-body"><strong>' + title + '</strong><span>' + message + '</span></div>' +
+          '<button class="toast-close" aria-label="Cerrar">&times;</button>';
+
+        container.appendChild(toast);
+
+        requestAnimationFrame(function() {
+          toast.classList.add("show");
+        });
+
+        toast.querySelector(".toast-close").addEventListener("click", function() {
+          removeToast(toast);
+        });
+
+        setTimeout(function() { removeToast(toast); }, 4500);
+      }
+
+      function removeToast(toast) {
+        if (!toast || !toast.parentNode) return;
+        toast.classList.remove("show");
+        setTimeout(function() {
+          if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 400);
+      }
 
       // ==========================================
-      // 4. Tabs del formulario de login
+      // 4. ESTADO DE SESIÓN — Mostrar/ocultar
+      //    ✅ FIX: Ya NO redirige, sino que cambia
+      //    la vista según si está logueado o no
+      // ==========================================
+      function updateView() {
+        var isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+        var loginCard = document.getElementById("loginCard");
+        var sessionCard = document.getElementById("sessionCard");
+        var userNav = document.getElementById("userNav");
+
+        if (isLoggedIn) {
+          // Mostrar vista logueada
+          loginCard.style.display = "none";
+          sessionCard.style.display = "block";
+          userNav.style.display = "block";
+
+          // Llenar datos del usuario
+          var name = localStorage.getItem("userName") || "Usuario";
+          var rut = localStorage.getItem("userRut") || "—";
+          var method = localStorage.getItem("loginMethod") || "formulario";
+
+          document.getElementById("userNameDisplay").textContent = name;
+          document.getElementById("sessionUserName").textContent = name;
+          document.getElementById("sessionUserRut").textContent = "RUT: " + rut;
+
+          var methodLabel = method === "clave_unica" ? "Autenticado con Clave Única" : "Autenticado con formulario";
+          document.getElementById("sessionMethod").textContent = methodLabel;
+        } else {
+          // Mostrar vista de login
+          loginCard.style.display = "block";
+          sessionCard.style.display = "none";
+          userNav.style.display = "none";
+        }
+      }
+
+      // Ejecutar al cargar
+      updateView();
+
+      // ==========================================
+      // 5. Tabs del formulario de login
       // ==========================================
       (function() {
         var tabCiudadano = document.getElementById("tabCiudadano");
@@ -1044,7 +1260,7 @@
       })();
 
       // ==========================================
-      // 5. Envío del formulario de login
+      // 6. Envío del formulario de login
       // ==========================================
       document.getElementById("loginForm").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -1055,36 +1271,65 @@
         var captcha = document.getElementById("captcha").checked;
 
         if (tipo === "Seleccione" || !rut || !clave) {
-          alert("Por favor complete todos los campos obligatorios");
+          showToast("error", "Campos incompletos", "Por favor complete todos los campos obligatorios.");
           return;
         }
         if (!captcha) {
-          alert("Por favor confirme que no es un robot");
+          showToast("error", "Verificación requerida", "Por favor confirme que no es un robot.");
           return;
         }
 
+        // Guardar sesión
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userName", "Jaime Alberto Galleguillos Araya");
         localStorage.setItem("userRut", rut);
-        window.location.href = "pages/dashboard.html";
+        localStorage.setItem("loginMethod", "formulario");
+
+        showToast("success", "Bienvenido", "Has iniciado sesión correctamente.");
+
+        // Actualizar vista en vez de redirigir
+        setTimeout(function() {
+          updateView();
+        }, 800);
       });
 
       // ==========================================
-      // 6. Botón Clave Única
+      // 7. Botón Clave Única
+      //    ✅ FIX: Apunta a la página correcta
+      //    del formulario de login de Clave Única
       // ==========================================
       document.getElementById("btnClaveUnica").addEventListener("click", function() {
-        window.location.href = "pages/clave-unica.html";
+        window.location.href = "pages/clave-unica-login.html";
       });
 
       // ==========================================
-      // 7. Cerrar sesión
+      // 8. Cerrar sesión (desde la barra de usuario)
       // ==========================================
-      document.getElementById("btnLogout").addEventListener("click", function() {
+      document.getElementById("btnLogout").addEventListener("click", function(e) {
+        e.preventDefault();
+        doLogout();
+      });
+
+      // ==========================================
+      // 9. Cerrar sesión (desde la card de sesión)
+      // ==========================================
+      document.getElementById("btnEndSession").addEventListener("click", function() {
+        doLogout();
+      });
+
+      function doLogout() {
         localStorage.removeItem("isLoggedIn");
         localStorage.removeItem("userName");
         localStorage.removeItem("userRut");
-        window.location.href = "index.html";
-      });
+        localStorage.removeItem("loginMethod");
+        localStorage.removeItem("userRunClean");
+
+        showToast("info", "Sesión cerrada", "Has cerrado tu sesión correctamente.");
+
+        setTimeout(function() {
+          updateView();
+        }, 500);
+      }
     </script>
   </body>
 </html>
