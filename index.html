@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
-      /* =========================================
-         VARIABLES Y RESET
-         ========================================= */
       :root {
         --color-primary: #1b3a6b;
         --color-secondary: #c84654;
@@ -50,7 +47,63 @@
       }
 
       /* =========================================
-         HEADER STYLES
+         BOTÓN MODO TEST — Flotante
+         ========================================= */
+      .test-toggle {
+        position: fixed;
+        bottom: 24px;
+        left: 24px;
+        z-index: 9998;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .test-toggle-btn {
+        background: #333;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: var(--font-body);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+
+      .test-toggle-btn:hover {
+        background: #222;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+      }
+
+      .test-toggle-btn.logued-in {
+        background: var(--color-secondary);
+      }
+
+      .test-toggle-btn.logued-in:hover {
+        background: var(--color-secondary-dark);
+      }
+
+      .test-toggle-label {
+        background: #555;
+        color: #ccc;
+        padding: 3px 10px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-family: monospace;
+        letter-spacing: 0.5px;
+      }
+
+      /* =========================================
+         HEADER
          ========================================= */
       .main-header {
         background-color: #ffffff;
@@ -119,7 +172,6 @@
         background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 100%);
       }
 
-      /* Navegación Pública */
       .public-nav {
         display: flex;
         justify-content: center;
@@ -150,7 +202,7 @@
         box-shadow: 0 2px 4px rgba(27, 58, 107, 0.3);
       }
 
-      /* Barra de Usuario (logueado) */
+      /* Barra de Usuario */
       .user-nav {
         background-color: #d5d7dd;
         padding: 10px 0;
@@ -250,18 +302,14 @@
         box-shadow: 0 2px 4px rgba(27, 58, 107, 0.3);
       }
 
-      .btn-user.active-page-btn:hover {
-        background-color: #152d55;
-      }
+      .btn-user.active-page-btn:hover { background-color: #152d55; }
 
       .btn-user.btn-logout {
         background-color: #9b4f5e;
         box-shadow: 0 2px 4px rgba(155, 79, 94, 0.2);
       }
 
-      .btn-user.btn-logout:hover {
-        background-color: #7d3d4b;
-      }
+      .btn-user.btn-logout:hover { background-color: #7d3d4b; }
 
       /* =========================================
          CONTENIDO PRINCIPAL
@@ -277,9 +325,7 @@
         flex: 1;
       }
 
-      /* =========================================
-         LOGIN CARD
-         ========================================= */
+      /* LOGIN CARD */
       .login-card {
         background: white;
         border-radius: 8px;
@@ -419,9 +465,7 @@
 
       .btn-clave-unica:hover { background: #2563eb; }
 
-      /* =========================================
-         SESIÓN ACTIVA CARD (cuando está logueado)
-         ========================================= */
+      /* SESIÓN ACTIVA CARD */
       .session-card {
         background: white;
         border-radius: 8px;
@@ -517,9 +561,7 @@
         color: var(--color-secondary);
       }
 
-      /* =========================================
-         INFO PANEL
-         ========================================= */
+      /* INFO PANEL */
       .info-panel { padding: 20px; }
 
       .info-panel p {
@@ -565,9 +607,7 @@
         line-height: 1.6;
       }
 
-      /* =========================================
-         TOAST
-         ========================================= */
+      /* TOAST */
       .toast-container {
         position: fixed;
         top: 50px;
@@ -629,9 +669,7 @@
 
       .toast-close:hover { color: #333; }
 
-      /* =========================================
-         FOOTER
-         ========================================= */
+      /* FOOTER */
       .blue-section {
         background: var(--color-primary);
         color: white;
@@ -832,23 +870,11 @@
       .barra-footer-final .bf-blue { background: #3b82f6; flex: 1; }
       .barra-footer-final .bf-red { background: var(--color-secondary); flex: 1; }
 
-      /* =========================================
-         RESPONSIVE
-         ========================================= */
+      /* RESPONSIVE */
       @media (max-width: 1024px) {
         .banner-img { max-height: 240px; }
-        .user-nav-container {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 12px;
-          padding: 0 15px;
-        }
-        .user-actions {
-          width: 100%;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 12px;
-        }
+        .user-nav-container { flex-direction: column; align-items: flex-start; gap: 12px; padding: 0 15px; }
+        .user-actions { width: 100%; flex-direction: column; align-items: flex-start; gap: 12px; }
         .user-buttons { width: 100%; flex-wrap: wrap; }
         .btn-user { flex: 1; min-width: 140px; justify-content: center; }
         .footer-content { grid-template-columns: repeat(2, 1fr); }
@@ -861,21 +887,12 @@
 
       @media (max-width: 768px) {
         .banner-img { max-height: 180px; object-position: center 30%; }
-        .public-nav {
-          flex-direction: column;
-          align-items: stretch;
-          padding: 10px 15px;
-        }
+        .public-nav { flex-direction: column; align-items: stretch; padding: 10px 15px; }
         .nav-tab { width: 100%; margin-bottom: 5px; }
         .nav-tab:last-child { margin-bottom: 0; }
         .user-profile .user-name { display: none; }
         .user-buttons { flex-direction: column; }
-        .btn-user {
-          min-width: 100%;
-          justify-content: center;
-          font-size: 0.85rem;
-          padding: 8px 12px;
-        }
+        .btn-user { min-width: 100%; justify-content: center; font-size: 0.85rem; padding: 8px 12px; }
         .breadcrumb { font-size: 0.9rem; }
         .footer-content { grid-template-columns: 1fr; }
         .footer-bottom { grid-template-columns: 1fr; text-align: center; }
@@ -887,6 +904,9 @@
       @media (max-width: 480px) {
         .banner-img { max-height: 140px; }
         .user-profile .user-icon { width: 28px; height: 28px; font-size: 0.9rem; }
+        .test-toggle { bottom: 16px; left: 16px; }
+        .test-toggle-btn { padding: 8px 12px; font-size: 0.75rem; }
+        .test-toggle-label { display: none; }
       }
     </style>
   </head>
@@ -899,10 +919,20 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- ========================================== -->
+    <!-- BOTÓN MODO TEST — Flotante inferior izq    -->
+    <!-- ========================================== -->
+    <div class="test-toggle">
+      <div class="test-toggle-label">DEBUG</div>
+      <button class="test-toggle-btn" id="btnTestToggle">
+        <i class="bi bi-lightning-charge-fill"></i>
+        <span id="testToggleText">Simular login</span>
+      </button>
+    </div>
+
+    <!-- ========================================== -->
     <!-- HEADER                                     -->
     <!-- ========================================== -->
     <header class="main-header">
-
       <div class="top-banner" id="topBanner">
         <img
           id="bannerImage"
@@ -928,7 +958,6 @@
         <button class="nav-tab" data-page="requerimientos">Proceso de requerimientos</button>
       </nav>
 
-      <!-- Barra de Usuario (visible solo cuando está logueado) -->
       <nav class="user-nav" id="userNav" style="display: none;">
         <div class="user-nav-container">
           <div class="breadcrumb">
@@ -963,7 +992,6 @@
     <!-- ========================================== -->
     <main class="main-content">
 
-      <!-- LOGIN CARD — se oculta cuando está logueado -->
       <div class="login-card" id="loginCard">
         <h2>Iniciar Sesión</h2>
         <div class="login-tabs">
@@ -996,14 +1024,12 @@
             <a href="#">¿Olvidaste tu clave?</a>
             <a href="#">¿No estás registrado?</a>
           </div>
-          <!-- ✅ FIX: Ahora apunta a la página correcta -->
           <button type="button" class="btn-clave-unica" id="btnClaveUnica">
             <i class="bi bi-key-fill"></i> Clave Única
           </button>
         </form>
       </div>
 
-      <!-- SESIÓN ACTIVA CARD — se muestra cuando está logueado -->
       <div class="session-card" id="sessionCard">
         <div class="session-icon">
           <i class="bi bi-check-circle-fill"></i>
@@ -1022,7 +1048,6 @@
         </button>
       </div>
 
-      <!-- Panel Informativo (siempre visible) -->
       <div class="info-panel">
         <p>La Superintendencia de Educación tiene como misión contribuir al aseguramiento de la calidad y equidad de la educación parvularia y escolar, resguardando los derechos de la comunidad educativa a través de la promoción del cumplimiento de la normativa educacional.</p>
         <h3>En este portal usted podrá:</h3>
@@ -1038,7 +1063,6 @@
         </div>
       </div>
     </main>
-
 
     <!-- SECCIÓN AZUL -->
     <section class="blue-section">
@@ -1137,8 +1161,8 @@
           fallback.style.display = "flex";
           console.warn(
             "=== IMAGEN DEL BANNER NO ENCONTRADA ===\n" +
-            "Ruta intentada: " + img.src + "\n" +
-            "Reemplaza 'header.png' por el nombre exacto en la carpeta img/\n" +
+            "Ruta: " + img.src + "\n" +
+            "Reemplaza 'header.png' por el nombre exacto en img/\n" +
             "======================================="
           );
         }
@@ -1153,7 +1177,7 @@
       })();
 
       // ==========================================
-      // 2. Navegación por tabs públicos
+      // 2. Tabs públicos
       // ==========================================
       (function() {
         var tabs = document.querySelectorAll("#publicNav .nav-tab");
@@ -1166,60 +1190,46 @@
       })();
 
       // ==========================================
-      // 3. Sistema de toasts
+      // 3. Toasts
       // ==========================================
       function showToast(type, title, message) {
         var container = document.getElementById("toastContainer");
         var toast = document.createElement("div");
         toast.className = "toast" + (type !== "success" ? " toast-" + type : "");
-
         var iconMap = { success: "success", error: "error", info: "info" };
         var iconCharMap = { success: "\u2713", error: "!", info: "i" };
-
         toast.innerHTML =
           '<div class="toast-icon ' + iconMap[type] + '">' + iconCharMap[type] + '</div>' +
           '<div class="toast-body"><strong>' + title + '</strong><span>' + message + '</span></div>' +
           '<button class="toast-close" aria-label="Cerrar">&times;</button>';
-
         container.appendChild(toast);
-
-        requestAnimationFrame(function() {
-          toast.classList.add("show");
-        });
-
-        toast.querySelector(".toast-close").addEventListener("click", function() {
-          removeToast(toast);
-        });
-
+        requestAnimationFrame(function() { toast.classList.add("show"); });
+        toast.querySelector(".toast-close").addEventListener("click", function() { removeToast(toast); });
         setTimeout(function() { removeToast(toast); }, 4500);
       }
 
       function removeToast(toast) {
         if (!toast || !toast.parentNode) return;
         toast.classList.remove("show");
-        setTimeout(function() {
-          if (toast.parentNode) toast.parentNode.removeChild(toast);
-        }, 400);
+        setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 400);
       }
 
       // ==========================================
-      // 4. ESTADO DE SESIÓN — Mostrar/ocultar
-      //    ✅ FIX: Ya NO redirige, sino que cambia
-      //    la vista según si está logueado o no
+      // 4. Actualizar vista según sesión
       // ==========================================
       function updateView() {
         var isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
         var loginCard = document.getElementById("loginCard");
         var sessionCard = document.getElementById("sessionCard");
         var userNav = document.getElementById("userNav");
+        var testBtn = document.getElementById("btnTestToggle");
+        var testText = document.getElementById("testToggleText");
 
         if (isLoggedIn) {
-          // Mostrar vista logueada
           loginCard.style.display = "none";
           sessionCard.style.display = "block";
           userNav.style.display = "block";
 
-          // Llenar datos del usuario
           var name = localStorage.getItem("userName") || "Usuario";
           var rut = localStorage.getItem("userRut") || "—";
           var method = localStorage.getItem("loginMethod") || "formulario";
@@ -1227,44 +1237,68 @@
           document.getElementById("userNameDisplay").textContent = name;
           document.getElementById("sessionUserName").textContent = name;
           document.getElementById("sessionUserRut").textContent = "RUT: " + rut;
+          document.getElementById("sessionMethod").textContent =
+            method === "clave_unica" ? "Autenticado con Clave Única" : "Autenticado con formulario";
 
-          var methodLabel = method === "clave_unica" ? "Autenticado con Clave Única" : "Autenticado con formulario";
-          document.getElementById("sessionMethod").textContent = methodLabel;
+          // Botón test cambia a "Cerrar sesión"
+          testBtn.classList.add("logued-in");
+          testText.textContent = "Cerrar sesión (test)";
         } else {
-          // Mostrar vista de login
           loginCard.style.display = "block";
           sessionCard.style.display = "none";
           userNav.style.display = "none";
+
+          testBtn.classList.remove("logued-in");
+          testText.textContent = "Simular login";
         }
       }
 
-      // Ejecutar al cargar
       updateView();
 
       // ==========================================
-      // 5. Tabs del formulario de login
+      // 5. ✅ BOTÓN MODO TEST — Toggle instantáneo
+      //    Sin formulario, sin redirección.
+      //    Simplemente alterna el estado.
+      // ==========================================
+      document.getElementById("btnTestToggle").addEventListener("click", function() {
+        var isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+        if (isLoggedIn) {
+          // Cerrar sesión
+          localStorage.removeItem("isLoggedIn");
+          localStorage.removeItem("userName");
+          localStorage.removeItem("userRut");
+          localStorage.removeItem("loginMethod");
+          localStorage.removeItem("userRunClean");
+          showToast("info", "Sesión cerrada", "Modo test: sesión eliminada.");
+        } else {
+          // Loguear al instante con datos de prueba
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("userName", "Jaime Alberto Galleguillos Araya");
+          localStorage.setItem("userRut", "12345678-9");
+          localStorage.setItem("userRunClean", "123456789");
+          localStorage.setItem("loginMethod", "formulario");
+          showToast("success", "Login simulado", "Ahora puedes ver el sitio en estado logueado.");
+        }
+
+        updateView();
+      });
+
+      // ==========================================
+      // 6. Tabs del login
       // ==========================================
       (function() {
-        var tabCiudadano = document.getElementById("tabCiudadano");
-        var tabEstablecimiento = document.getElementById("tabEstablecimiento");
-
-        tabCiudadano.addEventListener("click", function() {
-          tabCiudadano.classList.add("active");
-          tabEstablecimiento.classList.remove("active");
-        });
-
-        tabEstablecimiento.addEventListener("click", function() {
-          tabEstablecimiento.classList.add("active");
-          tabCiudadano.classList.remove("active");
-        });
+        var t1 = document.getElementById("tabCiudadano");
+        var t2 = document.getElementById("tabEstablecimiento");
+        t1.addEventListener("click", function() { t1.classList.add("active"); t2.classList.remove("active"); });
+        t2.addEventListener("click", function() { t2.classList.add("active"); t1.classList.remove("active"); });
       })();
 
       // ==========================================
-      // 6. Envío del formulario de login
+      // 7. Login por formulario
       // ==========================================
       document.getElementById("loginForm").addEventListener("submit", function(e) {
         e.preventDefault();
-
         var tipo = document.getElementById("tipoDoc").value;
         var rut = document.getElementById("rutInput").value;
         var clave = document.getElementById("claveInput").value;
@@ -1279,31 +1313,24 @@
           return;
         }
 
-        // Guardar sesión
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userName", "Jaime Alberto Galleguillos Araya");
         localStorage.setItem("userRut", rut);
         localStorage.setItem("loginMethod", "formulario");
 
         showToast("success", "Bienvenido", "Has iniciado sesión correctamente.");
-
-        // Actualizar vista en vez de redirigir
-        setTimeout(function() {
-          updateView();
-        }, 800);
+        setTimeout(function() { updateView(); }, 800);
       });
 
       // ==========================================
-      // 7. Botón Clave Única
-      //    ✅ FIX: Apunta a la página correcta
-      //    del formulario de login de Clave Única
+      // 8. Clave Única
       // ==========================================
       document.getElementById("btnClaveUnica").addEventListener("click", function() {
         window.location.href = "pages/clave-unica-login.html";
       });
 
       // ==========================================
-      // 8. Cerrar sesión (desde la barra de usuario)
+      // 9. Cerrar sesión (barra usuario)
       // ==========================================
       document.getElementById("btnLogout").addEventListener("click", function(e) {
         e.preventDefault();
@@ -1311,7 +1338,7 @@
       });
 
       // ==========================================
-      // 9. Cerrar sesión (desde la card de sesión)
+      // 10. Cerrar sesión (card)
       // ==========================================
       document.getElementById("btnEndSession").addEventListener("click", function() {
         doLogout();
@@ -1323,12 +1350,8 @@
         localStorage.removeItem("userRut");
         localStorage.removeItem("loginMethod");
         localStorage.removeItem("userRunClean");
-
         showToast("info", "Sesión cerrada", "Has cerrado tu sesión correctamente.");
-
-        setTimeout(function() {
-          updateView();
-        }, 500);
+        setTimeout(function() { updateView(); }, 500);
       }
     </script>
   </body>
