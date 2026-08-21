@@ -796,8 +796,6 @@
          ========================================== -->
     <main class="dashboard-content">
 
-       
-
         <!-- Mensaje de información previa -->
         <div class="info-previa" id="infoPrevia">
             <button class="info-previa-close" id="btnCerrarInfo" aria-label="Cerrar mensaje">&times;</button>
@@ -824,9 +822,9 @@
         <!-- 5 cajas de opciones (CALUGAS) -->
         <div class="options-container">
            <a href="https://siac.supereduc.cl/autoatencion/formulario.php" target="_blank" class="option-box">
-    <div class="card-icon"><i class="bi bi-chat-dots-fill"></i></div>
-    <h3>Ingresar consulta</h3>
-</a>
+                <div class="card-icon"><i class="bi bi-chat-dots-fill"></i></div>
+                <h3>Ingresar consulta</h3>
+            </a>
 
             <a href="gcc.html" class="option-box">
                 <div class="card-icon"><i class="bi bi-people-fill"></i></div>
@@ -834,7 +832,8 @@
                 <div class="subtitle">Mediación – Conciliación – Facilitación</div>
             </a>
 
-            <a href="denuncia.html" class="option-box">
+            <!-- ✅ CAMBIO APLICADO: antes iba a denuncia.html, ahora va a preguntas-previas.html -->
+            <a href="preguntas-previas.html" class="option-box">
                 <div class="card-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
                 <h3>Ingresar denuncia</h3>
             </a>
@@ -931,7 +930,6 @@
             </div>
         </div>
     </footer>
-
     <div class="barra-footer-final">
         <div class="bf-blue"></div>
         <div class="bf-red"></div>
@@ -987,10 +985,8 @@
         // ==========================================
         document.getElementById("btnCerrarInfo").addEventListener("click", function() {
             var box = document.getElementById("infoPrevia");
-            // Obtener altura actual para la animación
             var height = box.offsetHeight;
             box.style.maxHeight = height + "px";
-            // Forzar reflow para que el navegador registre el maxHeight inicial
             box.offsetHeight;
             box.classList.add("closing");
             setTimeout(function() {
