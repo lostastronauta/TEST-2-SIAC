@@ -353,163 +353,222 @@
         }
 
         /* FOOTER OSCURO */
-        .footer-dark {
-            background: var(--color-footer-bg);
-            color: white;
-            padding: 40px 20px 20px;
-        }
+      .footer-dark {
+        background: linear-gradient(180deg, #071c35 0%, #0a2240 100%);
+        color: white;
+        padding: 40px 20px 0;
+        border-top: 4px solid rgba(59, 130, 246, 0.7);
+      }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 30px;
-        }
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto 28px;
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
+        gap: 32px;
+        align-items: start;
+      }
 
-        .footer-section h5 {
-            font-size: 1rem;
-            margin-bottom: 15px;
-            color: white;
-            font-weight: 500;
-        }
+      .footer-section {
+        min-width: 0;
+      }
 
-        .footer-section ul { list-style: none; padding: 0; }
-        .footer-section ul li { margin-bottom: 10px; }
-        .footer-section ul li a {
-            color: #ccc;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        .footer-section ul li a:hover { color: white; }
+      .footer-section h5 {
+        margin: 0 0 16px;
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-family: var(--font-heading);
+      }
 
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+      .footer-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
 
-        .social-links a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-        }
+      .footer-section ul li {
+        margin-bottom: 10px;
+      }
 
-        .social-links a .social-icon {
-            background: var(--color-secondary);
-            width: 24px;
-            height: 24px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 3px;
-            font-size: 0.8rem;
-        }
+      .footer-section ul li a,
+      .footer-section p,
+      .social-links a,
+      .footer-bottom .contact-info {
+        color: #edf2ff;
+        font-size: 0.92rem;
+        line-height: 1.6;
+        font-family: var(--font-body);
+        text-decoration: none;
+      }
 
-        .footer-bottom {
-            border-top: 1px solid #333;
-            padding-top: 25px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            align-items: center;
-        }
+      .footer-section ul li a:hover,
+      .social-links a:hover {
+        color: #ffffff;
+      }
 
-        .footer-bottom .contact-info {
-            font-size: 0.85rem;
-            color: #ccc;
-        }
+      .footer-section p {
+        margin: 0 0 8px;
+      }
 
-        .footer-logo-box {
-            background: white;
-            padding: 10px 15px;
-            border-radius: 4px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: #333;
-            font-size: 0.85rem;
-        }
+      .social-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 14px;
+      }
 
-        .footer-logo-box .doc-icon {
-            background: #888;
-            color: white;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
+      .social-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: opacity 0.2s ease, color 0.2s ease;
+      }
 
-        .supereduc-logo-footer {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: white;
-        }
+      .social-links a .social-icon {
+        background: linear-gradient(135deg, #3b82f6, #c84654);
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 0.75rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
 
-        .supereduc-logo-footer .barra {
-            display: flex;
-            gap: 2px;
-            margin-bottom: 5px;
-        }
+      .footer-bottom {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-top: 22px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 18px 28px;
+      }
 
-        .supereduc-logo-footer .barra span {
-            height: 6px;
-            width: 60px;
-        }
+      .footer-bottom .contact-info {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 18px;
+        font-size: 0.9rem;
+        color: #edf2ff;
+      }
 
-        .barra-blue { background: #3b82f6; }
-        .barra-red { background: var(--color-secondary); }
+      .footer-bottom .contact-info p {
+        margin: 0;
+        color: #edf2ff;
+      }
 
-        .footer-orgs {
-            max-width: 1200px;
-            margin: 30px auto 0;
-            padding-top: 25px;
-            border-top: 1px solid #333;
-        }
+      .footer-logo-box {
+        background: #edf2f9;
+        padding: 12px 14px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: #1f2937;
+        font-size: 0.8rem;
+        min-height: 68px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
 
-        .footer-orgs p {
-            font-size: 0.85rem;
-            color: #ccc;
-            margin-bottom: 15px;
-        }
+      .footer-logo-box .doc-icon {
+        background: linear-gradient(135deg, #3b82f6, #1b3a6b);
+        color: white;
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
 
-        .orgs-buttons {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
+      .supereduc-logo-footer {
+        font-weight: 700;
+        font-size: 1rem;
+        color: white;
+        font-family: var(--font-heading);
+        line-height: 1.3;
+      }
 
-        .org-btn {
-            padding: 20px;
-            text-align: center;
-            color: white;
-            font-weight: 500;
-            border-radius: 4px;
-            font-size: 0.95rem;
-        }
+      .supereduc-logo-footer .barra {
+        display: flex;
+        gap: 2px;
+        margin-bottom: 6px;
+      }
 
-        .org-btn.agencia { background: #5ba3d9; }
-        .org-btn.mineduc { background: #e04f3f; }
-        .org-btn.consejo { background: #f4c44a; color: #333; }
+      .barra-blue { background: #3b82f6; height: 6px; width: 62px; }
+      .barra-red { background: var(--color-secondary); height: 6px; width: 62px; }
 
-        .barra-footer-final {
-            height: 15px;
-            background: var(--color-footer-bg);
-            display: flex;
-        }
+      .footer-orgs {
+        max-width: 1200px;
+        margin: 28px auto 0;
+        padding-top: 22px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+      }
 
-        .barra-footer-final .bf-blue { background: #3b82f6; flex: 1; }
-        .barra-footer-final .bf-red { background: var(--color-secondary); flex: 1; }
+      .footer-orgs p {
+        margin: 0 0 16px;
+        font-size: 0.9rem;
+        color: #dfe8f7;
+        font-family: var(--font-body);
+      }
 
-        /* RESPONSIVE */
+      .orgs-buttons {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        padding-bottom: 28px;
+      }
+
+      .org-btn {
+        padding: 18px 16px;
+        border-radius: 8px;
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        font-size: 0.9rem;
+        line-height: 1.3;
+        font-family: var(--font-body);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .org-btn.agencia { background: linear-gradient(135deg, #5ba3d9, #3c8ec9); }
+      .org-btn.mineduc { background: linear-gradient(135deg, #e04f3f, #c73f39); }
+      .org-btn.consejo { background: linear-gradient(135deg, #f5c96b, #e9b739); color: #1f2937; }
+
+      .barra-footer-final {
+        height: 16px;
+        background: var(--color-footer-bg);
+        display: flex;
+      }
+
+      .barra-footer-final .bf-blue { background: #3b82f6; flex: 1; }
+      .barra-footer-final .bf-red { background: var(--color-secondary); flex: 1; }
+
+      @media (max-width: 1024px) {
+        .footer-content { grid-template-columns: 1fr; }
+        .footer-bottom { justify-content: flex-start; }
+      }
+
+      @media (max-width: 768px) {
+        .orgs-buttons { grid-template-columns: 1fr; }
+        .footer-bottom { flex-direction: column; align-items: flex-start; }
+        .footer-bottom .contact-info { flex-direction: column; align-items: flex-start; }
+      }
+
+/* RESPONSIVE */
         @media (max-width: 968px) {
             .options-grid {
                 grid-template-columns: 1fr;
