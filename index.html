@@ -1014,173 +1014,334 @@
         margin-left: auto;
         margin-right: auto;
       }
-
       .footer-dark {
-        background: var(--color-footer-bg);
-        color: white;
-        padding: 40px 20px 20px;
+        background: linear-gradient(180deg, #071d39 0%, #0b2543 100%);
+        color: #fff;
+        padding: 32px 20px 0;
+        border-top: 4px solid rgba(59, 130, 246, 0.75);
       }
 
-      .footer-content {
-        max-width: 1200px;
+      .footer-dark .footer-inner {
+        max-width: 1180px;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        margin-bottom: 30px;
+        grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.6fr);
+        gap: 42px;
+        align-items: flex-start;
       }
 
-      .footer-section h5 {
-        font-size: 1rem;
-        margin-bottom: 15px;
-        color: white;
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        min-width: 0;
+      }
+
+      .footer-brand__logo-wrap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 150px;
+        padding: 12px 10px;
+        border-radius: 6px 6px 0 0;
+        background: linear-gradient(180deg, #ffffff00 0%, #edf2ff00 100%);
+        box-shadow: 0 8px 18px rgba(9, 17, 31, 0.22);
+      }
+
+      .footer-brand__logo {
+        display: block;
+        width: 100%;
+        max-width: 120px;
+        height: auto;
+        filter: none;
+      }
+
+      .footer-brand__gov {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 120px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 6px;
+        padding: 8px 14px;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .footer-brand__links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 16px;
+      }
+
+      .footer-brand__links li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #f3f8ff;
         font-weight: 500;
-        font-family: var(--font-heading);
+        font-size: 0.97rem;
       }
 
-      .footer-section ul { list-style: none; padding: 0; }
-      .footer-section ul li { margin-bottom: 10px; }
-      .footer-section ul li a {
-        color: #ccc;
-        text-decoration: none;
-        font-size: 0.9rem;
-        font-family: var(--font-body);
-        transition: color 0.2s;
+      .footer-brand__links li::before {
+        content: "◉";
+        color: #eb4c63;
+        font-size: 0.8rem;
+        line-height: 1;
       }
-      .footer-section ul li a:hover { color: white; }
+
+      .footer-brand__links a,
+      .footer-related a,
+      .footer-section a,
+      .footer-links a {
+        color: #f3f8ff;
+        text-decoration: none;
+        transition: opacity 0.2s ease, color 0.2s ease;
+      }
+
+      .footer-brand__links a:hover,
+      .footer-related a:hover,
+      .footer-section a:hover,
+      .footer-links a:hover {
+        color: #fff;
+      }
+
+      .footer-main-panel {
+        min-width: 0;
+      }
+
+      .footer-utility-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .footer-mini-card {
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 12px;
+        padding: 18px 18px 16px;
+        min-height: 96px;
+        color: #12345c;
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .footer-mini-card__bar {
+        display: flex;
+        gap: 2px;
+        width: 100%;
+        height: 6px;
+        margin-bottom: 14px;
+        overflow: hidden;
+        border-radius: 999px;
+      }
+
+      .footer-mini-card__bar span {
+        flex: 1;
+      }
+
+      .footer-mini-card__bar .blue { background: #2f7dde; }
+      .footer-mini-card__bar .red { background: #d13f52; }
+
+      .footer-mini-card__label {
+        font-size: 0.92rem;
+        line-height: 1.2;
+        font-weight: 700;
+        color: #0f2d52;
+      }
+
+      .footer-mini-card__label strong {
+        display: block;
+        font-weight: 700;
+      }
+
+      .footer-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 520px;
+        margin: 0 auto 26px;
+        padding: 12px 18px;
+        border-radius: 8px;
+        background: rgba(33, 104, 184, 0.2);
+        border: 1px solid rgba(127, 192, 255, 0.35);
+        color: #e9f5ff;
+        text-align: center;
+        font-size: 0.96rem;
+        text-decoration: none;
+      }
+
+      .footer-related {
+        max-width: 540px;
+        margin: 0 auto 0 0;
+      }
+
+      .footer-related h5 {
+        margin: 0 0 14px;
+        color: #eaf4ff;
+        font-size: 1.05rem;
+        letter-spacing: 0.02em;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .footer-related ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .footer-related li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #edf6ff;
+        font-size: 1.05rem;
+        line-height: 1.4;
+      }
+
+      .footer-related li::before {
+        content: "▸";
+        color: #ff5d6c;
+        font-size: 0.9rem;
+        line-height: 1;
+      }
+
+      .footer-meta {
+        max-width: 1180px;
+        margin: 28px auto 0;
+        padding: 18px 0 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .footer-phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        color: #fff;
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .footer-phone i {
+        font-size: 1.5rem;
+        color: #fff;
+      }
+
+      .footer-domain {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 240px;
+        padding: 14px 26px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #3178d6 0%, #1d5fb8 100%);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.05rem;
+        box-shadow: 0 6px 16px rgba(17, 88, 174, 0.35);
+      }
 
       .social-links {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
       }
 
       .social-links a {
-        color: white;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 0.9rem;
-        font-family: var(--font-body);
-        transition: opacity 0.2s;
-      }
-
-      .social-links a:hover { opacity: 0.85; }
-
-      .social-links a .social-icon {
-        background: var(--color-secondary);
-        width: 24px;
-        height: 24px;
+        width: 42px;
+        height: 42px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        border-radius: 3px;
-        font-size: 0.8rem;
-        flex-shrink: 0;
-      }
-
-      .footer-bottom {
-        border-top: 1px solid #333;
-        padding-top: 25px;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-        align-items: center;
-      }
-
-      .footer-bottom .contact-info {
-        font-size: 0.85rem;
-        color: #ccc;
-        font-family: var(--font-body);
-      }
-
-      .footer-logo-box {
-        background: white;
-        padding: 10px 15px;
-        border-radius: 4px;
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        color: #333;
-        font-size: 0.85rem;
-        font-family: var(--font-body);
-      }
-
-      .footer-logo-box .doc-icon {
-        background: #888;
-        color: white;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        flex-shrink: 0;
-      }
-
-      .supereduc-logo-footer {
+        border-radius: 50%;
+        background: #2e7de1;
+        border: 2px solid rgba(255, 255, 255, 0.22);
+        color: #fff;
+        font-size: 1rem;
         font-weight: 700;
-        font-size: 1.1rem;
-        color: white;
-        font-family: var(--font-heading);
+        text-decoration: none;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
       }
 
-      .supereduc-logo-footer .barra {
-        display: flex;
-        gap: 2px;
-        margin-bottom: 5px;
+      .footer__tricolor {
+        width: 100%;
+        background: #0a1628;
+        line-height: 0;
+        margin-top: 0;
       }
 
-      .barra-blue { background: #3b82f6; height: 6px; width: 60px; }
-      .barra-red { background: var(--color-secondary); height: 6px; width: 60px; }
-
-      .footer-orgs {
-        max-width: 1200px;
-        margin: 30px auto 0;
-        padding-top: 25px;
-        border-top: 1px solid #333;
+      .footer__tricolor img {
+        display: block;
+        width: 100%;
+        max-height: 62px;
+        object-fit: cover;
+        object-position: center top;
       }
 
-      .footer-orgs p {
-        font-size: 0.85rem;
-        color: #ccc;
-        margin-bottom: 15px;
-        font-family: var(--font-body);
+      @media (max-width: 1024px) {
+        .footer-dark .footer-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-utility-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
       }
 
-      .orgs-buttons {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+      @media (max-width: 768px) {
+        .footer-dark {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .footer-brand__logo-wrap {
+          width: 128px;
+        }
+
+        .footer-utility-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-meta {
+          justify-content: center;
+          text-align: center;
+        }
+
+        .footer-phone,
+        .footer-domain,
+        .social-links {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .footer-domain {
+          min-width: 0;
+        }
       }
 
-      .org-btn {
-        padding: 20px;
-        text-align: center;
-        color: white;
-        font-weight: 500;
-        border-radius: 4px;
-        font-size: 0.95rem;
-        font-family: var(--font-body);
-      }
-
-      .org-btn.agencia { background: #5ba3d9; }
-      .org-btn.mineduc { background: #e04f3f; }
-      .org-btn.consejo { background: #f4c44a; color: #333; }
-
-      .barra-footer-final {
-        height: 15px;
-        background: var(--color-footer-bg);
-        display: flex;
-      }
-
-      .barra-footer-final .bf-blue { background: #3b82f6; flex: 1; }
-      .barra-footer-final .bf-red { background: var(--color-secondary); flex: 1; }
-
-      /* RESPONSIVE */
+/* RESPONSIVE */
       @media (max-width: 1024px) {
         .banner-img { max-height: 240px; }
         .user-nav-container { flex-direction: column; align-items: flex-start; gap: 12px; padding: 0 15px; }
@@ -1373,7 +1534,7 @@
     <!-- ========================================== -->
     <section class="clave-unica-section">
       <div class="clave-unica-container">
-        <p class="clave-unica-title">Accede con tu identidad digital del Gobierno de Chile</p>
+        <p class="clave-unica-title">Inicia sesión de Clave Única</p>
         <button type="button" class="btn-cu l" id="btnClaveUnicaOficial">
           <span class="cl-claveunica">ClaveÚnica</span>
           <span class="texto">Ingresar con ClaveÚnica</span>
@@ -1395,7 +1556,7 @@
             <h3 class="tarjeta__titulo">Consultas</h3>
           </div>
           <p class="tarjeta__texto"><strong>Orientación normativa:</strong> Destinado a entregar orientaciones sobre la normativa educacional y conocer el estado de su requerimiento.</p>
-          <img class="tarjeta__icono" src="img/icono-consultas.svg" alt="" width="92" height="92" loading="lazy">
+          <img class="tarjeta__icono" src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/icono-consultas.svg" alt="" width="92" height="92" loading="lazy">
           <div style="text-align:center; margin-top:1rem;">
             <a class="btn-pill" href="consultas.html">Ver Proceso de Consultas &rarr;</a>
           </div>
@@ -1423,7 +1584,7 @@
                   stroke-linejoin="round" />
               </svg><span>Mediación</span></li>
           </ul>
-          <img class="tarjeta__icono" src="img/icono-mediacion.svg" alt="" width="92" height="92" loading="lazy">
+          <img class="tarjeta__icono" src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/icono-mediacion.svg" alt="" width="92" height="92" loading="lazy">
           <div style="text-align:center; margin-top:1rem;">
             <a class="btn-pill" href="mediacion.html">Ver Proceso de Mediación &rarr;</a>
           </div>
@@ -1434,7 +1595,7 @@
             <h3 class="tarjeta__titulo">Gestión de denuncias</h3>
           </div>
           <p class="tarjeta__texto">Su objetivo es verificar el cumplimiento de la normativa educacional por parte de los establecimientos educativos y que estos adopten las medidas correspondientes.</p>
-          <img class="tarjeta__icono" src="img/icono-denuncias.svg" alt="" width="92" height="92" loading="lazy">
+          <img class="tarjeta__icono" src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/icono-denuncias.svg" alt="" width="92" height="92" loading="lazy">
           <div style="text-align:center; margin-top:1rem;">
             <a class="btn-pill btn-pill--cu" href="denuncias.html">Ver Proceso de Denuncias &rarr;</a>
           </div>
@@ -1449,50 +1610,61 @@
             <li>Sugerencias</li>
             <li>Reclamos</li>
           </ul>
-          <img class="tarjeta__icono" src="img/icono-opinion.svg" alt="" width="92" height="92" loading="lazy">
+          
+          <img class="tarjeta__icono" src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/icono-opinion.svg" alt="" width="92" height="92" loading="lazy">
+        <div style="text-align:center; margin-top:1rem;">
+            <a class="btn-pill btn-pill--cu" href="opinion.html">Danos tu Opinión &rarr;</a>
+          </div>
         </article>
       </section>
 
       <div class="divisor" aria-hidden="true"></div>
 
       <aside class="recuerda">
-        <img src="img/estrella-recuerda.svg" alt="" width="56" height="56" loading="lazy">
+        <img src="https://raw.githubusercontent.com/lostastronauta/TEST/a78d8ad7d7e1005c91f426071f707ff2e635eb6e/img/estrella-recuerda.svg" alt="" width="56" height="56" loading="lazy">
         <div>
           <h3>Recuerda:</h3>
-          <p>Los establecimientos educacionales deben contar con procedimientos para la atención de consultas y reclamos de los integrantes de las comunidades educativas, procurando el resguardo de los derechos de los estudiantes.</p>
+          <p>Los establecimientos educacionales deben contar con procedimientos para la atención de las consultas y reclamos de las y los integrantes de las comunidades educativas, procurando el resguardo de los derechos de las y los estudiantes.</p>
         </div>
       </aside>
 
       <section aria-labelledby="titulo-facultades">
-        <p class="facultades__intro" id="titulo-facultades">La Superintendencia de Educación cuenta con las siguientes facultades que le permiten impulsar el cumplimiento de la normativa educacional y el resguardo de los derechos:</p>
+        <p class="facultades__intro" id="titulo-facultades">La Superintendencia de Educación tiene como misión contribuir al aseguramiento de la calidad y equidad de la educación parvularia y escolar, resguardando los derechos de la comunidad educativa a través de la promoción del cumplimiento de la normativa educacional.</p>
         <ul class="facultades">
           <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="12" fill="#2D717C" />
               <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
                 stroke-linejoin="round" />
             </svg>
-            <p>Orientar y entregar información sobre la normativa educacional vigente y los derechos de los miembros de la comunidad educativa.</p>
+            <p>Ingresar Consultas. </p>
           </li>
           <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="12" fill="#2D717C" />
               <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
                 stroke-linejoin="round" />
             </svg>
-            <p>Recibir y gestionar requerimientos tales como consultas, solicitudes de mediación y denuncias sobre hechos que pueden constituir una infracción o una vulneración de derechos establecidos en la normativa educacional.</p>
+            <p>Solicitar GCC para generar un espacio de diálogo, que busque soluciones conjuntas de conflictos dentro de la comunidad educativa a través de: mediación, conciliación y facilitación. </p>
           </li>
           <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="12" fill="#2D717C" />
               <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
                 stroke-linejoin="round" />
             </svg>
-            <p>Fiscalizar que se cumpla la normativa educacional y que los recursos entregados por el Estado se utilicen correctamente.</p>
+            <p>Ingresar denuncias para solicitar la investigación y/o fiscalización de hechos que puedan constituir una falta a la normativa educacional.</p>
           </li>
           <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="12" fill="#2D717C" />
               <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
                 stroke-linejoin="round" />
             </svg>
-            <p>Promover la resolución colaborativa de conflictos al interior de las comunidades educativas para fortalecer la convivencia y la calidad educativa.</p>
+            <p> Hacer seguimiento a sus casos de denuncias y GCC.</p>
+          </li>
+           <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="12" fill="#2D717C" />
+              <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <p> Hacer sugerencias, felicitaciones y reclamos a la Superintendencia.</p>
           </li>
         </ul>
       </section>
@@ -1501,20 +1673,20 @@
       <section class="panel" aria-labelledby="t-si">
         <h2 class="cinta" id="t-si">¿Qué tipo de denuncias SÍ son competencia de la Supereduc?</h2>
         <ul class="grid-iconos">
-          <li><img src="img/si/maltrato.svg" alt="" loading="lazy"><p>Maltrato escolar</p></li>
-          <li><img src="img/si/discriminacion.svg" alt="" loading="lazy"><p>Discriminación</p></li>
-          <li><img src="img/si/cancelacion-matricula.svg" alt="" loading="lazy"><p>Cancelación de matrícula</p></li>
-          <li><img src="img/si/medidas-disciplinarias.svg" alt="" loading="lazy"><p>Medidas disciplinarias</p></li>
-          <li><img src="img/si/connotacion-sexual.svg" alt="" loading="lazy"><p>Situaciones de connotación sexual</p></li>
-          <li><img src="img/si/retencion-documentos.svg" alt="" loading="lazy"><p>Retención de documentos</p></li>
-          <li><img src="img/si/falta-mobiliario.svg" alt="" loading="lazy"><p>Falta de mobiliario y de elementos de enseñanza</p></li>
-          <li><img src="img/si/reglamento-evaluacion.svg" alt="" loading="lazy"><p>Cumplimiento del reglamento de evaluación y promoción escolar</p></li>
-          <li><img src="img/si/declaracion-asistencia.svg" alt="" loading="lazy"><p>Irregularidades en la declaración de asistencia</p></li>
-          <li><img src="img/si/planes-programas.svg" alt="" loading="lazy"><p>Incumplimiento de planes y programas</p></li>
-          <li><img src="img/si/proceso-admision.svg" alt="" loading="lazy"><p>Irregularidades en el proceso de admisión</p></li>
-          <li><img src="img/si/uniformes-utiles.svg" alt="" loading="lazy"><p>Uniformes, útiles y textos escolares</p></li>
-          <li><img src="img/si/planta-docente.svg" alt="" loading="lazy"><p>Problemas con planta docente</p></li>
-          <li><img src="img/si/participacion.svg" alt="" loading="lazy"><p>Participación: Centro de estudiantes, Centro de madres, padres y apoderados/as, Consejos Escolares</p></li>
+          <li><img src="img/maltrato.svg" alt="" loading="lazy"><p>Maltrato escolar</p></li>
+          <li><img src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/discriminacion.svg" alt="" loading="lazy"><p>Discriminación</p></li>
+          <li><img src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/cancelacion-matricula.svg" alt="" loading="lazy"><p>Cancelación de matrícula</p></li>
+          <li><img src="img/medidas-disciplinarias.svg" alt="" loading="lazy"><p>Medidas disciplinarias</p></li>
+          <li><img src="img/connotacion-sexual.svg" alt="" loading="lazy"><p>Situaciones de connotación sexual</p></li>
+          <li><img src="img/retencion-documentos.svg" alt="" loading="lazy"><p>Retención de documentos</p></li>
+          <li><img src="img/falta-mobiliario.svg" alt="" loading="lazy"><p>Falta de mobiliario y de elementos de enseñanza</p></li>
+          <li><img src="img/reglamento-evaluacion.svg" alt="" loading="lazy"><p>Cumplimiento del reglamento de evaluación y promoción escolar</p></li>
+          <li><img src="img/declaracion-asistencia.svg" alt="" loading="lazy"><p>Irregularidades en la declaración de asistencia</p></li>
+          <li><img src="img/planes-programas.svg" alt="" loading="lazy"><p>Incumplimiento de planes y programas</p></li>
+          <li><img src="img/proceso-admision.svg" alt="" loading="lazy"><p>Irregularidades en el proceso de admisión</p></li>
+          <li><img src="img/uniformes-utiles.svg" alt="" loading="lazy"><p>Uniformes, útiles y textos escolares</p></li>
+          <li><img src="img/planta-docente.svg" alt="" loading="lazy"><p>Problemas con planta docente</p></li>
+          <li><img src="img/participacion.svg" alt="" loading="lazy"><p>Participación: Centro de estudiantes, Centro de madres, padres y apoderados/as, Consejos Escolares</p></li>
         </ul>
 
         <div style="text-align:center; margin-top:2.5rem;">
@@ -1528,17 +1700,17 @@
       <section class="panel panel--rojo" aria-labelledby="t-no">
         <h2 class="cinta cinta--roja" id="t-no">¿Qué tipo de denuncias NO son competencia de la Supereduc?</h2>
         <ul class="grid-iconos">
-          <li><img src="img/no/matricula-sae.svg" alt="" loading="lazy"><p>Búsqueda de matrícula y proceso SAE</p></li>
-          <li><img src="img/no/educacion-superior.svg" alt="" loading="lazy"><p>Faltas a la normativa educacional en Educación Superior</p></li>
-          <li><img src="img/no/contratos-laborales.svg" alt="" loading="lazy"><p>Contratos laborales de los funcionarios</p></li>
-          <li><img src="img/no/identificador-provisorio.svg" alt="" loading="lazy"><p>Problemas con Identificador Provisorio Escolar</p></li>
-          <li><img src="img/no/becas-tne.svg" alt="" loading="lazy"><p>Reclamos por servicios becas y alimentación TNE</p></li>
-          <li><img src="img/no/autorizacion-docencia.svg" alt="" loading="lazy"><p>Autorización para ejercer docencia</p></li>
-          <li><img src="img/no/reconocimiento-oficial.svg" alt="" loading="lazy"><p>Solicitud o modificación de Reconocimiento Oficial</p></li>
-          <li><img src="img/no/cambio-datos.svg" alt="" loading="lazy"><p>Cambio de apellidos, nombres, sexo o RUN en documentos educacionales</p></li>
-          <li><img src="img/no/subvenciones-rbd.svg" alt="" loading="lazy"><p>Detalle de subvenciones entregadas por RBD Sostenedor</p></li>
-          <li><img src="img/no/certificados-ips.svg" alt="" loading="lazy"><p>Certificados de antecedentes laborales previsionales de Docentes y Asistentes de la Educación (IPS)</p></li>
-          <li><img src="img/no/plataforma-sige.svg" alt="" loading="lazy"><p>Problemas o dudas en uso de plataforma SIGE</p></li>
+          <li><img src="img/matricula-sae.svg" alt="" loading="lazy"><p>Búsqueda de matrícula y proceso SAE</p></li>
+          <li><img src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/educacion-superior.svg" alt="" loading="lazy"><p>Faltas a la normativa educacional en Educación Superior</p></li>
+          <li><img src="img/contratos-laborales.svg" alt="" loading="lazy"><p>Contratos laborales de los funcionarios</p></li>
+          <li><img src="img/identificador-provisorio.svg" alt="" loading="lazy"><p>Problemas con Identificador Provisorio Escolar</p></li>
+          <li><img src="img/becas-tne.svg" alt="" loading="lazy"><p>Reclamos por servicios becas y alimentación TNE</p></li>
+          <li><img src="img/autorizacion-docencia.svg" alt="" loading="lazy"><p>Autorización para ejercer docencia</p></li>
+          <li><img src="img/reconocimiento-oficial.svg" alt="" loading="lazy"><p>Solicitud o modificación de Reconocimiento Oficial</p></li>
+          <li><img src="img/cambio-datos.svg" alt="" loading="lazy"><p>Cambio de apellidos, nombres, sexo o RUN en documentos educacionales</p></li>
+          <li><img src="img/subvenciones-rbd.svg" alt="" loading="lazy"><p>Detalle de subvenciones entregadas por RBD Sostenedor</p></li>
+          <li><img src="img/certificados-ips.svg" alt="" loading="lazy"><p>Certificados de antecedentes laborales previsionales de Docentes y Asistentes de la Educación (IPS)</p></li>
+          <li><img src="img/plataforma-sige.svg" alt="" loading="lazy"><p>Problemas o dudas en uso de plataforma SIGE</p></li>
         </ul>
       </section>
 
@@ -1546,7 +1718,7 @@
 
       <!-- DERIVACIÓN A MINEDUC -->
       <aside class="derivacion" style="display: flex; flex-direction: column; align-items: center; gap: 1.1rem; text-align: center; background: #fff; border: 2px solid var(--primary); border-radius: var(--radio); padding: 1.3rem 1.2rem; margin: 2.2rem auto;">
-        <img src="img/estrella-recuerda.svg" alt="" loading="lazy" style="width: 56px;">
+        <img src="img/tricolor estrella.png" alt="" loading="lazy" style="width: 56px;">
         <p style="font-family: var(--font-heading); font-weight: 600; text-transform: uppercase; font-size: 1rem; line-height: 1.4; color: var(--black);">Si tu consulta, solicitud o denuncia no corresponde con nuestras competencias, dirígete al sitio de consultas de Mineduc</p>
         <span style="width: 0; height: 0; border-top: 13px solid transparent; border-bottom: 13px solid transparent; border-left: 20px solid var(--primary);" aria-hidden="true"></span>
         <a class="btn-pill" href="https://ayudamineduc.cl" target="_blank" rel="noopener">ayudamineduc.cl</a>
@@ -1565,7 +1737,7 @@
 
         <div class="organismos">
           <article class="organismo">
-            <img class="organismo__badge" src="img/org/mineduc.svg" alt="Logo Ministerio de Educación" loading="lazy">
+            <img class="organismo__badge" src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/mineduc.svg" alt="Logo Ministerio de Educación" loading="lazy">
             <div>
               <h3><a href="https://ayudamineduc.cl/" target="_blank" rel="noopener">Ministerio de Educación</a></h3>
               <p>Búsqueda de matrícula, Sistema de Admisión Escolar, certificados de estudios, Identificador Provisorio Escolar, certificados de Alumnos Prioritarios, uso de plataforma SIGE, autorizaciones para el ejercicio de la docencia, Reconocimiento Oficial, modificación de datos personales en documentos oficiales educacionales, detalle de subvenciones entregadas por RBD, ránking de notas, legalización o apostilla de certificados.</p>
@@ -1573,7 +1745,7 @@
           </article>
 
           <article class="organismo">
-            <img class="organismo__badge" src="img/org/junji.svg" alt="Logo JUNJI" loading="lazy">
+            <img class="organismo__badge" src="img/junji.svg" alt="Logo JUNJI" loading="lazy">
             <div>
               <h3><a href="https://junji.cl/" target="_blank" rel="noopener">Junta Nacional de Jardines Infantiles (JUNJI)</a></h3>
               <p>Denuncias respecto a cupos, reclamos con funcionarios de jardines pertenecientes a las entidades.</p>
@@ -1581,7 +1753,7 @@
           </article>
 
           <article class="organismo">
-            <img class="organismo__badge" src="img/org/integra.svg" alt="Logo Fundación Integra" loading="lazy">
+            <img class="organismo__badge" src="img/integra.svg" alt="Logo Fundación Integra" loading="lazy">
             <div>
               <h3><a href="https://integra.cl/" target="_blank" rel="noopener">Red de Salas Cuna y Jardines Infantiles (Fundación Integra)</a></h3>
               <p>Denuncias respecto a cupos, reclamos con funcionarios de jardines pertenecientes a las entidades.</p>
@@ -1589,7 +1761,7 @@
           </article>
 
           <article class="organismo">
-            <img class="organismo__badge" src="img/org/supereduc-superior.svg" alt="Logo Superintendencia de Educación Superior" loading="lazy">
+            <img class="organismo__badge" src="img/supereduc-superior.svg" alt="Logo Superintendencia de Educación Superior" loading="lazy">
             <div>
               <h3><a href="https://www.sesuperior.cl/es_cl/" target="_blank" rel="noopener">Superintendencia de Educación Superior</a></h3>
               <p>Hechos o faltas ocurridas en universidades, institutos profesionales o centros de formación técnica.</p>
@@ -1597,7 +1769,7 @@
           </article>
 
           <article class="organismo">
-            <img class="organismo__badge" src="img/org/junaeb.svg" alt="Logo JUNAEB" loading="lazy">
+            <img class="organismo__badge" src="img/junaeb.svg" alt="Logo JUNAEB" loading="lazy">
             <div>
               <h3><a href="https://www.junaeb.cl/" target="_blank" rel="noopener">Junta Nacional de Auxilio Escolar y Becas (JUNAEB)</a></h3>
               <p>Requerimientos respecto a computadores entregados por la institución, becas, programas de alimentación y Tarjeta Nacional Estudiantil.</p>
@@ -1605,7 +1777,7 @@
           </article>
 
           <article class="organismo">
-            <img class="organismo__badge" src="img/org/poder-judicial.svg" alt="Logo Poder Judicial" loading="lazy">
+            <img class="organismo__badge" src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/poder-judicial.svg" alt="Logo Poder Judicial" loading="lazy">
             <div>
               <h3><a href="https://www.pjud.cl/tribunales/corte-de-apelaciones" target="_blank" rel="noopener">Corte de Apelaciones del Poder Judicial</a></h3>
               <p>Ingreso de Recursos de Protección ante vulneración de derechos educacionales. Temas de alcance judicial.</p>
@@ -1613,7 +1785,7 @@
           </article>
 
           <article class="organismo">
-            <img class="organismo__badge" src="img/org/direccion-trabajo.svg" alt="Logo Dirección del Trabajo" loading="lazy">
+            <img class="organismo__badge" src="img/direccion-trabajo.svg" alt="Logo Dirección del Trabajo" loading="lazy">
             <div>
               <h3><a href="https://www.dt.gob.cl/portal/1626/w3-channel.html" target="_blank" rel="noopener">Dirección del Trabajo (DT)</a></h3>
               <p>Denuncias por temas contractuales de docentes y asistentes de la educación, así como responsabilidades administrativas de establecimientos particulares (subvencionados y pagados).</p>
@@ -1621,7 +1793,7 @@
           </article>
 
           <article class="organismo">
-            <img class="organismo__badge" src="img/org/contraloria.svg" alt="Logo Contraloría General de la República" loading="lazy">
+            <img class="organismo__badge" src="https://raw.githubusercontent.com/lostastronauta/TEST-2-SIAC/64a03c465ee6d14807f90dc7e231dbeacc3c5d78/img/contraloria.svg" alt="Logo Contraloría General de la República" loading="lazy">
             <div>
               <h3><a href="https://www.contraloria.cl/" target="_blank" rel="noopener">Contraloría General de la República</a></h3>
               <p>Denuncias por temas contractuales de docentes y asistentes de la educación, así como responsabilidades administrativas de establecimientos públicos.</p>
@@ -1629,7 +1801,7 @@
           </article>
 
           <article class="organismo">
-            <img class="organismo__badge" src="img/org/sernac.svg" alt="Logo SERNAC" loading="lazy">
+            <img class="organismo__badge" src="img/sernac.svg" alt="Logo SERNAC" loading="lazy">
             <div>
               <h3><a href="https://www.sernac.cl/portal/617/w3-channel.html" target="_blank" rel="noopener">Servicio Nacional del Consumidor (SERNAC)</a></h3>
               <p>Requerimientos relacionados a contratos de prestación de servicios educativos entre privados.</p>
@@ -1642,90 +1814,77 @@
       <section class="cta" aria-label="Recursos complementarios">
         <img class="cta__lapiz" src="img/icono-lapiz.svg" alt="" width="30" height="60" loading="lazy">
         <p class="cta__texto">Para más información, revisa los recursos complementarios de la Supereduc, <a href="https://www.supereduc.cl" target="_blank" rel="noopener">aquí</a>
-          <img class="cta__mano" src="img/icono-mano.svg" alt="" width="44" height="34" loading="lazy">
+          <img class="cta__mano" src="img/mano.png" alt="" width="44" height="34" loading="lazy">
         </p>
       </section>
     </main>
 
-    <!-- SECCIÓN AZUL -->
-    <section class="blue-section">
-      <button class="btn-footer">Preguntas frecuentes</button>
-      <p>Si tienes dudas respecto a la normativa educacional vigente, no olvides que puedes revisar toda la información de forma simple en nuestra sección de preguntas frecuentes.</p>
-      <button class="btn-footer">Busca tu oficina regional más cercana</button>
-      <p>Si tienes consultas, puedes contactarnos a nuestro servicio telefónico al <strong>600 3600 390</strong><br/>Atención telefónica de lunes a viernes de 09:00 a 13:00 horas.</p>
-    </section>
+   
 
     <!-- FOOTER -->
     <footer class="footer-dark">
-      <div class="footer-content">
-        <div class="footer-section">
-          <ul>
+      <div class="footer-inner">
+        <div class="footer-section footer-brand">
+          <div class="footer-brand__logo-wrap">
+            <img class="footer-brand__logo" src="img/logo-supereduc-rojo.svg" alt="Superintendencia de Educación" />
+          </div>
+          <div class="footer-brand__gov">Gobierno de Chile</div>
+          <ul class="footer-brand__links">
             <li><a href="#">Preguntas frecuentes</a></li>
-            <li><a href="#">Mapa del Sitio</a></li>
-            <li><a href="#">Políticas de privacidad</a></li>
             <li><a href="#">Políticas de Seguridad de la Información</a></li>
-            <li><a href="#">Trabaja con nosotros</a></li>
-            <li><a href="#">Estados Financieros</a></li>
+            <li><a href="#">Políticas de Privacidad</a></li>
           </ul>
         </div>
-        <div class="footer-section">
-          <h5>Síganos en redes sociales</h5>
-          <div class="social-links">
-            <a href="#"><span class="social-icon">f</span> Facebook / supereducCL</a>
-            <a href="#"><span class="social-icon">X</span> Twitter / supereduc_cl</a>
-            <a href="#"><span class="social-icon">&#9654;</span> Youtube / Superintendencia Educación</a>
-            <a href="#"><span class="social-icon">&#9638;</span> Instagram / supereduc_cl</a>
-            <a href="#"><span class="social-icon">in</span> Linkedin / Superintendencia de Educación</a>
+
+        <div class="footer-main-panel">
+          <div class="footer-utility-grid">
+            <div class="footer-mini-card">
+              <div class="footer-mini-card__bar"><span class="blue"></span><span class="red"></span></div>
+              <div class="footer-mini-card__label"><strong>Solicitud de información</strong>Ley de Transparencia</div>
+            </div>
+            <div class="footer-mini-card">
+              <div class="footer-mini-card__bar"><span class="blue"></span><span class="red"></span></div>
+              <div class="footer-mini-card__label"><strong>Compromisos de</strong>Gestión Institucional</div>
+            </div>
+            <div class="footer-mini-card">
+              <div class="footer-mini-card__bar"><span class="blue"></span><span class="red"></span></div>
+              <div class="footer-mini-card__label"><strong>Gobierno</strong>Transparente</div>
+            </div>
           </div>
-        </div>
-        <div class="footer-section">
-          <h5>Sitios Relacionados</h5>
-          <ul>
-            <li><a href="#">Ayuda Mineduc</a></li>
-            <li><a href="#">JUNJI</a></li>
-            <li><a href="#">Integra</a></li>
-            <li><a href="#">CONICYT</a></li>
-            <li><a href="#">Empleos Públicos</a></li>
-            <li><a href="#">Chile Atiende</a></li>
-            <li><a href="#">Ciudadanía y Escuela</a></li>
-          </ul>
+
+          <a href="#" class="footer-cta">Si necesitas contactarte con la administración de este sitio, haz clic aquí</a>
+
+          <div class="footer-related">
+            <h5>SITIOS RELACIONADOS:</h5>
+            <ul>
+              <li><a href="#">Ayuda Mineduc</a></li>
+              <li><a href="#">JUNJI</a></li>
+              <li><a href="#">Integra</a></li>
+              <li><a href="#">ANID</a></li>
+              <li><a href="#">Chile Atiende</a></li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <div class="contact-info">
-          <p><strong>Contáctenos 600 3600 390</strong></p>
-          <p>Versión 1.1.5</p>
-          <div class="supereduc-logo-footer">
-            <div class="barra"><span class="barra-blue"></span><span class="barra-red"></span></div>
-            Superintendencia<br/>de Educación
-          </div>
-        </div>
-        <div class="footer-logo-box">
-          <div class="doc-icon"></div>
-          <div>Registro de<br/><strong>Trámites Digitales</strong></div>
-        </div>
-        <div class="footer-logo-box">
-          <div class="doc-icon">&#128203;</div>
-          <div>Solicitud de datos<br/><strong>Ley de Transparencia</strong></div>
-        </div>
-        <div class="footer-logo-box" style="background: white; color: var(--color-primary); font-weight: bold;">
-          ayuda MINEDUC<br/><small>atención ciudadana</small>
-        </div>
-      </div>
-
-      <div class="footer-orgs">
-        <p>Sistema de Aseguramiento de la Calidad de la Educación</p>
-        <div class="orgs-buttons">
-          <div class="org-btn agencia">Agencia de la Calidad<br/>de la Educación</div>
-          <div class="org-btn mineduc">Ministerio de<br/>de Educación</div>
-          <div class="org-btn consejo">Consejo Nacional<br/>de Educación</div>
+      <div class="footer-meta">
+        <div class="footer-phone"><i class="bi bi-telephone-fill"></i> <span>600 3600 390</span></div>
+        <a href="https://www.supereduc.cl" class="footer-domain" target="_blank" rel="noreferrer">www.supereduc.cl</a>
+        <div class="social-links" aria-label="Redes sociales">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">◌</a>
+          <a href="#" aria-label="X">X</a>
+          <a href="#" aria-label="Correo">@</a>
+          <a href="#" aria-label="YouTube">▶</a>
         </div>
       </div>
     </footer>
-    <div class="barra-footer-final">
+    <div class="barra-footer-final" aria-hidden="true">
       <div class="bf-blue"></div>
       <div class="bf-red"></div>
+    </div>
+    <div class="footer__tricolor" aria-hidden="true">
+      <img src="https://www.supereduc.cl/wp-content/uploads/2026/08/tricolor-estrella-scaled.png" alt="" loading="lazy" />
     </div>
 
 
