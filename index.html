@@ -4,10 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema Integral de Atención Ciudadana - Supereduc</title>
+    
+    <!-- FUENTES: Solo Roboto (SIN SERIF) -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
+      /* =========================================
+         VARIABLES GLOBALES
+         ========================================= */
       :root {
         --color-primary: #1b3a6b;
         --color-secondary: #c84654;
@@ -17,8 +22,37 @@
         --color-text-muted: #6c757d;
         --color-border: #dee2e6;
         --color-footer-bg: #0a1628;
-        --font-body: "Roboto", sans-serif;
-        --font-heading: "Roboto", sans-serif;
+        
+        /* ClaveÚnica Brand */
+        --cu-azul: #0B457F;
+        --cu-rojo: #E31837;
+        
+        /* Framework Digital */
+        --azul-header: #2731A0;
+        --azul-profundo: #1B2A80;
+        --azul-btn: #2A3785;
+        --rojo: #E63B4C;
+        --rojo-osc: #C4273C;
+        --primary: #006FB3;
+        --secondary: #FE6565;
+        --tertiary: #0A132D;
+        --accent: #A8B7C7;
+        --neutral: #EEEEEE;
+        --gris-fondo: #f4f5f7;
+        --gray-a: #4A4A4A;
+        --gray-b: #8A8A8A;
+        --black: #111111;
+        --white: #FFFFFF;
+        --verde: #2D717C;
+        
+        /* Tipografías - TODAS SANS-SERIF */
+        --font-body: "Roboto", system-ui, sans-serif;
+        --font-heading: "Roboto", system-ui, sans-serif;
+        
+        /* Sistema */
+        --radio: 0.6rem;
+        --sombra-azul: -9px 9px 0 rgba(27, 42, 128, 0.85);
+        --sombra-roja: -9px 9px 0 rgba(196, 39, 60, 0.85);
       }
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,6 +65,12 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        line-height: 1.25;
       }
 
       .mockup-banner {
@@ -312,299 +352,526 @@
       .btn-user.btn-logout:hover { background-color: #7d3d4b; }
 
       /* =========================================
-         CONTENIDO PRINCIPAL
+         BOTÓN CLAVE ÚNICA OFICIAL
+         ========================================= */
+      .clave-unica-section {
+        background: linear-gradient(135deg, var(--cu-azul) 0%, #1a5a8a 100%);
+        padding: 20px;
+        text-align: center;
+        border-bottom: 3px solid var(--cu-rojo);
+      }
+
+      .clave-unica-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .clave-unica-title {
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 15px;
+        font-family: var(--font-body);
+      }
+
+      .btn-cu{
+        display: inline-block;
+        padding: 8px 18px 8px 15px !important;
+        background-color: #0F69C4;
+        font-family: Roboto, sans-serif;
+        font-size: 1em;
+        line-height: 1.6em;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border-radius: 0;
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+      }
+      
+      .btn-cu a{
+        color: #fff;
+      }
+
+      .btn-cu .cl-claveunica{
+        color:#fff;
+        display: inline-block;
+        float: left;
+        text-indent: -9999px;
+        width: 24px;
+        height: 24px;
+        background: url(https://www.supereduc.cl/wp-content/uploads/2020/11/iconclave.png); 
+        background-size: 24px 24px;
+      }
+
+      .btn-cu .texto{
+        padding-left: 3px;
+        text-decoration: underline;
+        color:#fff;
+      }
+
+      .btn-cu:hover{
+        background-color: #0C549C;
+      }
+
+      .btn-cu:hover.hover-shw{
+        background-color: #0F69C4 !important;
+        -webkit-box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.2);
+        -moz-box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.2);
+        box-shadow: 0px 1px 15px 0px rgba(0,0,0,0.2);
+      }
+
+      .btn-cu.s{
+        padding: 6px 14px 6px 12px !important;
+        font-size: 0.8rem;
+      }
+
+      .btn-cu.s .cl-claveunica{
+        width: 18px;
+        height: 18px;
+        background-size: 18px 18px;
+      }
+
+      .btn-cu.l{ 
+        padding: 11px 30px 11px 23px !important;
+        font-size: 1.25rem;
+      }
+
+      .btn-cu.l .cl-claveunica{
+        width: 32px;
+        height: 32px;
+        background-size: 32px 32px;
+      }
+
+      /* =========================================
+         CONTENIDO PRINCIPAL - TARJETAS HTML B
          ========================================= */
       .main-content {
         max-width: 1200px;
         margin: 40px auto;
         padding: 0 20px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        align-items: start;
         flex: 1;
       }
 
-      /* LOGIN CARD */
-      .login-card {
-        background: white;
-        border-radius: 8px;
-        padding: 30px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      }
-
-      .login-card h2 {
-        text-align: center;
-        color: #555;
-        margin-bottom: 25px;
-        font-weight: 400;
-        font-size: 1.5rem;
-      }
-
-      .login-tabs {
-        display: flex;
-        border-bottom: 2px solid #eee;
-        margin-bottom: 25px;
-      }
-
-      .login-tabs button {
-        flex: 1;
-        padding: 12px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 0.95rem;
-        color: #666;
-        border-bottom: 3px solid transparent;
-        margin-bottom: -2px;
-        font-family: var(--font-body);
-        transition: all 0.2s;
-      }
-
-      .login-tabs button:hover { color: var(--color-primary); }
-
-      .login-tabs button.active {
-        color: var(--color-primary);
-        border-bottom-color: var(--color-secondary);
+      .intro {
         font-weight: 500;
-      }
-
-      .form-group { margin-bottom: 20px; }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 500;
-        color: var(--color-text);
-        font-size: 0.9rem;
-      }
-
-      .form-group label .required { color: var(--color-secondary); }
-
-      .form-control {
-        width: 100%;
-        padding: 10px 14px;
-        border: 1px solid var(--color-border);
-        border-radius: 4px;
-        font-size: 0.95rem;
-        font-family: var(--font-body);
-        transition: border-color 0.2s;
-      }
-
-      .form-control:focus {
-        outline: none;
-        border-color: var(--color-primary);
-        box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.1);
-      }
-
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 10px;
-      }
-
-      .captcha-box {
-        border: 1px solid #ddd;
-        padding: 12px 15px;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin: 20px 0;
-        background: #f9f9f9;
-      }
-
-      .btn-ingresar {
-        width: 100%;
-        background: #e8919a;
-        color: white;
-        border: none;
-        padding: 14px;
-        border-radius: 4px;
-        font-size: 1rem;
-        cursor: pointer;
-        margin-bottom: 15px;
-        font-family: var(--font-body);
-        font-weight: 500;
-        transition: background 0.2s;
-      }
-
-      .btn-ingresar:hover { background: #d4787f; }
-
-      .login-links {
-        text-align: center;
-        margin: 15px 0;
-        font-size: 0.85rem;
-      }
-
-      .login-links a {
-        color: var(--color-secondary);
-        text-decoration: none;
-        margin: 0 10px;
-      }
-
-      .login-links a:hover { text-decoration: underline; }
-
-      .btn-clave-unica {
-        width: 100%;
-        background: #3b82f6;
-        color: white;
-        border: none;
-        padding: 14px;
-        border-radius: 4px;
-        font-size: 1rem;
-        cursor: pointer;
-        font-family: var(--font-body);
-        font-weight: 500;
-        transition: background 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-      }
-
-      .btn-clave-unica:hover { background: #2563eb; }
-
-      /* SESIÓN ACTIVA CARD */
-      .session-card {
-        background: white;
-        border-radius: 8px;
-        padding: 40px 30px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        text-align: center;
-        display: none;
-      }
-
-      .session-card .session-icon {
-        width: 72px;
-        height: 72px;
-        background: #E8F5E9;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 20px;
-        color: #2E7D32;
-        font-size: 2rem;
-      }
-
-      .session-card h2 {
-        color: var(--color-primary);
-        font-size: 1.4rem;
-        font-weight: 500;
-        margin-bottom: 10px;
-      }
-
-      .session-card .session-user {
-        font-size: 1.05rem;
-        color: #444;
-        margin-bottom: 6px;
-      }
-
-      .session-card .session-rut {
-        font-size: 0.9rem;
-        color: var(--color-text-muted);
-        margin-bottom: 6px;
-      }
-
-      .session-card .session-method {
-        display: inline-block;
-        background: #E8F0FE;
-        color: #0B5394;
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-size: 0.8rem;
-        font-weight: 500;
-        margin-bottom: 24px;
-      }
-
-      .session-card .btn-go-dashboard {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: var(--color-primary);
-        color: white;
-        border: none;
-        padding: 14px 32px;
-        border-radius: 6px;
-        font-size: 1rem;
-        font-weight: 500;
-        cursor: pointer;
-        font-family: var(--font-body);
-        transition: background 0.2s, box-shadow 0.2s;
-        text-decoration: none;
-      }
-
-      .session-card .btn-go-dashboard:hover {
-        background: #152d55;
-        box-shadow: 0 4px 12px rgba(27, 58, 107, 0.3);
-      }
-
-      .session-card .btn-end-session {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: none;
-        border: 1px solid var(--color-border);
-        color: #666;
-        padding: 12px 24px;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        font-family: var(--font-body);
-        transition: all 0.2s;
-        margin-top: 12px;
-      }
-
-      .session-card .btn-end-session:hover {
-        border-color: var(--color-secondary);
-        color: var(--color-secondary);
-      }
-
-      /* INFO PANEL */
-      .info-panel { padding: 20px; }
-
-      .info-panel p {
-        color: #555;
-        line-height: 1.8;
-        margin-bottom: 25px;
-        font-size: 0.95rem;
-      }
-
-      .info-panel h3 {
-        color: var(--color-primary);
-        margin-bottom: 20px;
-        font-size: 1.2rem;
-        font-weight: 500;
-      }
-
-      .info-panel ul { list-style: none; padding: 0; }
-
-      .info-panel ul li {
-        padding: 12px 0 12px 35px;
-        position: relative;
-        color: #333;
-        line-height: 1.6;
-        font-size: 0.95rem;
-      }
-
-      .info-panel ul li::before {
-        content: "\2714";
-        position: absolute;
-        left: 0;
-        color: var(--color-primary);
-        font-weight: bold;
+        color: var(--gray-a);
         font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .info-panel .remember-box {
-        background: #f0f4f8;
-        padding: 20px;
-        border-left: 4px solid var(--color-primary);
-        margin-top: 25px;
+      .section-banner {
+        position: relative;
+        display: block;
+        width: fit-content;
+        max-width: 100%;
+        margin: 2.3rem auto 2rem;
+        background: var(--azul-btn);
+        color: #fff;
+        text-align: center;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: clamp(1.25rem, 3.4vw, 1.6875rem);
+        padding: 0.9rem 1.5rem;
+        border-radius: 0.6rem;
+      }
+
+      .section-banner::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        transform: translateX(-50%);
+        border: 12px solid transparent;
+        border-top: 12px solid var(--azul-btn);
+        border-bottom: 0;
+      }
+
+      .tarjeta {
+        position: relative;
+        background: #fff;
+        border: 2px solid var(--accent);
+        border-radius: var(--radio);
+        padding: 1.4rem 1.2rem 1.5rem;
+        margin-bottom: 1.7rem;
+        box-shadow: var(--sombra-azul);
+      }
+
+      .tarjeta__cab {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .tarjeta__num {
+        flex: 0 0 auto;
+        width: 2.3rem;
+        height: 2.3rem;
+        border-radius: 50%;
+        background: var(--azul-profundo);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1.05rem;
+      }
+
+      .tarjeta__titulo {
+        flex: 1;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--black);
+        font-size: clamp(1.25rem, 3.6vw, 1.6875rem);
+        letter-spacing: 0.02em;
+        line-height: 1.25;
+      }
+
+      .tarjeta__texto {
+        margin-top: 0.8rem;
+        text-align: center;
+        font-size: 1rem;
+        color: var(--gray-a);
+      }
+
+      .tarjeta__icono {
+        width: 74px;
+        margin: 1.1rem auto 0;
+      }
+
+      .tarjeta--roja {
+        border-color: var(--rojo);
+        box-shadow: var(--sombra-roja);
+      }
+
+      .tarjeta--roja .tarjeta__num {
+        background: var(--rojo);
+      }
+
+      .tarjeta--roja .tarjeta__titulo {
+        color: var(--rojo);
+      }
+
+      .tarjeta__lista {
+        margin-top: 0.9rem;
+        display: grid;
+        gap: 0.5rem;
+        justify-items: center;
+      }
+
+      .tarjeta__lista li {
+        display: flex;
+        gap: 0.55rem;
+        align-items: flex-start;
+        max-width: 34rem;
+        color: var(--gray-a);
+      }
+
+      .check {
+        flex: 0 0 auto;
+        width: 1.35rem;
+        height: 1.35rem;
+        margin-top: 0.15rem;
+      }
+
+      .btn-pill {
+        background: var(--primary);
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.65rem 1.8rem;
+        font-family: var(--font-body);
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-pill:hover,
+      .btn-pill:focus {
+        filter: brightness(1.1);
+      }
+
+      .btn-pill--cu {
+        background: var(--cu-azul);
+        border-bottom: 3px solid var(--cu-rojo);
+      }
+
+      .cu-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--cu-azul) 50%, var(--cu-rojo) 50%);
+        color: #fff;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        font-size: 0.65rem;
+        font-weight: 900;
+      }
+
+      .divisor {
+        height: 4px;
+        width: min(100% - 2rem, 70rem);
+        margin: 2.5rem auto;
+        background: var(--accent);
+      }
+
+      .recuerda {
+        display: flex;
+        gap: 1.1rem;
+        align-items: flex-start;
+        background: #fff;
+        border: 1.5px solid var(--accent);
+        border-radius: var(--radio);
+        padding: 1.3rem 1.2rem;
+        margin: 2.2rem auto;
+      }
+
+      .recuerda img {
+        width: 56px;
+        flex: 0 0 auto;
+      }
+
+      .recuerda h3 {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        font-size: 1.4375rem;
+        margin-bottom: 0.4rem;
+        color: var(--black);
+      }
+
+      .recuerda p {
+        font-size: 1rem;
+        color: var(--gray-a);
+      }
+
+      .facultades__intro {
+        font-weight: 500;
+        margin-bottom: 1.2rem;
+        color: var(--gray-a);
+        font-size: 1.05rem;
+      }
+
+      .facultades {
+        display: grid;
+        gap: 0.95rem;
+        list-style: none;
+      }
+
+      .facultades li {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        color: var(--gray-a);
+      }
+
+      .panel {
+        background: #fff;
+        border: 2px solid var(--accent);
+        border-radius: var(--radio);
+        padding: 2.6rem 1.1rem 1.8rem;
+        margin: 2.6rem 0 2.2rem;
+        box-shadow: var(--sombra-azul);
+      }
+
+      .panel--rojo {
+        border-color: var(--rojo);
+        box-shadow: var(--sombra-roja);
+      }
+
+      .cinta {
+        position: relative;
+        z-index: 0;
+        display: block;
+        width: fit-content;
+        max-width: 92%;
+        margin: -1.4rem auto 1.8rem;
+        background: var(--azul-btn);
+        --cinta-fin: var(--azul-profundo);
+        color: #fff;
+        text-align: center;
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: clamp(1.25rem, 3.4vw, 1.6875rem);
+        padding: 0.9rem 1.8rem;
+        border-radius: 0.5rem;
+        line-height: 1.3;
+      }
+
+      .cinta::before,
+      .cinta::after {
+        content: "";
+        position: absolute;
+        top: 0.5rem;
+        height: 100%;
+        width: 1.5rem;
+        background: var(--cinta-fin);
+        z-index: -1;
+      }
+
+      .cinta::before {
+        left: -1.1rem;
+        clip-path: polygon(100% 0, 100% 100%, 0 100%, 42% 50%, 0 0);
+      }
+
+      .cinta::after {
+        right: -1.1rem;
+        clip-path: polygon(0 0, 100% 0, 58% 50%, 100% 100%, 0 100%);
+      }
+
+      .cinta--roja {
+        background: var(--rojo);
+        --cinta-fin: var(--rojo-osc);
+      }
+
+      .grid-iconos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.6rem 1rem;
+        justify-items: center;
+        text-align: center;
+        list-style: none;
+      }
+
+      .grid-iconos img {
+        width: 66px;
+        height: 66px;
+        object-fit: contain;
+        margin-inline: auto;
+      }
+
+      .grid-iconos p {
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        max-width: 10rem;
+        color: var(--gray-a);
+      }
+
+      .panel--rojo .grid-iconos p {
+        color: var(--rojo);
+        font-weight: 600;
+      }
+
+      .otros-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+        text-align: center;
+        margin-top: 3rem;
+      }
+
+      .titulo-grande {
+        font-family: var(--font-heading);
+        font-weight: 700;
+        color: var(--black);
+        text-transform: uppercase;
+        font-size: clamp(1.4375rem, 6vw, 2.4rem);
+        line-height: 1.15;
+      }
+
+      .otros-header__icono {
+        width: 120px;
+      }
+
+      .organismos {
+        display: grid;
+        gap: 1.8rem;
+        margin-top: 1.6rem;
+      }
+
+      .organismo {
+        display: flex;
+        gap: 1.1rem;
+        align-items: flex-start;
+      }
+
+      .organismo__badge {
+        flex: 0 0 auto;
+        width: 86px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid var(--accent);
+      }
+
+      .organismo h3 {
+        color: var(--primary);
+        font-family: var(--font-heading);
+        font-weight: 600;
+        font-size: 1.125rem;
+        margin-bottom: 0.35rem;
+      }
+
+      .organismo h3 a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .organismo h3 a:hover,
+      .organismo h3 a:focus {
+        color: var(--primary);
+        text-decoration: underline;
+      }
+
+      .organismo p {
         font-size: 0.9rem;
-        color: #444;
-        line-height: 1.6;
+        color: var(--gray-a);
+        line-height: 1.5;
+      }
+
+      .cta {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.9rem;
+        background: #fff;
+        border: 2px solid var(--primary);
+        border-radius: var(--radio);
+        padding: 1.2rem;
+        margin: 2.5rem auto;
+      }
+
+      .cta__lapiz {
+        width: 26px;
+      }
+
+      .cta__texto {
+        font-family: var(--font-heading);
+        font-weight: 600;
+        color: var(--azul-btn);
+        text-transform: uppercase;
+        text-align: center;
+        font-size: clamp(1.125rem, 3.4vw, 1.4375rem);
+        line-height: 1.35;
+      }
+
+      .cta__texto a {
+        color: var(--primary);
+        text-decoration: underline;
+      }
+
+      .cta__mano {
+        width: 44px;
+        display: inline-block;
+        vertical-align: middle;
       }
 
       /* TOAST */
@@ -668,6 +935,49 @@
       }
 
       .toast-close:hover { color: #333; }
+
+      /* MODAL CLAVE ÚNICA */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 19, 45, 0.75);
+        backdrop-filter: blur(4px);
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-card {
+        background: #fff;
+        width: min(100%, 32rem);
+        border-radius: var(--radio);
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 2px solid var(--cu-azul);
+        position: relative;
+        text-align: center;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--gray-a);
+      }
 
       /* FOOTER */
       .blue-section {
@@ -882,7 +1192,18 @@
       }
 
       @media (max-width: 968px) {
-        .main-content { grid-template-columns: 1fr; }
+        .tarjeta {
+          padding: 1.6rem 8.6rem 1.6rem 1.8rem;
+        }
+
+        .tarjeta__icono {
+          position: absolute;
+          right: 1.4rem;
+          top: 50%;
+          transform: translateY(-50%);
+          margin: 0;
+          width: 92px;
+        }
       }
 
       @media (max-width: 768px) {
@@ -899,6 +1220,20 @@
         .footer-bottom .footer-logo-box { justify-content: center; }
         .orgs-buttons { grid-template-columns: 1fr; }
         .toast { min-width: 260px; max-width: calc(100vw - 40px); }
+        .tarjeta {
+          padding: 1.4rem 1.2rem 1.5rem;
+        }
+        .tarjeta__icono {
+          position: static;
+          transform: none;
+          width: 74px;
+          margin: 1.1rem auto 0;
+        }
+        .cta {
+          flex-direction: row;
+          justify-content: center;
+          gap: 1.2rem;
+        }
       }
 
       @media (max-width: 480px) {
@@ -907,6 +1242,25 @@
         .test-toggle { bottom: 16px; left: 16px; }
         .test-toggle-btn { padding: 8px 12px; font-size: 0.75rem; }
         .test-toggle-label { display: none; }
+      }
+
+      @media (min-width: 640px) {
+        .grid-iconos {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (min-width: 900px) {
+        .organismos {
+          grid-template-columns: 1fr 1fr;
+          gap: 2.2rem 3rem;
+        }
+      }
+
+      @media (min-width: 960px) {
+        .grid-iconos {
+          grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+        }
       }
     </style>
   </head>
@@ -917,6 +1271,33 @@
 
     <!-- Toast container -->
     <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Modal Clave Única -->
+    <div id="cu-modal" class="modal-overlay">
+      <div class="modal-card" role="dialog" aria-labelledby="cu-modal-title" aria-modal="true">
+        <button class="modal-close" id="cu-modal-close" aria-label="Cerrar modal">&times;</button>
+        <div style="display:flex; justify-content:center; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+          <span class="cu-badge" style="width:30px; height:30px; font-size:0.9rem;">CU</span>
+          <h2 id="cu-modal-title" style="font-size:1.4rem; color:var(--cu-azul); font-family:var(--font-heading);">Acceso con ClaveÚnica</h2>
+        </div>
+        <p style="font-size:0.95rem; margin-bottom:1.5rem; color:var(--gray-a);">
+          El Portal de Atención Ciudadana SIE requiere autenticación oficial del Gobierno de Chile para el seguimiento y gestión personalizada de sus denuncias y solicitudes.
+        </p>
+        
+        <div style="background:var(--neutral); padding:1rem; border-radius:0.5rem; margin-bottom:1.5rem; text-align:left; font-size:0.85rem;">
+          <strong>Simulador de Presentación (Modo Demo):</strong>
+          <div style="margin-top:0.5rem; display:grid; gap:0.5rem;">
+            <button id="btn-demo-login" class="btn-pill btn-pill--cu" style="width:100%; justify-content:center;">
+              Simular Login Ciudadano (Nivel B)
+            </button>
+          </div>
+        </div>
+
+        <div style="font-size:0.75rem; color:var(--gray-b);">
+          * Integración OpenID Connect con <code>accounts.claveunica.gob.cl</code> lista para el equipo de TI.
+        </div>
+      </div>
+    </div>
 
     <!-- ========================================== -->
     <!-- BOTÓN MODO TEST — Flotante inferior izq    -->
@@ -988,80 +1369,282 @@
     </header>
 
     <!-- ========================================== -->
-    <!-- CONTENIDO PRINCIPAL                         -->
+    <!-- SECCIÓN CLAVE ÚNICA OFICIAL                -->
     <!-- ========================================== -->
-    <main class="main-content">
-
-      <div class="login-card" id="loginCard">
-        <h2>Iniciar Sesión</h2>
-        <div class="login-tabs">
-          <button class="active" id="tabCiudadano">Ciudadano</button>
-          <button id="tabEstablecimiento">Establecimiento/Sostenedor</button>
-        </div>
-        <form id="loginForm">
-          <div class="form-group">
-            <label>Tipo <span class="required">(*)</span></label>
-            <div class="form-row">
-              <select class="form-control" id="tipoDoc">
-                <option>Seleccione</option>
-                <option>RUT</option>
-                <option>Pasaporte</option>
-              </select>
-              <input type="text" class="form-control" id="rutInput" placeholder="">
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Clave</label>
-            <input type="password" class="form-control" id="claveInput">
-          </div>
-          <div class="captcha-box">
-            <input type="checkbox" id="captcha">
-            <label for="captcha" style="margin: 0; font-size: 0.9rem">No soy un robot</label>
-            <span style="color: #3b82f6; font-size: 0.7rem; margin-left: auto">reCAPTCHA</span>
-          </div>
-          <button type="submit" class="btn-ingresar">Ingresar</button>
-          <div class="login-links">
-            <a href="#">¿Olvidaste tu clave?</a>
-            <a href="#">¿No estás registrado?</a>
-          </div>
-          <button type="button" class="btn-clave-unica" id="btnClaveUnica">
-            <i class="bi bi-key-fill"></i> Clave Única
-          </button>
-        </form>
-      </div>
-
-      <div class="session-card" id="sessionCard">
-        <div class="session-icon">
-          <i class="bi bi-check-circle-fill"></i>
-        </div>
-        <h2>Sesión activa</h2>
-        <p class="session-user" id="sessionUserName">—</p>
-        <p class="session-rut" id="sessionUserRut">—</p>
-        <div class="session-method" id="sessionMethod">—</div>
-        <br>
-        <a href="pages/dashboard.html" class="btn-go-dashboard">
-          <i class="bi bi-arrow-right-circle"></i> Ir al Sistema
-        </a>
-        <br>
-        <button class="btn-end-session" id="btnEndSession">
-          <i class="bi bi-box-arrow-right"></i> Cerrar sesión aquí
+    <section class="clave-unica-section">
+      <div class="clave-unica-container">
+        <p class="clave-unica-title">Accede con tu identidad digital del Gobierno de Chile</p>
+        <button type="button" class="btn-cu l" id="btnClaveUnicaOficial">
+          <span class="cl-claveunica">ClaveÚnica</span>
+          <span class="texto">Ingresar con ClaveÚnica</span>
         </button>
       </div>
+    </section>
 
-      <div class="info-panel">
-        <p>La Superintendencia de Educación tiene como misión contribuir al aseguramiento de la calidad y equidad de la educación parvularia y escolar, resguardando los derechos de la comunidad educativa a través de la promoción del cumplimiento de la normativa educacional.</p>
-        <h3>En este portal usted podrá:</h3>
-        <ul>
-          <li><strong>Solicitar mediación</strong> para generar un espacio de diálogo, que busque soluciones conjuntas de conflictos dentro de la comunidad educativa.</li>
-          <li><strong>Ingresar requerimientos</strong> para solicitar la investigación y/o fiscalización de hechos que puedan constituir una falta a la normativa educacional.</li>
-          <li><strong>Realizar seguimiento de requerimientos</strong> y de solicitudes de mediación.</li>
-          <li><strong>Ingresar al sistema de postulación de mediadores escolares.</strong></li>
-          <li><strong>Ingresar sugerencias, felicitaciones y reclamos.</strong></li>
-        </ul>
-        <div class="remember-box">
-          <strong>Recuerde:</strong> Los establecimientos educacionales deben contar con procedimientos para la atención de las consultas y reclamos de las y los integrantes de las comunidades educativas, procurando el resguardo de los derechos de las y los estudiantes.
+    <!-- ========================================== -->
+    <!-- CONTENIDO PRINCIPAL - TARJETAS             -->
+    <!-- ========================================== -->
+    <main class="main-content">
+      <p class="intro">En el marco de la Ley N.° 20.529, que crea el Sistema de Aseguramiento de la Calidad de la Educación, ejerce sus facultades para asegurar una educación de calidad, promoviendo el cumplimiento de los deberes, la igualdad de oportunidades y la protección de los derechos de niños, niñas y jóvenes en todo el país.</p>
+
+      <section id="competencias" aria-labelledby="titulo-requerimientos">
+        <h2 class="section-banner" id="titulo-requerimientos">Tipos de requerimientos que se pueden ingresar a la Supereduc</h2>
+
+        <article class="tarjeta" id="consultas">
+          <div class="tarjeta__cab"><span class="tarjeta__num" aria-hidden="true">1</span>
+            <h3 class="tarjeta__titulo">Consultas</h3>
+          </div>
+          <p class="tarjeta__texto"><strong>Orientación normativa:</strong> Destinado a entregar orientaciones sobre la normativa educacional y conocer el estado de su requerimiento.</p>
+          <img class="tarjeta__icono" src="img/icono-consultas.svg" alt="" width="92" height="92" loading="lazy">
+          <div style="text-align:center; margin-top:1rem;">
+            <a class="btn-pill" href="consultas.html">Ver Proceso de Consultas &rarr;</a>
+          </div>
+        </article>
+
+        <article class="tarjeta" id="mediacion">
+          <div class="tarjeta__cab"><span class="tarjeta__num" aria-hidden="true">2</span>
+            <h3 class="tarjeta__titulo">Gestión colaborativa de conflictos</h3>
+          </div>
+          <p class="tarjeta__texto">Tiene como objetivo facilitar el diálogo y fortalecer la capacidad que tienen los establecimientos para abordar de manera oportuna los conflictos que puedan afectar la convivencia escolar, para ello contempla distintos mecanismos, tales como:</p>
+          <ul class="tarjeta__lista">
+            <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="12" fill="#2D717C" />
+                <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg><span><strong>Formulario de contacto directo</strong> entre la/el ciudadana/o y el establecimiento educacional</span></li>
+            <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="12" fill="#2D717C" />
+                <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg><span>Conciliación</span></li>
+            <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="12" fill="#2D717C" />
+                <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg><span>Mediación</span></li>
+          </ul>
+          <img class="tarjeta__icono" src="img/icono-mediacion.svg" alt="" width="92" height="92" loading="lazy">
+          <div style="text-align:center; margin-top:1rem;">
+            <a class="btn-pill" href="mediacion.html">Ver Proceso de Mediación &rarr;</a>
+          </div>
+        </article>
+
+        <article class="tarjeta tarjeta--roja" id="denuncias">
+          <div class="tarjeta__cab"><span class="tarjeta__num" aria-hidden="true">3</span>
+            <h3 class="tarjeta__titulo">Gestión de denuncias</h3>
+          </div>
+          <p class="tarjeta__texto">Su objetivo es verificar el cumplimiento de la normativa educacional por parte de los establecimientos educativos y que estos adopten las medidas correspondientes.</p>
+          <img class="tarjeta__icono" src="img/icono-denuncias.svg" alt="" width="92" height="92" loading="lazy">
+          <div style="text-align:center; margin-top:1rem;">
+            <a class="btn-pill btn-pill--cu" href="denuncias.html">Ver Proceso de Denuncias &rarr;</a>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div class="tarjeta__cab"><span class="tarjeta__num" aria-hidden="true">4</span>
+            <h3 class="tarjeta__titulo">Danos tu opinión</h3>
+          </div>
+          <ul class="opinion" style="list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.6rem; margin-top: 0.7rem; font-weight: 600; color: var(--gray-a);">
+            <li>Felicitaciones</li>
+            <li>Sugerencias</li>
+            <li>Reclamos</li>
+          </ul>
+          <img class="tarjeta__icono" src="img/icono-opinion.svg" alt="" width="92" height="92" loading="lazy">
+        </article>
+      </section>
+
+      <div class="divisor" aria-hidden="true"></div>
+
+      <aside class="recuerda">
+        <img src="img/estrella-recuerda.svg" alt="" width="56" height="56" loading="lazy">
+        <div>
+          <h3>Recuerda:</h3>
+          <p>Los establecimientos educacionales deben contar con procedimientos para la atención de consultas y reclamos de los integrantes de las comunidades educativas, procurando el resguardo de los derechos de los estudiantes.</p>
         </div>
-      </div>
+      </aside>
+
+      <section aria-labelledby="titulo-facultades">
+        <p class="facultades__intro" id="titulo-facultades">La Superintendencia de Educación cuenta con las siguientes facultades que le permiten impulsar el cumplimiento de la normativa educacional y el resguardo de los derechos:</p>
+        <ul class="facultades">
+          <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="12" fill="#2D717C" />
+              <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <p>Orientar y entregar información sobre la normativa educacional vigente y los derechos de los miembros de la comunidad educativa.</p>
+          </li>
+          <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="12" fill="#2D717C" />
+              <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <p>Recibir y gestionar requerimientos tales como consultas, solicitudes de mediación y denuncias sobre hechos que pueden constituir una infracción o una vulneración de derechos establecidos en la normativa educacional.</p>
+          </li>
+          <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="12" fill="#2D717C" />
+              <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <p>Fiscalizar que se cumpla la normativa educacional y que los recursos entregados por el Estado se utilicen correctamente.</p>
+          </li>
+          <li><svg class="check" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="12" fill="#2D717C" />
+              <path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            <p>Promover la resolución colaborativa de conflictos al interior de las comunidades educativas para fortalecer la convivencia y la calidad educativa.</p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- DENUNCIAS QUE SÍ SON COMPETENCIA -->
+      <section class="panel" aria-labelledby="t-si">
+        <h2 class="cinta" id="t-si">¿Qué tipo de denuncias SÍ son competencia de la Supereduc?</h2>
+        <ul class="grid-iconos">
+          <li><img src="img/si/maltrato.svg" alt="" loading="lazy"><p>Maltrato escolar</p></li>
+          <li><img src="img/si/discriminacion.svg" alt="" loading="lazy"><p>Discriminación</p></li>
+          <li><img src="img/si/cancelacion-matricula.svg" alt="" loading="lazy"><p>Cancelación de matrícula</p></li>
+          <li><img src="img/si/medidas-disciplinarias.svg" alt="" loading="lazy"><p>Medidas disciplinarias</p></li>
+          <li><img src="img/si/connotacion-sexual.svg" alt="" loading="lazy"><p>Situaciones de connotación sexual</p></li>
+          <li><img src="img/si/retencion-documentos.svg" alt="" loading="lazy"><p>Retención de documentos</p></li>
+          <li><img src="img/si/falta-mobiliario.svg" alt="" loading="lazy"><p>Falta de mobiliario y de elementos de enseñanza</p></li>
+          <li><img src="img/si/reglamento-evaluacion.svg" alt="" loading="lazy"><p>Cumplimiento del reglamento de evaluación y promoción escolar</p></li>
+          <li><img src="img/si/declaracion-asistencia.svg" alt="" loading="lazy"><p>Irregularidades en la declaración de asistencia</p></li>
+          <li><img src="img/si/planes-programas.svg" alt="" loading="lazy"><p>Incumplimiento de planes y programas</p></li>
+          <li><img src="img/si/proceso-admision.svg" alt="" loading="lazy"><p>Irregularidades en el proceso de admisión</p></li>
+          <li><img src="img/si/uniformes-utiles.svg" alt="" loading="lazy"><p>Uniformes, útiles y textos escolares</p></li>
+          <li><img src="img/si/planta-docente.svg" alt="" loading="lazy"><p>Problemas con planta docente</p></li>
+          <li><img src="img/si/participacion.svg" alt="" loading="lazy"><p>Participación: Centro de estudiantes, Centro de madres, padres y apoderados/as, Consejos Escolares</p></li>
+        </ul>
+
+        <div style="text-align:center; margin-top:2.5rem;">
+          <button class="btn-pill btn-pill--cu" id="btnDenunciaCU" style="font-size:1.05rem; cursor: pointer;">
+            <span class="cu-badge">CU</span> Ingresar Denuncia con ClaveÚnica
+          </button>
+        </div>
+      </section>
+
+      <!-- DENUNCIAS QUE NO SON COMPETENCIA -->
+      <section class="panel panel--rojo" aria-labelledby="t-no">
+        <h2 class="cinta cinta--roja" id="t-no">¿Qué tipo de denuncias NO son competencia de la Supereduc?</h2>
+        <ul class="grid-iconos">
+          <li><img src="img/no/matricula-sae.svg" alt="" loading="lazy"><p>Búsqueda de matrícula y proceso SAE</p></li>
+          <li><img src="img/no/educacion-superior.svg" alt="" loading="lazy"><p>Faltas a la normativa educacional en Educación Superior</p></li>
+          <li><img src="img/no/contratos-laborales.svg" alt="" loading="lazy"><p>Contratos laborales de los funcionarios</p></li>
+          <li><img src="img/no/identificador-provisorio.svg" alt="" loading="lazy"><p>Problemas con Identificador Provisorio Escolar</p></li>
+          <li><img src="img/no/becas-tne.svg" alt="" loading="lazy"><p>Reclamos por servicios becas y alimentación TNE</p></li>
+          <li><img src="img/no/autorizacion-docencia.svg" alt="" loading="lazy"><p>Autorización para ejercer docencia</p></li>
+          <li><img src="img/no/reconocimiento-oficial.svg" alt="" loading="lazy"><p>Solicitud o modificación de Reconocimiento Oficial</p></li>
+          <li><img src="img/no/cambio-datos.svg" alt="" loading="lazy"><p>Cambio de apellidos, nombres, sexo o RUN en documentos educacionales</p></li>
+          <li><img src="img/no/subvenciones-rbd.svg" alt="" loading="lazy"><p>Detalle de subvenciones entregadas por RBD Sostenedor</p></li>
+          <li><img src="img/no/certificados-ips.svg" alt="" loading="lazy"><p>Certificados de antecedentes laborales previsionales de Docentes y Asistentes de la Educación (IPS)</p></li>
+          <li><img src="img/no/plataforma-sige.svg" alt="" loading="lazy"><p>Problemas o dudas en uso de plataforma SIGE</p></li>
+        </ul>
+      </section>
+
+      <div class="divisor" aria-hidden="true"></div>
+
+      <!-- DERIVACIÓN A MINEDUC -->
+      <aside class="derivacion" style="display: flex; flex-direction: column; align-items: center; gap: 1.1rem; text-align: center; background: #fff; border: 2px solid var(--primary); border-radius: var(--radio); padding: 1.3rem 1.2rem; margin: 2.2rem auto;">
+        <img src="img/estrella-recuerda.svg" alt="" loading="lazy" style="width: 56px;">
+        <p style="font-family: var(--font-heading); font-weight: 600; text-transform: uppercase; font-size: 1rem; line-height: 1.4; color: var(--black);">Si tu consulta, solicitud o denuncia no corresponde con nuestras competencias, dirígete al sitio de consultas de Mineduc</p>
+        <span style="width: 0; height: 0; border-top: 13px solid transparent; border-bottom: 13px solid transparent; border-left: 20px solid var(--primary);" aria-hidden="true"></span>
+        <a class="btn-pill" href="https://ayudamineduc.cl" target="_blank" rel="noopener">ayudamineduc.cl</a>
+      </aside>
+
+      <div class="divisor" aria-hidden="true"></div>
+
+      <!-- COMPETENCIA DE OTROS ORGANISMOS -->
+      <section aria-labelledby="t-otros">
+        <div class="otros-header">
+          <h2 class="titulo-grande" id="t-otros">Denuncias que son competencia de otros organismos</h2>
+          <img class="otros-header__icono" src="img/icono-organismos.svg" alt="" loading="lazy">
+        </div>
+        <div class="divisor" aria-hidden="true"></div>
+        <p class="facultades__intro">Antes de ingresar su requerimiento, revise la siguiente información para confirmar si los hechos a ingresar son de competencia de otros organismos.</p>
+
+        <div class="organismos">
+          <article class="organismo">
+            <img class="organismo__badge" src="img/org/mineduc.svg" alt="Logo Ministerio de Educación" loading="lazy">
+            <div>
+              <h3><a href="https://ayudamineduc.cl/" target="_blank" rel="noopener">Ministerio de Educación</a></h3>
+              <p>Búsqueda de matrícula, Sistema de Admisión Escolar, certificados de estudios, Identificador Provisorio Escolar, certificados de Alumnos Prioritarios, uso de plataforma SIGE, autorizaciones para el ejercicio de la docencia, Reconocimiento Oficial, modificación de datos personales en documentos oficiales educacionales, detalle de subvenciones entregadas por RBD, ránking de notas, legalización o apostilla de certificados.</p>
+            </div>
+          </article>
+
+          <article class="organismo">
+            <img class="organismo__badge" src="img/org/junji.svg" alt="Logo JUNJI" loading="lazy">
+            <div>
+              <h3><a href="https://junji.cl/" target="_blank" rel="noopener">Junta Nacional de Jardines Infantiles (JUNJI)</a></h3>
+              <p>Denuncias respecto a cupos, reclamos con funcionarios de jardines pertenecientes a las entidades.</p>
+            </div>
+          </article>
+
+          <article class="organismo">
+            <img class="organismo__badge" src="img/org/integra.svg" alt="Logo Fundación Integra" loading="lazy">
+            <div>
+              <h3><a href="https://integra.cl/" target="_blank" rel="noopener">Red de Salas Cuna y Jardines Infantiles (Fundación Integra)</a></h3>
+              <p>Denuncias respecto a cupos, reclamos con funcionarios de jardines pertenecientes a las entidades.</p>
+            </div>
+          </article>
+
+          <article class="organismo">
+            <img class="organismo__badge" src="img/org/supereduc-superior.svg" alt="Logo Superintendencia de Educación Superior" loading="lazy">
+            <div>
+              <h3><a href="https://www.sesuperior.cl/es_cl/" target="_blank" rel="noopener">Superintendencia de Educación Superior</a></h3>
+              <p>Hechos o faltas ocurridas en universidades, institutos profesionales o centros de formación técnica.</p>
+            </div>
+          </article>
+
+          <article class="organismo">
+            <img class="organismo__badge" src="img/org/junaeb.svg" alt="Logo JUNAEB" loading="lazy">
+            <div>
+              <h3><a href="https://www.junaeb.cl/" target="_blank" rel="noopener">Junta Nacional de Auxilio Escolar y Becas (JUNAEB)</a></h3>
+              <p>Requerimientos respecto a computadores entregados por la institución, becas, programas de alimentación y Tarjeta Nacional Estudiantil.</p>
+            </div>
+          </article>
+
+          <article class="organismo">
+            <img class="organismo__badge" src="img/org/poder-judicial.svg" alt="Logo Poder Judicial" loading="lazy">
+            <div>
+              <h3><a href="https://www.pjud.cl/tribunales/corte-de-apelaciones" target="_blank" rel="noopener">Corte de Apelaciones del Poder Judicial</a></h3>
+              <p>Ingreso de Recursos de Protección ante vulneración de derechos educacionales. Temas de alcance judicial.</p>
+            </div>
+          </article>
+
+          <article class="organismo">
+            <img class="organismo__badge" src="img/org/direccion-trabajo.svg" alt="Logo Dirección del Trabajo" loading="lazy">
+            <div>
+              <h3><a href="https://www.dt.gob.cl/portal/1626/w3-channel.html" target="_blank" rel="noopener">Dirección del Trabajo (DT)</a></h3>
+              <p>Denuncias por temas contractuales de docentes y asistentes de la educación, así como responsabilidades administrativas de establecimientos particulares (subvencionados y pagados).</p>
+            </div>
+          </article>
+
+          <article class="organismo">
+            <img class="organismo__badge" src="img/org/contraloria.svg" alt="Logo Contraloría General de la República" loading="lazy">
+            <div>
+              <h3><a href="https://www.contraloria.cl/" target="_blank" rel="noopener">Contraloría General de la República</a></h3>
+              <p>Denuncias por temas contractuales de docentes y asistentes de la educación, así como responsabilidades administrativas de establecimientos públicos.</p>
+            </div>
+          </article>
+
+          <article class="organismo">
+            <img class="organismo__badge" src="img/org/sernac.svg" alt="Logo SERNAC" loading="lazy">
+            <div>
+              <h3><a href="https://www.sernac.cl/portal/617/w3-channel.html" target="_blank" rel="noopener">Servicio Nacional del Consumidor (SERNAC)</a></h3>
+              <p>Requerimientos relacionados a contratos de prestación de servicios educativos entre privados.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CTA RECURSOS -->
+      <section class="cta" aria-label="Recursos complementarios">
+        <img class="cta__lapiz" src="img/icono-lapiz.svg" alt="" width="30" height="60" loading="lazy">
+        <p class="cta__texto">Para más información, revisa los recursos complementarios de la Supereduc, <a href="https://www.supereduc.cl" target="_blank" rel="noopener">aquí</a>
+          <img class="cta__mano" src="img/icono-mano.svg" alt="" width="44" height="34" loading="lazy">
+        </p>
+      </section>
     </main>
 
     <!-- SECCIÓN AZUL -->
@@ -1146,7 +1729,9 @@
     </div>
 
 
-    <!-- JAVASCRIPT -->
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT INTEGRADO                       -->
+    <!-- ========================================== -->
     <script>
       // ==========================================
       // 1. Fallback de imagen del banner
@@ -1219,33 +1804,22 @@
       // ==========================================
       function updateView() {
         var isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-        var loginCard = document.getElementById("loginCard");
-        var sessionCard = document.getElementById("sessionCard");
         var userNav = document.getElementById("userNav");
         var testBtn = document.getElementById("btnTestToggle");
         var testText = document.getElementById("testToggleText");
 
         if (isLoggedIn) {
-          loginCard.style.display = "none";
-          sessionCard.style.display = "block";
           userNav.style.display = "block";
 
           var name = localStorage.getItem("userName") || "Usuario";
           var rut = localStorage.getItem("userRut") || "—";
-          var method = localStorage.getItem("loginMethod") || "formulario";
 
           document.getElementById("userNameDisplay").textContent = name;
-          document.getElementById("sessionUserName").textContent = name;
-          document.getElementById("sessionUserRut").textContent = "RUT: " + rut;
-          document.getElementById("sessionMethod").textContent =
-            method === "clave_unica" ? "Autenticado con Clave Única" : "Autenticado con formulario";
 
           // Botón test cambia a "Cerrar sesión"
           testBtn.classList.add("logued-in");
           testText.textContent = "Cerrar sesión (test)";
         } else {
-          loginCard.style.display = "block";
-          sessionCard.style.display = "none";
           userNav.style.display = "none";
 
           testBtn.classList.remove("logued-in");
@@ -1256,9 +1830,7 @@
       updateView();
 
       // ==========================================
-      // 5. ✅ BOTÓN MODO TEST — Toggle instantáneo
-      //    Sin formulario, sin redirección.
-      //    Simplemente alterna el estado.
+      // 5. BOTÓN MODO TEST — Toggle instantáneo
       // ==========================================
       document.getElementById("btnTestToggle").addEventListener("click", function() {
         var isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -1285,62 +1857,10 @@
       });
 
       // ==========================================
-      // 6. Tabs del login
-      // ==========================================
-      (function() {
-        var t1 = document.getElementById("tabCiudadano");
-        var t2 = document.getElementById("tabEstablecimiento");
-        t1.addEventListener("click", function() { t1.classList.add("active"); t2.classList.remove("active"); });
-        t2.addEventListener("click", function() { t2.classList.add("active"); t1.classList.remove("active"); });
-      })();
-
-      // ==========================================
-      // 7. Login por formulario
-      // ==========================================
-      document.getElementById("loginForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        var tipo = document.getElementById("tipoDoc").value;
-        var rut = document.getElementById("rutInput").value;
-        var clave = document.getElementById("claveInput").value;
-        var captcha = document.getElementById("captcha").checked;
-
-        if (tipo === "Seleccione" || !rut || !clave) {
-          showToast("error", "Campos incompletos", "Por favor complete todos los campos obligatorios.");
-          return;
-        }
-        if (!captcha) {
-          showToast("error", "Verificación requerida", "Por favor confirme que no es un robot.");
-          return;
-        }
-
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userName", "Jaime Alberto Galleguillos Araya");
-        localStorage.setItem("userRut", rut);
-        localStorage.setItem("loginMethod", "formulario");
-
-        showToast("success", "Bienvenido", "Has iniciado sesión correctamente.");
-        setTimeout(function() { updateView(); }, 800);
-      });
-
-      // ==========================================
-      // 8. Clave Única
-      // ==========================================
-      document.getElementById("btnClaveUnica").addEventListener("click", function() {
-        window.location.href = "pages/clave-unica-login.html";
-      });
-
-      // ==========================================
-      // 9. Cerrar sesión (barra usuario)
+      // 6. Cerrar sesión (barra usuario)
       // ==========================================
       document.getElementById("btnLogout").addEventListener("click", function(e) {
         e.preventDefault();
-        doLogout();
-      });
-
-      // ==========================================
-      // 10. Cerrar sesión (card)
-      // ==========================================
-      document.getElementById("btnEndSession").addEventListener("click", function() {
         doLogout();
       });
 
@@ -1353,6 +1873,82 @@
         showToast("info", "Sesión cerrada", "Has cerrado tu sesión correctamente.");
         setTimeout(function() { updateView(); }, 500);
       }
+
+      // ==========================================
+      // 7. Módulo ClaveÚnica Integrado
+      // ==========================================
+      (function () {
+        'use strict';
+
+        const SESSION_KEY = 'supereduc_cu_user_session';
+
+        window.ClaveUnica = {
+          getUser: function () {
+            try {
+              const stored = sessionStorage.getItem(SESSION_KEY);
+              return stored ? JSON.parse(stored) : null;
+            } catch (e) {
+              return null;
+            }
+          },
+
+          loginMock: function (nombre = "Juan Pérez González", rut = "12.345.678-9") {
+            const mockUser = {
+              name: nombre,
+              rut: rut,
+              email: "juan.perez@ejemplo.cl",
+              loggedAt: new Date().toISOString()
+            };
+            sessionStorage.setItem(SESSION_KEY, JSON.stringify(mockUser));
+            
+            // También actualizar localStorage para compatibilidad
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("userName", nombre);
+            localStorage.setItem("userRut", rut);
+            localStorage.setItem("loginMethod", "clave_unica");
+            
+            window.location.reload();
+          },
+
+          logout: function () {
+            sessionStorage.removeItem(SESSION_KEY);
+            doLogout();
+          },
+
+          openLoginModal: function () {
+            let modal = document.getElementById('cu-modal');
+            if (!modal) return;
+            
+            modal.classList.add('active');
+          }
+        };
+
+        // Event listeners para botones Clave Única
+        document.getElementById("btnClaveUnicaOficial").addEventListener("click", function() {
+          window.ClaveUnica.openLoginModal();
+        });
+
+        document.getElementById("btnDenunciaCU").addEventListener("click", function() {
+          window.ClaveUnica.openLoginModal();
+        });
+
+        // Modal close
+        document.getElementById("cu-modal-close").addEventListener("click", function() {
+          document.getElementById('cu-modal').classList.remove('active');
+        });
+
+        // Demo login
+        document.getElementById("btn-demo-login").addEventListener("click", function() {
+          window.ClaveUnica.loginMock();
+        });
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('cu-modal').addEventListener('click', function(e) {
+          if (e.target === this) {
+            this.classList.remove('active');
+          }
+        });
+      })();
     </script>
   </body>
 </html>
