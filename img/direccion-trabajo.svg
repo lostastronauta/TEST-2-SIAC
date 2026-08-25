@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 86 86">
+  <!-- Generator: Adobe Illustrator 29.1.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 142)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #f0f1f2;
+      }
+
+      .st1 {
+        opacity: 1;
+      }
+
+      .st1, .st2 {
+        fill: #f7072e;
+      }
+
+      .st3 {
+        fill: #fff;
+      }
+
+      .st4 {
+        fill: #006ab7;
+      }
+
+      .st5 {
+        fill: url(#Degradado_sin_nombre_441);
+      }
+
+      .st6 {
+        fill: url(#Degradado_sin_nombre_442);
+      }
+
+      .st7 {
+        fill: url(#Degradado_sin_nombre_44);
+      }
+
+      .st8 {
+        fill: #006fb3;
+        font-family: Helvetica-Bold, Helvetica;
+        font-size: 12px;
+        font-weight: 700;
+        isolation: isolate;
+      }
+
+      .st9 {
+        fill: #f4f6f9;
+        stroke: #a8b7c7;
+        stroke-width: 2.5px;
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_44" data-name="Degradado sin nombre 44" x1="20.8" y1="62.9" x2="122.5" y2="62.9" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+      <stop offset="0" stop-color="#fff" stop-opacity=".4"/>
+      <stop offset=".1" stop-color="#fff" stop-opacity=".5"/>
+      <stop offset=".2" stop-color="#fff" stop-opacity=".7"/>
+      <stop offset=".3" stop-color="#fff" stop-opacity=".8"/>
+      <stop offset=".3" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset=".4" stop-color="#fff" stop-opacity=".9"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity="1"/>
+      <stop offset=".6" stop-color="#fff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#fff"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_441" data-name="Degradado sin nombre 44" x1="21.7" x2="63.7" xlink:href="#Degradado_sin_nombre_44"/>
+    <linearGradient id="Degradado_sin_nombre_442" data-name="Degradado sin nombre 44" x1="-11.1" x2="65.2" xlink:href="#Degradado_sin_nombre_44"/>
+  </defs>
+  <circle class="st9" cx="43" cy="43" r="40"/>
+  <text class="st8" transform="translate(29.3 48)"><tspan x="0" y="0">GOB</tspan></text>
+  <g>
+    <g>
+      <circle class="st4" cx="43" cy="42.6" r="41.4"/>
+      <g>
+        <path class="st1" d="M78.2,20.4c-5.9-9.4-15.2-15.9-26-18.4-3.2-.7-6.4-1.1-9.7-1v5.5c2.7,0,5.6.2,8.4.9,19.5,4.4,31.7,23.8,27.3,43.3-4.4,19.5-23.8,31.7-43.3,27.3-2.7-.6-5.2-1.5-7.6-2.6l-2.3,4.9c2.8,1.3,5.7,2.3,8.8,3,10.8,2.5,22,.5,31.4-5.4,9.4-5.9,15.9-15.2,18.4-26s.5-22-5.4-31.4Z"/>
+        <path class="st2" d="M7.7,34.7C11.5,18,26.1,6.7,42.5,6.5V1c-7.6,0-15,2.3-21.7,6.4C11.4,13.4,4.8,22.6,2.4,33.4c-2.5,10.8-.5,22,5.4,31.4,4.3,6.8,10.2,12,17.3,15.4l2.3-4.9c-14.9-7.1-23.5-23.8-19.7-40.6Z"/>
+      </g>
+      <polygon class="st3" points="43 16.1 43.9 18.8 46.7 18.8 44.4 20.5 45.3 23.1 43 21.5 40.7 23.1 41.6 20.5 39.3 18.8 42.1 18.8 43 16.1"/>
+      <g>
+        <polygon class="st7" points="23.6 63.6 20.8 63.6 21.6 62.1 24.4 62.1 23.6 63.6"/>
+        <path class="st5" d="M60.2,63.6h-3l.8-1.5h3l-.8,1.5ZM54.8,63.6h-3l.8-1.5h3l-.8,1.5ZM49.4,63.6h-3l.8-1.5h3l-.8,1.5ZM44.2,63.6h-3l.8-1.5h3l-.8,1.5ZM38.9,63.6h-3l.8-1.5h3l-.8,1.5ZM33.9,63.6h-2.9l.8-1.5h2.9l-.8,1.5ZM28.5,63.6h-2.9l.8-1.5h2.9l-.8,1.5Z"/>
+        <polygon class="st6" points="65.2 63.6 62.5 63.6 63.3 62.1 65.2 62.1 65.2 63.6"/>
+      </g>
+    </g>
+    <g>
+      <path class="st0" d="M37.6,41.1c-2.1,0-3.7-.4-5.1-.7v-13.1h4.9c4,0,6.6,1.6,6.6,6.6s-1.9,7.1-6.5,7.1ZM37.4,29.8h-1.6v8.3c.4.1,1.2.3,2.1.3,1.5,0,2.9-.7,2.9-4.5s-.8-4.1-3.3-4.1Z"/>
+      <path class="st0" d="M51.3,30v10.9h-3.3v-10.9h-3.2v-2.7h9.7v2.7h-3.2Z"/>
+    </g>
+    <g>
+      <path class="st3" d="M23.4,49.5c-.8,0-1.4-.1-1.9-.3v-4.8h1.8c1.5,0,2.5.6,2.5,2.5s-.7,2.7-2.4,2.7ZM23.3,45.4h-.6v3.1c.1,0,.5,0,.8,0,.5,0,1.1-.3,1.1-1.7s-.3-1.5-1.2-1.5Z"/>
+      <path class="st3" d="M26.9,49.5v-2.8h-.4v-.8h1.6v3.7h-1.2ZM26.9,44.3h1.2v1h-1.2v-1Z"/>
+      <path class="st3" d="M30.1,49.5h-1.2v-3.7h.8v.5h.1c0-.3.4-.6.8-.6s.3,0,.4,0v1c-.1,0-.3,0-.5,0s-.4,0-.6.2v2.6Z"/>
+      <path class="st3" d="M32.6,48c0,.4.3.7.8.7s.7-.1,1-.3l.2.8c-.3.2-.8.3-1.4.3-1.2,0-1.9-.7-1.9-1.9s.5-1.9,1.8-1.9,1.6.8,1.6,1.7v.5h-2.2ZM33.1,46.6c-.4,0-.5.4-.5.7h1.1c0-.4-.1-.7-.5-.7Z"/>
+      <path class="st3" d="M38.2,46.8c-.3-.1-.6-.2-.9-.2-.4,0-.7.3-.7,1s.2,1,.7,1,.7-.1,1-.3l.2.8c-.2.1-.7.3-1.3.3-1.2,0-1.8-.7-1.8-1.9s.7-1.9,1.8-1.9.9,0,1.3.3l-.3.8Z"/>
+      <path class="st3" d="M41.7,46.8c-.3-.1-.6-.2-.9-.2-.4,0-.7.3-.7,1s.2,1,.7,1,.7-.1,1-.3l.2.8c-.2.1-.7.3-1.3.3-1.2,0-1.8-.7-1.8-1.9s.7-1.9,1.8-1.9.9,0,1.3.3l-.3.8Z"/>
+      <path class="st3" d="M43,49.5v-2.8h-.4v-.8h1.6v3.7h-1.2ZM42.9,44.3h1.2v1h-1.2v-1Z"/>
+      <path class="st3" d="M48.4,47.6c0,1.3-.6,1.9-1.8,1.9s-1.8-.7-1.8-1.9.6-1.9,1.8-1.9,1.8.8,1.8,1.9ZM45.6,45.2v-.7c-.1,0,1.9-.5,1.9-.5v.9c.1,0-1.9.3-1.9.3ZM47.2,47.6c0-.9-.2-1-.6-1s-.6.2-.6,1,.2,1,.6,1,.6-.2.6-1Z"/>
+      <path class="st3" d="M51.3,49.5v-2.2c0-.5-.2-.7-.6-.7s-.4,0-.5.1v2.7h-1.2v-3.7h.8l.2.4c.2-.3.6-.5,1.2-.5,1,0,1.3.6,1.3,1.5v2.2h-1.2Z"/>
+      <path class="st3" d="M57.3,46.1c0-.2-.1-.4-.1-.7v-1.1h1.2v5.2h-1v-.4c-.2.2-.6.5-1,.5-.8,0-1.5-.6-1.5-1.9s.7-1.9,1.6-1.9.7.1.9.4ZM57.2,46.7c-.1,0-.3-.1-.6-.1-.4,0-.6.2-.6,1s.3,1.1.6,1.1.4-.1.6-.2v-1.7Z"/>
+      <path class="st3" d="M60.2,48c0,.4.3.7.8.7s.7-.1,1-.3l.2.8c-.3.2-.8.3-1.4.3-1.2,0-1.9-.7-1.9-1.9s.5-1.9,1.8-1.9,1.6.8,1.6,1.7v.5h-2.2ZM60.7,46.6c-.4,0-.5.4-.5.7h1.1c0-.4-.1-.7-.5-.7Z"/>
+      <path class="st3" d="M64.2,44.3v4c0,.2,0,.3.2.3h.3v.9s-.3,0-.6,0c-.7,0-1.1-.4-1.1-1v-4.2h1.2Z"/>
+      <path class="st3" d="M33.3,52.1v4.1h-1.2v-4.1h-1.2v-1h3.6v1h-1.2Z"/>
+      <path class="st3" d="M35.7,56.1h-1.2v-3.7h.8v.5h.1c0-.3.4-.6.8-.6s.3,0,.4,0v1c-.1,0-.3,0-.5,0s-.4,0-.6.2v2.6Z"/>
+      <path class="st3" d="M39.5,56.1v-.4c-.3.2-.7.5-1.2.5-.7,0-1.3-.5-1.3-1.2s.5-1.1,1.4-1.1h.7c0-.5-.3-.6-.6-.6-.4,0-.8,0-1.1.2l-.3-.8c.4-.2.9-.3,1.5-.3,1.1,0,1.6.5,1.6,1.5v2.3h-.8ZM39.2,54.6h-.5c-.3,0-.5.1-.5.4s.2.4.4.4.4,0,.5-.1v-.7Z"/>
+      <path class="st3" d="M41.7,56.1h-.6v-5.2h1.2v1.8c0-.2.4-.4.8-.4.8,0,1.5.6,1.5,1.9s-.8,1.9-1.6,1.9-.8-.2-1.1-.5l-.2.5ZM42.3,55c.1.2.3.4.6.4s.6-.3.6-1-.3-1-.6-1-.4.1-.6.2v1.5Z"/>
+      <path class="st3" d="M47.6,56.1v-.4c-.3.2-.7.5-1.2.5-.7,0-1.3-.5-1.3-1.2s.5-1.1,1.4-1.1h.7c0-.5-.3-.6-.6-.6-.4,0-.8,0-1.1.2l-.3-.8c.4-.2.9-.3,1.5-.3,1.1,0,1.6.5,1.6,1.5v2.3h-.8ZM47.2,54.6h-.5c-.3,0-.5.1-.5.4s.2.4.4.4.4,0,.5-.1v-.7Z"/>
+      <path class="st3" d="M50.6,56.2c0,1.1-.5,1.4-1.2,1.4s-.5,0-.7-.1v-.9c.2,0,.3,0,.5,0,.2,0,.3-.1.3-.3v-3h-.4v-.8h1.6v3.7ZM49.4,50.9h1.2v1h-1.2v-1Z"/>
+      <path class="st3" d="M54.9,54.3c0,1.3-.6,1.9-1.8,1.9s-1.8-.7-1.8-1.9.6-1.9,1.8-1.9,1.8.8,1.8,1.9ZM53.7,54.3c0-.9-.2-1-.6-1s-.6.2-.6,1,.2,1,.6,1,.6-.2.6-1Z"/>
+    </g>
+  </g>
+</svg>
