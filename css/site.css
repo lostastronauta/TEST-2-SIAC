@@ -361,7 +361,7 @@ h6 {
   background: var(--blanco);
 }
 
-.footer-content {
+.main-footer .footer-content {
   max-width: var(--max-width);
   margin: 0 auto;
   display: grid;
@@ -369,40 +369,40 @@ h6 {
   gap: 28px;
 }
 
-.footer-content h5 {
+.main-footer .footer-content h5 {
   color: #cfe3ff;
   margin-bottom: 15px;
   font-size: 1rem;
 }
 
-.footer-logo {
+.main-footer .footer-logo {
   width: 146px;
   max-width: 100%;
   height: auto;
   margin: 0 0 24px;
 }
 
-.footer-content ul {
+.main-footer .footer-content ul {
   list-style: none;
   padding: 0;
 }
 
-.footer-content ul li {
+.main-footer .footer-content ul li {
   margin-bottom: 10px;
 }
 
-.footer-content ul li a {
+.main-footer .footer-content ul li a {
   color: #ccc;
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.2s;
 }
 
-.footer-content ul li a:hover {
+.main-footer .footer-content ul li a:hover {
   color: var(--blanco);
 }
 
-.footer-content p {
+.main-footer .footer-content p {
   font-size: 0.9rem;
   color: #ccc;
   margin-bottom: 6px;
@@ -411,19 +411,19 @@ h6 {
   gap: 8px;
 }
 
-.footer-content p i {
+.main-footer .footer-content p i {
   font-size: 1rem;
 }
 
 /* Social links — círculos */
-.social-links {
+.main-footer .social-links {
   display: flex;
   gap: 10px;
   margin-top: 12px;
   padding-bottom: 24px;
 }
 
-.social-links a {
+.main-footer .social-links a {
   width: 36px;
   height: 36px;
   display: inline-flex;
@@ -438,11 +438,11 @@ h6 {
   transition: background 0.2s;
 }
 
-.social-links a:hover {
+.main-footer .social-links a:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.footer-contact-callout {
+.main-footer .footer-contact-callout {
   display: block;
   width: fit-content;
   max-width: 100%;
@@ -458,12 +458,12 @@ h6 {
   white-space: nowrap;
 }
 
-.footer-contact-callout:hover,
-.footer-contact-callout:focus-visible {
+.main-footer .footer-contact-callout:hover,
+.main-footer .footer-contact-callout:focus-visible {
   background: rgba(60, 112, 163, 0.2);
 }
 
-.footer-bottom {
+.main-footer .footer-bottom {
   text-align: center;
   margin-top: 0;
   padding: 20px 0 28px;
@@ -472,7 +472,7 @@ h6 {
   font-size: 0.85rem;
 }
 
-.footer-tricolor-star {
+.main-footer .footer-tricolor-star {
   display: block;
   width: calc(100% + 40px);
   height: 44px;
@@ -505,7 +505,7 @@ h6 {
     flex-wrap: wrap;
   }
 
-  .footer-content {
+  .main-footer .footer-content {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -558,26 +558,26 @@ h6 {
     gap: 22px;
   }
 
-  .footer-institutional-banners {
+  .main-footer .footer-institutional-banners {
     grid-template-columns: 1fr;
     gap: 12px;
     margin-bottom: 26px;
   }
 
-  .footer-institutional-banner {
+  .main-footer .footer-institutional-banner {
     min-height: 0;
     padding: 18px 20px;
     font-size: 0.95rem;
   }
 
-  .footer-contact-callout {
+  .main-footer .footer-contact-callout {
     margin: 6px auto 26px;
     padding: 12px 18px;
     font-size: 0.9rem;
     white-space: normal;
   }
 
-  .footer-logo {
+  .main-footer .footer-logo {
     width: 126px;
     margin-bottom: 20px;
   }

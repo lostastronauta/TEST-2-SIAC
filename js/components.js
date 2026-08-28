@@ -206,6 +206,29 @@ function adjustBodyPadding() {
   }
 }
 
+function ensureSharedStyles() {
+  var stylesheetUrl = new URL(
+    resolveAssetPath("css/site.css"),
+    window.location.href,
+  );
+  stylesheetUrl.searchParams.set("v", "20260828");
+  var stylesheet = Array.prototype.find.call(
+    document.querySelectorAll('link[rel="stylesheet"]'),
+    function (link) {
+      return link.href === stylesheetUrl.href;
+    },
+  );
+
+  if (!stylesheet) {
+    stylesheet = document.createElement("link");
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = stylesheetUrl.href;
+  }
+
+  stylesheet.dataset.sharedSiteStyles = "true";
+  document.head.appendChild(stylesheet);
+}
+
 function updateCurrentPage() {
   var currentFile = window.location.pathname.split("/").pop() || "index.html";
   var pageNames = {
@@ -239,6 +262,8 @@ function injectComponents() {
   var headerContainer = document.getElementById("header-container");
   var footerContainer = document.getElementById("footer-container");
   var isInsidePages = window.location.pathname.includes("/pages/");
+
+  ensureSharedStyles();
 
   if (headerContainer) headerContainer.innerHTML = HEADER_HTML;
   if (footerContainer) footerContainer.innerHTML = FOOTER_HTML;
@@ -293,11 +318,17 @@ function injectComponents() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function initializeComponents() {
   if (
     document.getElementById("header-container") ||
     document.getElementById("footer-container")
   ) {
     injectComponents();
   }
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializeComponents);
+} else {
+  initializeComponents();
+}
