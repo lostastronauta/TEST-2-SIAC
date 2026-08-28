@@ -954,6 +954,7 @@
     </style>
 </head>
 <body>
+<div id="header-container"></div>
 
     <!-- Banner de maqueta -->
     <div class="mockup-banner">MAQUETA DE PRUEBA / PROTOTIPO — No es el sitio oficial</div>
@@ -964,61 +965,7 @@
     <!-- ==========================================
          HEADER (idéntico al dashboard)
          ========================================== -->
-    <header class="main-header">
-
-        <!-- Banner con imagen institucional -->
-        <div class="top-banner" id="topBanner">
-            <img
-                id="bannerImage"
-                src="../img/header.png"
-                alt="Superintendencia de Educación - Ministerio de Educación - Gobierno de Chile"
-                class="banner-img"
-                onerror="this.style.display='none'; document.getElementById('bannerFallback').style.display='flex';"
-            >
-            <div class="banner-fallback" id="bannerFallback">
-                <div class="fallback-content">
-                    <div class="inst-label">Gobierno de Chile</div>
-                    <div class="inst-title">Superintendencia de Educación</div>
-                    <div class="inst-sub">Ministerio de Educación<br>Sistema Integral de Atención Ciudadana</div>
-                </div>
-                <div class="fallback-bar"></div>
-            </div>
-        </div>
-
-        <!-- Barra de usuario -->
-        <nav class="user-nav">
-            <div class="user-nav-container">
-                <div class="breadcrumb">
-                    <a href="dashboard.html">Inicio</a>
-                    <span class="separator">&gt;</span>
-                    <span class="current-page">Seguimiento de Casos</span>
-                </div>
-
-                <div class="user-actions">
-                    <div class="user-profile">
-                        <div class="user-icon"><i class="bi bi-person-fill"></i></div>
-                        <span class="user-name" id="userName">Cargando...</span>
-                    </div>
-                    <div class="user-buttons">
-                        <a href="dashboard.html" class="btn-user">
-                            <i class="bi bi-house-door-fill"></i> Inicio
-                        </a>
-                        <a href="#" class="btn-user" id="btnNotificaciones">
-                            <i class="bi bi-bell-fill"></i> Notificaciones
-                        </a>
-                        <a href="actualizar-datos.html" class="btn-user">
-                            <i class="bi bi-person-lines-fill"></i> Actualizar datos
-                        </a>
-                        <a href="#" class="btn-user btn-logout" id="btnLogout">
-                            <i class="bi bi-power"></i> Cerrar sesión
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!-- ==========================================
+<!-- ==========================================
          CONTENIDO PRINCIPAL
          ========================================== -->
     <main class="main-content">
@@ -1180,87 +1127,10 @@
 
     </main>
 
-    <!-- SECCIÓN AZUL INFERIOR -->
-    <section class="blue-section">
-        <button class="btn-footer">Preguntas frecuentes</button>
-        <p>Si tienes dudas respecto a la normativa educacional vigente, no olvides que puedes revisar toda la información de forma simple en nuestra sección de preguntas frecuentes.</p>
-        <button class="btn-footer">Busca tu oficina regional más cercana</button>
-        <p>Si tienes consultas, puedes contactarnos a nuestro servicio telefónico al <strong>600 3600 390</strong><br>Atención telefónica de lunes a viernes de 09:00 a 13:00 horas.</p>
-    </section>
+
 
     <!-- FOOTER -->
-    <footer class="footer-dark">
-        <div class="footer-content">
-            <div class="footer-section">
-                <ul>
-                    <li><a href="#">Preguntas frecuentes</a></li>
-                    <li><a href="#">Mapa del Sitio</a></li>
-                    <li><a href="#">Políticas de privacidad</a></li>
-                    <li><a href="#">Políticas de Seguridad de la Información</a></li>
-                    <li><a href="#">Trabaja con nosotros</a></li>
-                    <li><a href="#">Estados Financieros</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h5>Síganos en redes sociales</h5>
-                <div class="social-links">
-                    <a href="#"><span class="social-icon">f</span> Facebook / supereducCL</a>
-                    <a href="#"><span class="social-icon">X</span> Twitter / supereduc_cl</a>
-                    <a href="#"><span class="social-icon">&#9654;</span> Youtube / Superintendencia Educación</a>
-                    <a href="#"><span class="social-icon">&#9638;</span> Instagram / supereduc_cl</a>
-                    <a href="#"><span class="social-icon">in</span> Linkedin / Superintendencia de Educación</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h5>Sitios Relacionados</h5>
-                <ul>
-                    <li><a href="#">Ayuda Mineduc</a></li>
-                    <li><a href="#">JUNJI</a></li>
-                    <li><a href="#">Integra</a></li>
-                    <li><a href="#">CONICYT</a></li>
-                    <li><a href="#">Empleos Públicos</a></li>
-                    <li><a href="#">Chile Atiende</a></li>
-                    <li><a href="#">Ciudadanía y Escuela</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="contact-info">
-                <p><strong>Contáctenos 600 3600 390</strong></p>
-                <p>Versión 1.1.5</p>
-                <div class="supereduc-logo-footer">
-                    <div class="barra">
-                        <span class="barra-blue"></span>
-                        <span class="barra-red"></span>
-                    </div>
-                    Superintendencia<br>de Educación
-                </div>
-            </div>
-            <div class="footer-logo-box">
-                <div class="doc-icon"></div>
-                <div>Registro de<br><strong>Trámites Digitales</strong></div>
-            </div>
-            <div class="footer-logo-box">
-                <div class="doc-icon">&#128203;</div>
-                <div>Solicitud de datos<br><strong>Ley de Transparencia</strong></div>
-            </div>
-            <div class="footer-logo-box" style="background: white; color: var(--color-primary); font-weight: bold;">
-                ayuda MINEDUC<br><small>atención ciudadana</small>
-            </div>
-        </div>
-
-        <div class="footer-orgs">
-            <p>Sistema de Aseguramiento de la Calidad de la Educación</p>
-            <div class="orgs-buttons">
-                <div class="org-btn agencia">Agencia de la Calidad<br>de la Educación</div>
-                <div class="org-btn mineduc">Ministerio de<br>de Educación</div>
-                <div class="org-btn consejo">Consejo Nacional<br>de Educación</div>
-            </div>
-        </div>
-    </footer>
-
-    <div class="barra-footer-final">
+<div class="barra-footer-final">
         <div class="bf-blue"></div>
         <div class="bf-red"></div>
     </div>
@@ -1320,28 +1190,34 @@
         // ==========================================
         // 3. Cerrar sesión
         // ==========================================
-        document.getElementById("btnLogout").addEventListener("click", function(e) {
-            e.preventDefault();
-            localStorage.removeItem("isLoggedIn");
-            localStorage.removeItem("userName");
-            localStorage.removeItem("userRut");
-            localStorage.removeItem("userDatos");
-            localStorage.removeItem("loginMethod");
-            window.location.href = "../index.html";
-        });
+        var btnLogoutEl = document.getElementById("btnLogout");
+        if (btnLogoutEl) {
+            btnLogoutEl.addEventListener("click", function(e) {
+                e.preventDefault();
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("userName");
+                localStorage.removeItem("userRut");
+                localStorage.removeItem("userDatos");
+                localStorage.removeItem("loginMethod");
+                window.location.href = "../index.html";
+            });
+        }
 
         // ==========================================
         // 4. Notificaciones
         // ==========================================
-        document.getElementById("btnNotificaciones").addEventListener("click", function(e) {
-            e.preventDefault();
-            showToast("info", "Notificaciones", "No tiene notificaciones pendientes.");
-        });
+        var btnNotificacionesEl = document.getElementById("btnNotificaciones");
+        if (btnNotificacionesEl) {
+            btnNotificacionesEl.addEventListener("click", function(e) {
+                e.preventDefault();
+                showToast("info", "Notificaciones", "No tiene notificaciones pendientes.");
+            });
+        }
 
         // ==========================================
         // 5. Filtrado de casos
         // ==========================================
-        document.getElementById("btnFiltrar").addEventListener("click", function() {
+        var btnFiltrarEl = document.getElementById('btnFiltrar'); if (btnFiltrarEl) btnFiltrarEl.addEventListener("click", function() {
             var type = document.getElementById("filterType").value;
             var status = document.getElementById("filterStatus").value;
             var number = document.getElementById("filterNumber").value.toLowerCase();
@@ -1372,7 +1248,7 @@
         // ==========================================
         // 6. Limpiar filtros
         // ==========================================
-        document.getElementById("btnLimpiar").addEventListener("click", function() {
+        var btnLimpiarEl = document.getElementById('btnLimpiar'); if (btnLimpiarEl) btnLimpiarEl.addEventListener("click", function() {
             document.getElementById("filterType").value = "";
             document.getElementById("filterStatus").value = "";
             document.getElementById("filterDateFrom").value = "";
@@ -1413,5 +1289,8 @@
         });
     </script>
 
+
+<div id="footer-container"></div>
+<script src="../js/components.js" defer></script>
 </body>
 </html>

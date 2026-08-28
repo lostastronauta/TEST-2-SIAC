@@ -1239,17 +1239,17 @@
         // ==========================================
         // 9. Links informativos (simulados)
         // ==========================================
-        var linkRecupera = document.getElementById('linkRecupera'); if (linkRecupera) linkRecupera.addEventListener("click", function(e) {
+        var __el = document.getElementById(''); if (__el) __el.addEventListener("click", function(e) {
             e.preventDefault();
             showToast("info", "Recuperar clave", "En producción, esto te redirige a claveunica.gob.cl para recuperar tu clave.");
         });
 
-        var linkSolicita = document.getElementById('linkSolicita'); if (linkSolicita) linkSolicita.addEventListener("click", function(e) {
+        var __el = document.getElementById(''); if (__el) __el.addEventListener("click", function(e) {
             e.preventDefault();
             showToast("info", "Solicitar clave", "En producción, esto te redirige a claveunica.gob.cl para solicitar tu Clave Única.");
         });
 
-        var linkAyuda = document.getElementById('linkAyuda'); if (linkAyuda) linkAyuda.addEventListener("click", function(e) {
+        var __el = document.getElementById(''); if (__el) __el.addEventListener("click", function(e) {
             e.preventDefault();
             showToast("info", "Ayuda", "En producción, esto te lleva a la sección de ayuda de Clave Única.");
         });
@@ -1257,7 +1257,7 @@
         // ==========================================
         // 10. Envío del formulario
         // ==========================================
-        var cuFormEl = document.getElementById('cuForm'); if (cuFormEl) cuFormEl.addEventListener("submit", function(e) {
+        var __el = document.getElementById(''); if (__el) __el.addEventListener("submit", function(e) {
             e.preventDefault();
 
             var runVal = inputRun.value.trim();
@@ -1305,14 +1305,9 @@
                 var overlay = document.getElementById("successOverlay");
                 overlay.classList.add("show");
 
-                // Redirigir: si el perfil ya fue actualizado, ir al dashboard; si no, llevar a actualizar-datos
+                // Redirigir al dashboard
                 setTimeout(function() {
-                    var perfilActualizado = localStorage.getItem('profileUpdated') === 'true';
-                    if (perfilActualizado) {
-                        window.location.href = "dashboard.html";
-                    } else {
-                        window.location.href = "dashboard.html";
-                    }
+                    window.location.href = "dashboard.html";
                 }, 2500);
             }, 2000);
         });
@@ -1330,7 +1325,7 @@
         // ==========================================
         // 12. Botón volver
         // ==========================================
-        var btnVolverEl = document.getElementById('btnVolver'); if (btnVolverEl) btnVolverEl.addEventListener("click", function() {
+        var __el = document.getElementById(''); if (__el) __el.addEventListener("click", function() {
             window.location.href = "../index.html";
         });
     </script>

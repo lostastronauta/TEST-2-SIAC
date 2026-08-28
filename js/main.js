@@ -1,135 +1,313 @@
 /**
- * main.js — Controlador principal del header y estado de sesión
- * Se usa en header.html (que se incluye en todas las páginas)
+ * main.js — Lógica de página (index)
+ * Maneja: modal, login simulado, toasts, tabs, fallback banner
  */
 
-/**
- * Controla qué se muestra en el header
- * @param {boolean} isLoggedIn - true = vista logueada, false = vista pública
- */
-function setLoginState(isLoggedIn) {
-  const publicNav = document.getElementById("publicNav");
-  const userNav = document.getElementById("userNav");
-
-  if (!publicNav || !userNav) return;
-
-  if (isLoggedIn) {
-    publicNav.style.display = "none";
-    userNav.style.display = "block";
-  } else {
-    publicNav.style.display = "flex";
-    userNav.style.display = "none";
-  }
-}
-
-/**
- * Carga el nombre del usuario en la barra
- */
-function loadUserName() {
-  const nameEl = document.getElementById("userName");
-  if (nameEl) {
-    nameEl.textContent = localStorage.getItem("userName") || "Usuario";
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-
+document.addEventListener("DOMContentLoaded", function () {
   // ==========================================
-  // Determinar estado inicial
+  // SISTEMA DE TOASTS
   // ==========================================
-  var hasSession = localStorage.getItem("isLoggedIn") === "true";
+  function showToast(title, message, type) {
+    type = type || "success";
+    var container = document.getElementById("toastContainer");
+    if (!container) return;
 
-  if (hasSession) {
-    // Sesión real
-    setLoginState(true);
-    loadUserName();
-  } else {
-    // MODO MAQUETA: inyectar datos demo
-    // EN PRODUCCIÓN: borrar este bloque y dejar solo: setLoginState(false);
-    if (!localStorage.getItem("userName")) {
-      localStorage.setItem("userName", "Jaime Alberto Galleguillos Araya");
-    }
-    if (!localStorage.getItem("userRut")) {
-      localStorage.setItem("userRut", "199777706");
-    }
-    if (!localStorage.getItem("loginMethod")) {
-      localStorage.setItem("loginMethod", "clave_unica");
-    }
+    var icons = {
+      success: { cls: "success", char: "\u2713" },
+      error: { cls: "error", char: "\u2715" },
+      info: { cls: "info", char: "\u2139" },
+    };
 
-    // Si existe nav público (es el index), forzar logueado para demo
-    var publicNav = document.getElementById("publicNav");
-    if (publicNav) {
-      setLoginState(true);
-      loadUserName();
-    }
+    var ic = icons[type] || icons.success;
+
+    var toast = document.createElement("div");
+    toast.className = "toast" + (type !== "success" ? " toast-" + type : "");
+    toast.innerHTML =
+      '<div class="toast-icon ' +
+      ic.cls +
+      '">' +
+      ic.char +
+      "</div>" +
+      '<div class="toast-body"><strong>' +
+      title +
+      "</strong><span>" +
+      message +
+      "</span></div>" +
+      '<button class="toast-close">&times;</button>';
+
+    container.appendChild(toast);
+
+    requestAnimationFrame(function () {
+      toast.classList.add("show");
+    });
+
+    toast.querySelector(".toast-close").addEventListener("click", function () {
+      closeToast(toast);
+    });
+
+    setTimeout(function () {
+      closeToast(toast);
+    }, 5000);
+  }
+
+  function closeToast(toast) {
+    if (!toast || !toast.parentNode) return;
+    toast.classList.remove("show");
+    setTimeout(function () {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 400);
   }
 
   // ==========================================
-  // Tabs de navegación pública
+  // MODAL CLAVEÚNICA
   // ==========================================
-  const publicTabs = document.querySelectorAll("#publicNav .nav-tab");
-  publicTabs.forEach((tab) => {
-    tab.addEventListener("click", () => {
-      publicTabs.forEach((t) => t.classList.remove("active"));
+  var cuModal = document.getElementById("cu-modal");
+  var cuModalClose = document.getElementById("cu-modal-close");
+  var btnClaveUnica = document.getElementById("btnClaveUnicaOficial");
+  var btnDemoLogin = document.getElementById("btn-demo-login");
+  var btnDenunciaCU = document.getElementById("btnDenunciaCU");
+
+  function openModal() {
+    if (cuModal) {
+      cuModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+  }
+
+  function closeModal() {
+    if (cuModal) {
+      cuModal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  }
+
+  if (btnClaveUnica) {
+    btnClaveUnica.addEventListener("click", function () {
+      openModal();
+    });
+  }
+
+  if (cuModalClose) {
+    cuModalClose.addEventListener("click", function () {
+      closeModal();
+    });
+  }
+
+  if (cuModal) {
+    cuModal.addEventListener("click", function (e) {
+      if (e.target === cuModal) closeModal();
+    });
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && cuModal && cuModal.classList.contains("active")) {
+      closeModal();
+    }
+  });
+
+  // ==========================================
+  // AJUSTAR PADDING DEL BODY
+  // ==========================================
+  function adjustPadding() {
+    var mockupBanner = document.querySelector(".mockup-banner");
+    if (mockupBanner) {
+      document.body.style.paddingTop = (mockupBanner.offsetHeight || 44) + "px";
+    }
+  }
+
+  // ==========================================
+  // SIMULAR LOGIN → redirige a dashboard
+  // ==========================================
+  function doLogin() {
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userName", "Jaime Alberto Galleguillos Araya");
+    localStorage.setItem("userRut", "199777706");
+    localStorage.setItem("loginMethod", "clave_unica");
+
+    closeModal();
+
+    showToast("Sesión iniciada", "Redirigiendo al panel...", "success");
+
+    setTimeout(function () {
+      if (window.goToRoute) {
+        window.goToRoute("pages/dashboard.html");
+      } else {
+        window.location.href = "pages/dashboard.html";
+      }
+    }, 600);
+  }
+
+  // ==========================================
+  // CERRAR SESIÓN → redirige a index
+  // ==========================================
+  function doLogout() {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userRut");
+    localStorage.removeItem("userDatos");
+    localStorage.removeItem("loginMethod");
+
+    showToast("Sesión cerrada", "Redirigiendo al inicio...", "info");
+
+    setTimeout(function () {
+      if (window.goToRoute) {
+        window.goToRoute("index.html");
+      } else {
+        window.location.href = "index.html";
+      }
+    }, 600);
+  }
+
+  if (btnDemoLogin) {
+    btnDemoLogin.addEventListener("click", function () {
+      doLogin();
+    });
+  }
+
+  if (btnDenunciaCU) {
+    btnDenunciaCU.addEventListener("click", function () {
+      var isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      if (isLoggedIn) {
+        if (window.goToRoute) {
+          window.goToRoute("pages/denuncias.html");
+        } else {
+          window.location.href = "pages/denuncias.html";
+        }
+      } else {
+        openModal();
+      }
+    });
+  }
+
+  // ==========================================
+  // BOTÓN TEST TOGGLE (flotante inferior izq)
+  // ==========================================
+  var btnTestToggle = document.getElementById("btnTestToggle");
+  var testToggleText = document.getElementById("testToggleText");
+
+  function updateTestButton() {
+    if (!btnTestToggle) return;
+    var isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    if (isLoggedIn) {
+      btnTestToggle.classList.add("logued-in");
+      if (testToggleText) testToggleText.textContent = "Cerrar sesión (demo)";
+    } else {
+      btnTestToggle.classList.remove("logued-in");
+      if (testToggleText) testToggleText.textContent = "Simular login";
+    }
+  }
+
+  if (btnTestToggle) {
+    btnTestToggle.addEventListener("click", function () {
+      var isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      if (isLoggedIn) {
+        doLogout();
+      } else {
+        openModal();
+      }
+    });
+  }
+
+  updateTestButton();
+
+  // ==========================================
+  // TABS DE NAVEGACIÓN PÚBLICA
+  // ==========================================
+  var publicTabs = document.querySelectorAll("#publicNav .nav-tab");
+
+  publicTabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var page = tab.getAttribute("data-page");
+
+      publicTabs.forEach(function (t) {
+        t.classList.remove("active");
+      });
       tab.classList.add("active");
+
+      switch (page) {
+        case "competencias": {
+          var el = document.getElementById("competencias");
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+          break;
+        }
+        case "otros-organismos": {
+          var el2 = document.getElementById("otros-organismos");
+          if (el2) {
+            el2.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else {
+            showToast(
+              "En desarrollo",
+              "La sección de otros organismos estará disponible pronto",
+              "info",
+            );
+          }
+          break;
+        }
+        case "requerimientos": {
+          var el3 = document.getElementById("competencias");
+          if (el3) el3.scrollIntoView({ behavior: "smooth", block: "start" });
+          break;
+        }
+        default: {
+          showToast(
+            "En desarrollo",
+            "Esta sección estará disponible pronto",
+            "info",
+          );
+          break;
+        }
+      }
     });
   });
 
   // ==========================================
-  // Botones de usuario (marcar activo)
+  // BANNER FALLBACK + BREADCRUMB (solo interno)
   // ==========================================
-  const userButtons = document.querySelectorAll(".btn-user:not(.btn-logout)");
-  userButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      userButtons.forEach((b) => b.classList.remove("active-page-btn"));
-      btn.classList.add("active-page-btn");
-    });
-  });
+  requestAnimationFrame(function () {
+    var bannerImg = document.getElementById("bannerImage");
+    var bannerFallback = document.getElementById("bannerFallback");
 
-  // ==========================================
-  // Cerrar sesión
-  // ==========================================
-  const logoutBtn = document.querySelector(".btn-logout");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("userRut");
-      localStorage.removeItem("userDatos");
-      localStorage.removeItem("loginMethod");
-      setLoginState(false);
-    });
-  }
+    if (bannerImg && bannerFallback) {
+      function showFallback() {
+        bannerImg.style.display = "none";
+        bannerFallback.style.display = "flex";
+        setTimeout(adjustPadding, 50);
+      }
 
-  // ==========================================
-  // Fallback de imagen del banner
-  // ==========================================
-  var bannerImg = document.getElementById("bannerImage");
-  var bannerFallback = document.getElementById("bannerFallback");
-  if (bannerImg && bannerFallback) {
-    function showFallback() {
-      bannerImg.style.display = "none";
-      bannerFallback.style.display = "flex";
+      bannerImg.addEventListener("error", showFallback);
+
+      if (bannerImg.complete && bannerImg.naturalWidth === 0) {
+        showFallback();
+      }
+
+      bannerImg.addEventListener("load", function () {
+        bannerFallback.style.display = "none";
+        bannerImg.style.display = "block";
+        setTimeout(adjustPadding, 50);
+      });
     }
-    bannerImg.addEventListener("error", showFallback);
-    bannerImg.addEventListener("load", function() {
-      bannerFallback.style.display = "none";
-      bannerImg.style.display = "block";
-    });
-    if (bannerImg.complete && bannerImg.naturalWidth === 0) showFallback();
-  }
+
+    // Actualizar breadcrumb SOLO en páginas internas
+    var isIndex = document.getElementById("publicNav");
+    if (!isIndex) {
+      var currentPageEl = document.getElementById("currentPage");
+      var btnCurrentPage = document.getElementById("btnCurrentPage");
+      if (currentPageEl && btnCurrentPage) {
+        var pageTitle = document.title;
+        var parts = pageTitle.split(" - ");
+        var shortTitle = parts.length > 1 ? parts[0].trim() : pageTitle;
+        currentPageEl.textContent = shortTitle;
+        btnCurrentPage.innerHTML =
+          '<i class="bi bi-person-lines-fill"></i> ' + shortTitle;
+      }
+    }
+  });
 
   // ==========================================
-  // Protección de ruta para páginas internas
-  // (pages/ que NO tienen nav público)
+  // AJUSTE INICIAL DE PADDING
   // ==========================================
-  var isInternalPage = !document.getElementById("publicNav");
-  var isLoggedInNow = localStorage.getItem("isLoggedIn") === "true";
-
-  if (isInternalPage && !isLoggedInNow) {
-    // MODO MAQUETA: no redirigir, los datos demo ya se inyectaron arriba
-    // EN PRODUCCIÓN: descomentar la siguiente línea:
-    // window.location.href = "../index.html";
-  }
+  setTimeout(adjustPadding, 200);
+  setTimeout(adjustPadding, 500);
+  window.addEventListener("load", adjustPadding);
+  window.addEventListener("resize", adjustPadding);
 });

@@ -826,7 +826,7 @@
         })();
 
         // Manejo de subida de archivos
-        var fileInputEl = document.getElementById('fileInput'); if (fileInputEl) fileInputEl.addEventListener('change', function(e) {
+        var __el = document.getElementById(''); if (__el) __el.addEventListener('change', function(e) {
             const fileList = document.getElementById('fileList');
             fileList.innerHTML = '';
             
@@ -842,7 +842,7 @@
         });
 
         // Envío del formulario
-        var sugerenciasFormEl = document.getElementById('sugerenciasForm'); if (sugerenciasFormEl) sugerenciasFormEl.addEventListener('submit', function(e) {
+        var __el = document.getElementById(''); if (__el) __el.addEventListener('submit', function(e) {
             e.preventDefault();
             
             const tipo = document.querySelector('input[name="tipoMensaje"]:checked');

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preguntas Previas - Denuncia - Sistema Integral de Atención Ciudadana</title>
+    <title>Inicio - Sistema Integral de Atención Ciudadana</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -16,7 +16,13 @@
             --color-text-muted: #6C757D;
             --color-border: #DEE2E6;
             --color-footer-bg: #0a1628;
-            --color-box: #2a4a8a;
+            
+            /* Colores Tarjetas */
+            --color-box-primary: #2A4A8A; /* Azul fuerte original */
+            --color-box-secondary-bg: #E9EEF5; /* Gris azulado suave para fondo sección */
+            --color-box-secondary-card: #FFFFFF; /* Blanco para las tarjetas secundarias */
+            --color-box-secondary-text: #1B3A6B; /* Texto azul oscuro */
+            
             --font-body: 'Roboto', sans-serif;
             --font-heading: 'Roboto', sans-serif;
         }
@@ -33,9 +39,6 @@
             min-height: 100vh;
         }
 
-        /* =========================================
-           BANNER MAQUETA
-           ========================================= */
         .mockup-banner {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -50,7 +53,7 @@
         }
 
         /* =========================================
-           HEADER (igual que dashboard)
+           HEADER
            ========================================= */
         .main-header {
             background-color: #ffffff;
@@ -170,6 +173,16 @@
 
         .btn-user i { font-size: 1rem; }
 
+        .btn-user.active-page-btn {
+            background-color: var(--color-primary);
+            box-shadow: 0 2px 4px rgba(27, 58, 107, 0.3);
+        }
+
+        .btn-user.active-page-btn:hover {
+            background-color: #152d55;
+            box-shadow: 0 3px 6px rgba(27, 58, 107, 0.4);
+        }
+
         .btn-user.btn-logout {
             background-color: #9B4F5E;
             box-shadow: 0 2px 4px rgba(155, 79, 94, 0.2);
@@ -181,287 +194,192 @@
         }
 
         /* =========================================
-           CONTENIDO PRINCIPAL
+           CONTENIDO DASHBOARD
            ========================================= */
-        .main-content {
-            max-width: 900px;
+        .dashboard-content {
+            max-width: 1400px;
             margin: 40px auto;
             padding: 0 20px;
             flex: 1;
             width: 100%;
         }
 
-        /* CAJA INFORMATIVA */
-        .info-box {
-            background: #f0f4ff;
+        /* Mensaje Info Previa */
+        .info-previa {
+            background: #e8f0fe;
             border-left: 5px solid var(--color-primary);
-            padding: 30px;
-            border-radius: 4px;
+            border-radius: 0 8px 8px 0;
+            padding: 24px 30px 24px 30px;
             margin-bottom: 30px;
-        }
-
-        .info-box h2 {
-            color: var(--color-primary);
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .info-box p {
-            color: #444;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-
-        .info-box .highlight {
-            font-weight: 500;
-            color: var(--color-primary);
-            margin: 20px 0;
-        }
-
-        /* FORMULARIO DE PREGUNTAS */
-        .questions-card {
-            background: white;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 1px solid var(--color-border);
-        }
-
-        .question-block {
-            margin-bottom: 30px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .question-block:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-
-        .question-block h3 {
-            color: var(--color-primary);
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .question-block p {
-            color: #555;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-
-        .radio-options {
-            display: flex;
-            gap: 30px;
-            margin-top: 15px;
-        }
-
-        .radio-options label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            color: var(--color-text);
-        }
-
-        .radio-options input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        .hidden { display: none; }
-
-        /* TOOLTIP */
-        .tooltip-container {
             position: relative;
-            display: inline-block;
+            width: 100%;
         }
-
-        .tooltip-text {
-            visibility: hidden;
-            width: 300px;
-            background-color: rgba(0,0,0,0.9);
-            color: #fff;
-            text-align: left;
-            border-radius: 6px;
-            padding: 12px;
-            position: absolute;
-            z-index: 100;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -150px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 0.85rem;
-            line-height: 1.4;
+        .info-previa .info-previa-close {
+            position: absolute; top: 12px; right: 16px;
+            background: none; border: none; font-size: 1.3rem;
+            color: #6c757d; cursor: pointer; padding: 4px 8px;
+            border-radius: 4px; transition: background 0.2s, color 0.2s; line-height: 1;
         }
-
-        .tooltip-container:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        /* BOTONES */
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .btn-action {
-            padding: 12px 30px;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            text-decoration: none;
-            font-family: var(--font-body);
-            border: none;
-            transition: all 0.2s;
-        }
-
-        .btn-volver {
-            background: white;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
-        }
-
-        .btn-volver:hover {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .btn-continuar {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .btn-continuar:hover {
-            background: #152D55;
-        }
-
-        .btn-continuar:disabled {
-            background: #a0aec0;
-            cursor: not-allowed;
+        .info-previa .info-previa-close:hover { background: rgba(0,0,0,0.08); color: #333; }
+        .info-previa-title { color: var(--color-primary); font-size: 1.05rem; font-weight: 500; margin-bottom: 14px; line-height: 1.4; }
+        .info-previa ol { margin: 0 0 16px 0; padding-left: 22px; color: var(--color-text); font-size: 0.95rem; line-height: 1.7; }
+        .info-previa ol li { margin-bottom: 2px; padding-left: 4px; }
+        .info-previa .info-importante { font-size: 0.9rem; color: var(--color-text); line-height: 1.6; margin-bottom: 10px; }
+        .info-previa .info-importante strong { color: var(--color-secondary); }
+        
+        .info-previa.closing {
+            max-height: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0;
+            overflow: hidden; opacity: 0;
+            transition: max-height 0.4s ease, padding 0.4s ease, margin-bottom 0.4s ease, opacity 0.3s ease;
         }
 
         /* =========================================
-           TOASTS
+           GRUPO 1: TARJETAS PRINCIPALES (AZULES)
            ========================================= */
-        .toast-container {
-            position: fixed;
-            top: 50px;
-            right: 20px;
-            z-index: 10000;
+        .options-primary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columnas para las principales */
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .option-box {
+            background: var(--color-box-primary);
+            color: white;
+            padding: 28px 18px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            pointer-events: none;
-        }
-
-        .toast {
-            display: flex;
             align-items: center;
-            gap: 12px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            padding: 14px 18px;
-            min-width: 320px;
-            max-width: 420px;
-            transform: translateX(120%);
-            transition: transform 0.35s ease;
-            pointer-events: auto;
-            border-left: 4px solid #28a745;
+            text-align: center;
+            min-height: 160px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
+        .option-box::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; background: rgba(255, 255, 255, 0.25);
+            transition: height 0.3s ease, background 0.3s ease;
+        }
+
+        .option-box:hover {
+            background: #1a3570;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(42, 74, 138, 0.35);
+        }
+        .option-box:hover::before { height: 6px; background: rgba(255, 255, 255, 0.4); }
+
+        .card-number {
+            font-size: 3rem; font-weight: 700; opacity: 0.12;
+            position: absolute; top: 12px; right: 18px; line-height: 1;
+        }
+
+        .card-icon { font-size: 2rem; margin-bottom: 12px; opacity: 0.9; }
+        
+        .option-box h3 {
+            font-size: 1.05rem; font-weight: 500; line-height: 1.35;
+            position: relative; z-index: 1; margin: 0;
+        }
+
+        .option-box .subtitle {
+            font-size: 0.8rem; opacity: 0.8; font-weight: 300;
+            margin-top: 8px; line-height: 1.4; position: relative; z-index: 1;
+        }
+
+        /* =========================================
+           GRUPO 2: TARJETAS SECUNDARIAS (GRIS AZULADO)
+           ========================================= */
+        .secondary-section-title {
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+            margin-bottom: 15px;
+            padding-left: 5px;
+            border-left: 4px solid var(--color-border);
+        }
+
+        .options-secondary-wrapper {
+            background-color: var(--color-box-secondary-bg);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border: 1px solid #dbe2e8;
+        }
+
+        .options-secondary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columnas para las secundarias */
+            gap: 20px;
+        }
+
+        /* Estilo específico para tarjetas secundarias */
+        .option-box.secondary {
+            background: var(--color-box-secondary-card);
+            color: var(--color-box-secondary-text);
+            border: 1px solid #cbd5e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .option-box.secondary::before {
+            background: var(--color-primary); /* Barra superior azul */
+            height: 4px;
+        }
+
+        .option-box.secondary:hover {
+            background: #fff;
+            border-color: var(--color-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(27, 58, 107, 0.15);
+        }
+        
+        .option-box.secondary:hover::before {
+            height: 6px;
+        }
+
+        .option-box.secondary .card-icon {
+            color: var(--color-primary); /* Iconos azules */
+            opacity: 1;
+        }
+
+        .option-box.secondary h3 {
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .option-box.secondary .subtitle {
+            color: var(--color-text-muted);
+            opacity: 1;
+        }
+
+        /* =========================================
+           TOASTS & FOOTER (Sin cambios mayores)
+           ========================================= */
+        .toast-container { position: fixed; top: 50px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+        .toast { display: flex; align-items: center; gap: 12px; background: white; border-radius: 8px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); padding: 14px 18px; min-width: 320px; max-width: 420px; transform: translateX(120%); transition: transform 0.35s ease; pointer-events: auto; border-left: 4px solid #28a745; }
         .toast.show { transform: translateX(0); }
         .toast.toast-info { border-left-color: #17a2b8; }
         .toast.toast-warning { border-left-color: #ffc107; }
         .toast.toast-error { border-left-color: #dc3545; }
-
-        .toast-icon {
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            flex-shrink: 0;
-            color: white;
-        }
-
+        .toast-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; color: white; }
         .toast-icon.success { background: #28a745; }
         .toast-icon.info { background: #17a2b8; }
         .toast-icon.warning { background: #ffc107; color: #333; }
         .toast-icon.error { background: #dc3545; }
-
-        .toast-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
+        .toast-body { flex: 1; display: flex; flex-direction: column; gap: 2px; }
         .toast-body strong { font-size: 0.9rem; color: #333; }
         .toast-body span { font-size: 0.82rem; color: #666; }
-
-        .toast-close {
-            background: none;
-            border: none;
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: #999;
-            padding: 0 2px;
-            line-height: 1;
-            transition: color 0.2s;
-        }
-
+        .toast-close { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: #999; padding: 0 2px; line-height: 1; transition: color 0.2s; }
         .toast-close:hover { color: #333; }
 
-        /* =========================================
-           FOOTER
-           ========================================= */
-        .blue-section {
-            background: var(--color-primary);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .blue-section .btn-footer {
-            background: white;
-            color: var(--color-primary);
-            border: none;
-            padding: 12px 25px;
-            margin: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-family: var(--font-body);
-            font-weight: 500;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .blue-section .btn-footer:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .blue-section p {
-            margin: 20px 0;
-            line-height: 1.6;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .blue-section { background: var(--color-primary); color: white; padding: 50px 20px; text-align: center; margin-top: 60px; }
+        .blue-section .btn-footer { background: white; color: var(--color-primary); border: none; padding: 12px 25px; margin: 10px; border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-family: var(--font-body); font-weight: 500; transition: transform 0.2s, box-shadow 0.2s; }
+        .blue-section .btn-footer:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); }
+        .blue-section p { margin: 20px 0; line-height: 1.6; max-width: 700px; margin-left: auto; margin-right: auto; }
       .footer-dark {
         background: linear-gradient(180deg, #071c35 0%, #0a2240 100%);
         color: white;
@@ -681,21 +599,19 @@
            RESPONSIVE
            ========================================= */
         @media (max-width: 1200px) {
-            .user-nav-container {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-                padding: 0 15px;
-            }
+            .options-primary { grid-template-columns: repeat(3, 1fr); }
+            .banner-img { max-height: 240px; }
+            .user-nav-container { flex-direction: column; align-items: flex-start; gap: 12px; padding: 0 15px; }
             .user-actions { width: 100%; flex-direction: column; align-items: flex-start; gap: 12px; }
             .user-buttons { width: 100%; flex-wrap: wrap; }
             .btn-user { flex: 1; min-width: 140px; justify-content: center; }
             .footer-content { grid-template-columns: repeat(2, 1fr); }
             .footer-bottom { grid-template-columns: repeat(2, 1fr); }
-            .banner-img { max-height: 240px; }
         }
 
         @media (max-width: 968px) {
+            .options-primary { grid-template-columns: repeat(2, 1fr); } /* 2 columnas en tablets */
+            .options-secondary { grid-template-columns: repeat(2, 1fr); }
             .footer-content { grid-template-columns: 1fr; }
             .footer-bottom { grid-template-columns: 1fr; text-align: center; }
             .orgs-buttons { grid-template-columns: 1fr; }
@@ -707,17 +623,23 @@
             .user-buttons { flex-direction: column; }
             .btn-user { min-width: 100%; justify-content: center; font-size: 0.85rem; padding: 8px 12px; }
             .breadcrumb { font-size: 0.9rem; }
-            .radio-options { flex-direction: column; gap: 15px; }
-            .questions-card { padding: 20px; }
-            .action-buttons { flex-direction: column; align-items: center; }
-            .btn-action { width: 100%; max-width: 280px; text-align: center; justify-content: center; }
+            
+            /* En móvil, todo a 1 columna */
+            .options-primary { grid-template-columns: 1fr; }
+            .options-secondary { grid-template-columns: 1fr; }
+            
+            .option-box { min-height: 110px; padding: 20px 16px; }
+            .option-box .card-icon { font-size: 1.5rem; margin-bottom: 8px; }
+            .option-box h3 { font-size: 0.95rem; }
+            .info-previa { padding: 18px 20px; }
+            .info-previa .info-previa-title { font-size: 0.95rem; }
+            .info-previa ol { font-size: 0.9rem; }
         }
 
         @media (max-width: 480px) {
             .banner-img { max-height: 140px; }
             .user-profile .user-icon { width: 28px; height: 28px; font-size: 0.9rem; }
-            .info-box { padding: 20px; }
-            .info-box h2 { font-size: 1.1rem; }
+            .info-previa { padding: 16px 16px; }
         }
     </style>
 </head>
@@ -734,143 +656,128 @@
          HEADER
          ========================================== -->
 <!-- ==========================================
-         CONTENIDO PRINCIPAL
+         CONTENIDO DASHBOARD
          ========================================== -->
-    <main class="main-content">
+    <main class="dashboard-content">
 
-        <!-- CAJA INFORMATIVA -->
-        <div class="info-box">
-            <h2>La Superintendencia de Educación te informa lo siguiente:</h2>
-            <p>Puedes presentar una denuncia cuando consideres que existe un posible incumplimiento de la normativa educacional. Un profesional de la Superintendencia analizará los antecedentes y determinará las acciones que correspondan.</p>
-            <p>El tiempo de tramitación dependerá de la naturaleza y complejidad del caso.</p>
-            <p class="highlight">Antes de continuar, queremos preguntarte:</p>
+        <!-- Mensaje de información previa -->
+        <div class="info-previa" id="infoPrevia">
+            <button class="info-previa-close" id="btnCerrarInfo" aria-label="Cerrar mensaje">&times;</button>
+            <div class="info-previa-title">Antes de ingresar tu requerimiento, te recomendamos:</div>
+            <ol>
+                <li>Plantea la situación al establecimiento y espera una respuesta.</li>
+                <li>Si no tienes respuesta, la Superintendencia te puede orientar y ayudar de la siguiente forma:</li>
+            </ol>
+            <div class="info-importante">
+                <strong>*Importante:</strong> Ten presente que, en las denuncias referidas a convivencia escolar, se priorizará siempre la gestión colaborativa para gestionar el conflicto planteado. 
+            </div>
         </div>
 
-        <!-- FORMULARIO DE PREGUNTAS -->
-        <div class="questions-card">
+        <!-- ==============================================
+             GRUPO 1: ACCIONES PRINCIPALES (AZULES)
+             ============================================== -->
+        <div class="options-primary">
+            <a href="https://siac.supereduc.cl/autoatencion/formulario.php" target="_blank" class="option-box">
+                <div class="card-icon"><i class="bi bi-chat-dots-fill"></i></div>
+                <h3>Ingresar consulta</h3>
+            </a>
 
-            <!-- PREGUNTA 1 -->
-            <div class="question-block" id="pregunta1">
-                <h3></h3>
-                <p>¿Informó la situación que le afecta al establecimiento educacional?</p>
-                <div class="radio-options">
-                    <label>
-                        <input type="radio" name="pregunta1" value="si" onchange="handlePregunta1()">
-                        Sí
-                    </label>
-                    <label>
-                        <input type="radio" name="pregunta1" value="no" onchange="handlePregunta1()">
-                        No
-                    </label>
-                </div>
-            </div>
+            <a href="gcc.html" class="option-box">
+                <div class="card-icon"><i class="bi bi-people-fill"></i></div>
+                <h3>Solicitar Gestión Colaborativa de Conflictos</h3>
+                <div class="subtitle">Mediación – Conciliación – Facilitación</div>
+            </a>
 
-            <!-- PREGUNTA 2 (Aparece si P1 = Sí) -->
-            <div class="question-block hidden" id="pregunta2">
-                <h3></h3>
-                <p>¿El establecimiento respondió su solicitud?</p>
-                <div class="radio-options">
-                    <label>
-                        <input type="radio" name="pregunta2" value="si" onchange="handlePregunta2()">
-                        Sí
-                    </label>
-                    <label>
-                        <input type="radio" name="pregunta2" value="no" onchange="handlePregunta2()">
-                        No
-                    </label>
-                </div>
-            </div>
-
-            <!-- PREGUNTA 3 (Aparece si P1 = No, o P2 = No) -->
-            <div class="question-block hidden" id="pregunta3">
-                <h3></h3>
-                <p>¿Quieres intentar resolver primero la situación directamente con el establecimiento?</p>
-                <div class="radio-options">
-                    <label class="tooltip-container">
-                        <input type="radio" name="pregunta3" value="si" onchange="handlePregunta3()">
-                        Sí, quiero plantear directamente mi situación al establecimiento.
-                        <span class="tooltip-text">Te entregaremos un documento que podrás presentar al establecimiento para solicitar una respuesta o conversar sobre una posible solución. Recibirás el documento en tu correo electrónico.</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="pregunta3" value="no" onchange="handlePregunta3()">
-                        No, quiero continuar con mi denuncia.
-                    </label>
-                </div>
-            </div>
-
+            <a href="preguntas-previas.html" class="option-box">
+                <div class="card-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                <h3>Ingresar denuncia al establecimiento y/o al sostenedor</h3>
+            </a>
         </div>
 
-        <!-- BOTONES VOLVER/CONTINUAR -->
-        <div class="action-buttons">
-            <a href="info-previa.html" class="btn-action btn-volver">Volver</a>
-            <button class="btn-action btn-continuar" onclick="continuar()" id="btnContinuar" disabled>Continuar</button>
+        <!-- ==============================================
+             GRUPO 2: ACCIONES SECUNDARIAS (GRIS AZULADO)
+             ============================================== -->
+        <div class="options-secondary-wrapper">
+            <div class="secondary-section-title">Gestión y comentarios</div>
+            <div class="options-secondary">
+                
+                <a href="seguimiento.html" class="option-box secondary">
+                    <div class="card-icon"><i class="bi bi-search"></i></div>
+                    <h3>Hacer seguimiento a mi caso</h3>
+                    <div class="subtitle">Revisa el estado de tus requerimientos</div>
+                </a>
+
+                <a href="sugerencias.html" class="option-box secondary">
+                    <div class="card-icon"><i class="bi bi-star-fill"></i></div>
+                    <h3>Sugerencias, felicitaciones o reclamos</h3>
+                    <div class="subtitle">a la Superintendencia de Educación</div>
+                </a>
+
+            </div>
         </div>
 
     </main>
 
-
+  
 
     <!-- FOOTER -->
-<div class="barra-footer-final">
-        <div class="bf-blue"></div>
-        <div class="bf-red"></div>
-    </div>
+<div class="barra-footer-final"><div class="bf-blue"></div><div class="bf-red"></div></div>
 
+    <!-- Script del dashboard -->
     <script>
-        // ==========================================
-        // 1. Cargar nombre del usuario
-        // ==========================================
+        // 1. Cargar datos del usuario
         (function() {
             var name = localStorage.getItem("userName") || "Usuario";
             var nameEl = document.getElementById("userName");
             if (nameEl) nameEl.textContent = name;
         })();
 
-        // ==========================================
-        // 2. Funciones de toast
-        // ==========================================
+        // 2. Cerrar mensaje de información previa
+        var __el = document.getElementById(''); if (__el) __el.addEventListener("click", function() {
+            var box = document.getElementById("infoPrevia");
+            var height = box.offsetHeight;
+            box.style.maxHeight = height + "px";
+            box.offsetHeight;
+            box.classList.add("closing");
+            setTimeout(function() { box.style.display = "none"; }, 450);
+        });
+
+        // 3. Toasts
         function showToast(type, title, message) {
             var container = document.getElementById("toastContainer");
             if (!container) return;
-
             var toast = document.createElement("div");
             var className = "toast";
-            if (type && type !== "success") {
-                className += " toast-" + type;
-            }
+            if (type && type !== "success") className += " toast-" + type;
             toast.className = className;
-
             var iconChar = type === "info" ? "i" : "\u2713";
-
-            toast.innerHTML =
-                '<div class="toast-icon ' + (type || "success") + '">' + iconChar + '</div>' +
+            toast.innerHTML = '<div class="toast-icon ' + (type || "success") + '">' + iconChar + '</div>' +
                 '<div class="toast-body"><strong>' + title + '</strong><span>' + message + '</span></div>' +
                 '<button class="toast-close" aria-label="Cerrar">&times;</button>';
-
             container.appendChild(toast);
-
-            requestAnimationFrame(function() {
-                toast.classList.add("show");
-            });
-
-            toast.querySelector(".toast-close").addEventListener("click", function() {
-                removeToast(toast);
-            });
-
+            requestAnimationFrame(function() { toast.classList.add("show"); });
+            toast.querySelector(".toast-close").addEventListener("click", function() { removeToast(toast); });
             setTimeout(function() { removeToast(toast); }, 5000);
         }
-
         function removeToast(toast) {
             if (!toast || !toast.parentNode) return;
             toast.classList.remove("show");
-            setTimeout(function() {
-                if (toast.parentNode) toast.parentNode.removeChild(toast);
-            }, 400);
+            setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 400);
         }
 
-        // ==========================================
-        // 3. Cerrar sesión
-        // ==========================================
+        // 4. Toast bienvenida
+        (function() {
+            var welcomed = sessionStorage.getItem("dashboardWelcomed");
+            if (!welcomed) {
+                sessionStorage.setItem("dashboardWelcomed", "true");
+                setTimeout(function() {
+                    var name = localStorage.getItem("userName") || "Usuario";
+                    showToast("success", "Sesión iniciada", name + ". Seleccione una gestión para comenzar.");
+                }, 600);
+            }
+        })();
+
+        // 5. Cerrar sesión
         var btnLogoutEl = document.getElementById("btnLogout");
         if (btnLogoutEl) {
             btnLogoutEl.addEventListener("click", function(e) {
@@ -884,98 +791,13 @@
             });
         }
 
-        // ==========================================
-        // 4. Notificaciones
-        // ==========================================
+        // 6. Notificaciones
         var btnNotificacionesEl = document.getElementById("btnNotificaciones");
         if (btnNotificacionesEl) {
             btnNotificacionesEl.addEventListener("click", function(e) {
                 e.preventDefault();
                 showToast("info", "Notificaciones", "No tiene notificaciones pendientes.");
             });
-        }
-
-        // ==========================================
-        // 5. Lógica de preguntas previas
-        // ==========================================
-        var respuestas = {
-            pregunta1: null,
-            pregunta2: null,
-            pregunta3: null
-        };
-
-        function handlePregunta1() {
-            var valor = document.querySelector('input[name="pregunta1"]:checked').value;
-            respuestas.pregunta1 = valor;
-
-            var pregunta2 = document.getElementById('pregunta2');
-            var pregunta3 = document.getElementById('pregunta3');
-
-            // Resetear respuestas siguientes
-            respuestas.pregunta2 = null;
-            respuestas.pregunta3 = null;
-            document.querySelectorAll('input[name="pregunta2"]').forEach(function(r) { r.checked = false; });
-            document.querySelectorAll('input[name="pregunta3"]').forEach(function(r) { r.checked = false; });
-
-            if (valor === 'si') {
-                pregunta2.classList.remove('hidden');
-                pregunta3.classList.add('hidden');
-            } else {
-                pregunta2.classList.add('hidden');
-                pregunta3.classList.remove('hidden');
-            }
-
-            actualizarBoton();
-        }
-
-        function handlePregunta2() {
-            var valor = document.querySelector('input[name="pregunta2"]:checked').value;
-            respuestas.pregunta2 = valor;
-
-            var pregunta3 = document.getElementById('pregunta3');
-
-            // Resetear P3
-            respuestas.pregunta3 = null;
-            document.querySelectorAll('input[name="pregunta3"]').forEach(function(r) { r.checked = false; });
-
-            if (valor === 'no') {
-                pregunta3.classList.remove('hidden');
-            } else {
-                pregunta3.classList.add('hidden');
-            }
-
-            actualizarBoton();
-        }
-
-        function handlePregunta3() {
-            var valor = document.querySelector('input[name="pregunta3"]:checked').value;
-            respuestas.pregunta3 = valor;
-            actualizarBoton();
-        }
-
-        function actualizarBoton() {
-            var btnContinuar = document.getElementById('btnContinuar');
-            var completado = false;
-
-            if (respuestas.pregunta1 === 'si' && respuestas.pregunta2 === 'si') {
-                completado = true;
-            } else if (respuestas.pregunta1 === 'si' && respuestas.pregunta2 === 'no' && respuestas.pregunta3) {
-                completado = true;
-            } else if (respuestas.pregunta1 === 'no' && respuestas.pregunta3) {
-                completado = true;
-            }
-
-            btnContinuar.disabled = !completado;
-        }
-
-        function continuar() {
-            if (respuestas.pregunta1 === 'si' && respuestas.pregunta2 === 'si') {
-                window.location.href = 'denuncia.html';
-            } else if (respuestas.pregunta3 === 'si') {
-                window.location.href = 'contacto-directo.html';
-            } else if (respuestas.pregunta3 === 'no') {
-                window.location.href = 'denuncia.html';
-            }
         }
     </script>
 

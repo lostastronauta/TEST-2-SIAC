@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preguntas Previas - Denuncia - Sistema Integral de Atención Ciudadana</title>
+    <title>Seguimiento de Casos - Sistema Integral de Atención Ciudadana</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -19,6 +19,13 @@
             --color-box: #2a4a8a;
             --font-body: 'Roboto', sans-serif;
             --font-heading: 'Roboto', sans-serif;
+
+            /* Estados */
+            --status-review: #ffc107;
+            --status-process: #17a2b8;
+            --status-resolved: #28a745;
+            --status-closed: #6c757d;
+            --status-rejected: #dc3545;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -170,6 +177,16 @@
 
         .btn-user i { font-size: 1rem; }
 
+        .btn-user.active-page-btn {
+            background-color: var(--color-primary);
+            box-shadow: 0 2px 4px rgba(27, 58, 107, 0.3);
+        }
+
+        .btn-user.active-page-btn:hover {
+            background-color: #152d55;
+            box-shadow: 0 3px 6px rgba(27, 58, 107, 0.4);
+        }
+
         .btn-user.btn-logout {
             background-color: #9B4F5E;
             box-shadow: 0 2px 4px rgba(155, 79, 94, 0.2);
@@ -184,171 +201,373 @@
            CONTENIDO PRINCIPAL
            ========================================= */
         .main-content {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
             flex: 1;
             width: 100%;
         }
 
-        /* CAJA INFORMATIVA */
-        .info-box {
-            background: #f0f4ff;
-            border-left: 5px solid var(--color-primary);
-            padding: 30px;
-            border-radius: 4px;
+        .page-title {
+            color: var(--color-primary);
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: var(--color-text-muted);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* RESUMEN DE CASOS */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
             margin-bottom: 30px;
         }
 
-        .info-box h2 {
-            color: var(--color-primary);
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .info-box p {
-            color: #444;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-
-        .info-box .highlight {
-            font-weight: 500;
-            color: var(--color-primary);
-            margin: 20px 0;
-        }
-
-        /* FORMULARIO DE PREGUNTAS */
-        .questions-card {
+        .summary-card {
             background: white;
+            padding: 20px;
             border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 1px solid var(--color-border);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--color-primary);
         }
 
-        .question-block {
-            margin-bottom: 30px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid var(--color-border);
+        .summary-card .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
         }
 
-        .question-block:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
+        .summary-card .label {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin-top: 5px;
         }
 
-        .question-block h3 {
+        .summary-card.total { border-left-color: var(--color-primary); }
+        .summary-card.pending { border-left-color: var(--status-review); }
+        .summary-card.process { border-left-color: var(--status-process); }
+        .summary-card.resolved { border-left-color: var(--status-resolved); }
+
+        /* FILTROS */
+        .filters-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .filters-card h3 {
             color: var(--color-primary);
             font-size: 1.1rem;
             margin-bottom: 15px;
             font-weight: 500;
         }
 
-        .question-block p {
-            color: #555;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
+        .filters-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            align-items: end;
         }
 
-        .radio-options {
+        .filter-group {
             display: flex;
-            gap: 30px;
-            margin-top: 15px;
+            flex-direction: column;
         }
 
-        .radio-options label {
+        .filter-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--color-text);
+            margin-bottom: 6px;
+        }
+
+        .filter-control {
+            padding: 10px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-family: var(--font-body);
+            background: white;
+        }
+
+        .filter-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .btn-filter {
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 8px;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .btn-filter:hover { background: #152D55; }
+
+        .btn-clear {
+            background: white;
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            padding: 10px 20px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 1rem;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .btn-clear:hover { background: #f8f9fa; }
+
+        /* TABLA DE CASOS */
+        .table-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .table-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h3 {
+            color: var(--color-primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .results-count {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f8f9fa;
+        }
+
+        th {
+            padding: 14px 20px;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--color-border);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 16px 20px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--color-border);
             color: var(--color-text);
         }
 
-        .radio-options input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
+        tbody tr:hover {
+            background: #f8f9fa;
         }
 
-        .hidden { display: none; }
+        .case-number {
+            font-weight: 600;
+            color: var(--color-primary);
+            white-space: nowrap;
+        }
 
-        /* TOOLTIP */
-        .tooltip-container {
-            position: relative;
+        .case-type {
             display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: #e8f0fe;
+            color: var(--color-primary);
+            white-space: nowrap;
         }
 
-        .tooltip-text {
-            visibility: hidden;
-            width: 300px;
-            background-color: rgba(0,0,0,0.9);
-            color: #fff;
-            text-align: left;
-            border-radius: 6px;
-            padding: 12px;
-            position: absolute;
-            z-index: 100;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -150px;
-            opacity: 0;
-            transition: opacity 0.3s;
+        .case-type.denuncia { background: #fce8eb; color: var(--color-secondary); }
+        .case-type.consulta { background: #e8f0fe; color: #1a5fa8; }
+        .case-type.gcc { background: #e8f8f5; color: #0d7a6b; }
+        .case-type.sugerencia { background: #fff8e1; color: #b8860b; }
+
+        /* BADGES DE ESTADO */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .status-badge::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-review {
+            background: #fff8e1;
+            color: #856404;
+        }
+        .status-review::before { background: var(--status-review); }
+
+        .status-process {
+            background: #e0f7fa;
+            color: #0c5460;
+        }
+        .status-process::before { background: var(--status-process); }
+
+        .status-resolved {
+            background: #e8f5e9;
+            color: #155724;
+        }
+        .status-resolved::before { background: var(--status-resolved); }
+
+        .status-closed {
+            background: #f1f3f5;
+            color: #495057;
+        }
+        .status-closed::before { background: var(--status-closed); }
+
+        .btn-detail {
+            background: white;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
             font-size: 0.85rem;
-            line-height: 1.4;
+            font-family: var(--font-body);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+            white-space: nowrap;
         }
 
-        .tooltip-container:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
+        .btn-detail:hover {
+            background: var(--color-primary);
+            color: white;
         }
 
-        /* BOTONES */
-        .action-buttons {
+        /* PAGINACIÓN */
+        .pagination {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
+            align-items: center;
+            gap: 8px;
+            padding: 20px;
         }
 
-        .btn-action {
-            padding: 12px 30px;
+        .pagination button {
+            background: white;
+            border: 1px solid var(--color-border);
+            padding: 8px 14px;
             border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 500;
             cursor: pointer;
-            text-decoration: none;
             font-family: var(--font-body);
-            border: none;
+            font-size: 0.9rem;
+            color: var(--color-text);
             transition: all 0.2s;
         }
 
-        .btn-volver {
-            background: white;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
+        .pagination button:hover {
+            background: #f8f9fa;
+            border-color: var(--color-primary);
         }
 
-        .btn-volver:hover {
+        .pagination button.active {
             background: var(--color-primary);
             color: white;
+            border-color: var(--color-primary);
         }
 
-        .btn-continuar {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        .btn-continuar:hover {
-            background: #152D55;
-        }
-
-        .btn-continuar:disabled {
-            background: #a0aec0;
+        .pagination button:disabled {
+            opacity: 0.5;
             cursor: not-allowed;
         }
+
+        /* ESTADO VACÍO */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--color-text-muted);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: var(--color-border);
+        }
+
+        .empty-state h3 {
+            color: var(--color-text);
+            margin-bottom: 10px;
+        }
+
+        /* BOTÓN NUEVO CASO */
+        .btn-new-case {
+            background: var(--color-secondary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-new-case:hover { background: var(--color-secondary-dark); }
 
         /* =========================================
            TOASTS
@@ -381,6 +600,7 @@
         }
 
         .toast.show { transform: translateX(0); }
+
         .toast.toast-info { border-left-color: #17a2b8; }
         .toast.toast-warning { border-left-color: #ffc107; }
         .toast.toast-error { border-left-color: #dc3545; }
@@ -409,8 +629,15 @@
             gap: 2px;
         }
 
-        .toast-body strong { font-size: 0.9rem; color: #333; }
-        .toast-body span { font-size: 0.82rem; color: #666; }
+        .toast-body strong {
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .toast-body span {
+            font-size: 0.82rem;
+            color: #666;
+        }
 
         .toast-close {
             background: none;
@@ -426,7 +653,7 @@
         .toast-close:hover { color: #333; }
 
         /* =========================================
-           FOOTER
+           SECCIÓN AZUL INFERIOR
            ========================================= */
         .blue-section {
             background: var(--color-primary);
@@ -462,6 +689,10 @@
             margin-left: auto;
             margin-right: auto;
         }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
       .footer-dark {
         background: linear-gradient(180deg, #071c35 0%, #0a2240 100%);
         color: white;
@@ -692,13 +923,15 @@
             .btn-user { flex: 1; min-width: 140px; justify-content: center; }
             .footer-content { grid-template-columns: repeat(2, 1fr); }
             .footer-bottom { grid-template-columns: repeat(2, 1fr); }
-            .banner-img { max-height: 240px; }
         }
 
         @media (max-width: 968px) {
             .footer-content { grid-template-columns: 1fr; }
             .footer-bottom { grid-template-columns: 1fr; text-align: center; }
             .orgs-buttons { grid-template-columns: 1fr; }
+            .summary-cards { grid-template-columns: repeat(2, 1fr); }
+            .filters-row { grid-template-columns: 1fr; }
+            .banner-img { max-height: 240px; }
         }
 
         @media (max-width: 768px) {
@@ -707,17 +940,16 @@
             .user-buttons { flex-direction: column; }
             .btn-user { min-width: 100%; justify-content: center; font-size: 0.85rem; padding: 8px 12px; }
             .breadcrumb { font-size: 0.9rem; }
-            .radio-options { flex-direction: column; gap: 15px; }
-            .questions-card { padding: 20px; }
-            .action-buttons { flex-direction: column; align-items: center; }
-            .btn-action { width: 100%; max-width: 280px; text-align: center; justify-content: center; }
+            .summary-cards { grid-template-columns: repeat(2, 1fr); }
+            .table-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .table-header > div { width: 100%; flex-wrap: wrap; }
         }
 
         @media (max-width: 480px) {
             .banner-img { max-height: 140px; }
             .user-profile .user-icon { width: 28px; height: 28px; font-size: 0.9rem; }
-            .info-box { padding: 20px; }
-            .info-box h2 { font-size: 1.1rem; }
+            .page-title { font-size: 1.4rem; }
+            .summary-cards { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -731,79 +963,166 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- ==========================================
-         HEADER
+         HEADER (idéntico al dashboard)
          ========================================== -->
 <!-- ==========================================
          CONTENIDO PRINCIPAL
          ========================================== -->
     <main class="main-content">
 
-        <!-- CAJA INFORMATIVA -->
-        <div class="info-box">
-            <h2>La Superintendencia de Educación te informa lo siguiente:</h2>
-            <p>Puedes presentar una denuncia cuando consideres que existe un posible incumplimiento de la normativa educacional. Un profesional de la Superintendencia analizará los antecedentes y determinará las acciones que correspondan.</p>
-            <p>El tiempo de tramitación dependerá de la naturaleza y complejidad del caso.</p>
-            <p class="highlight">Antes de continuar, queremos preguntarte:</p>
+        <h1 class="page-title">Seguimiento de mis casos</h1>
+        <p class="page-subtitle">Consulta el estado de tus requerimientos ingresados ante la Superintendencia de Educación.</p>
+
+        <!-- RESUMEN DE CASOS -->
+        <div class="summary-cards">
+            <div class="summary-card total">
+                <div class="number">5</div>
+                <div class="label">Total de casos</div>
+            </div>
+            <div class="summary-card pending">
+                <div class="number">2</div>
+                <div class="label">En revisión</div>
+            </div>
+            <div class="summary-card process">
+                <div class="number">1</div>
+                <div class="label">En trámite</div>
+            </div>
+            <div class="summary-card resolved">
+                <div class="number">2</div>
+                <div class="label">Resueltos</div>
+            </div>
         </div>
 
-        <!-- FORMULARIO DE PREGUNTAS -->
-        <div class="questions-card">
-
-            <!-- PREGUNTA 1 -->
-            <div class="question-block" id="pregunta1">
-                <h3></h3>
-                <p>¿Informó la situación que le afecta al establecimiento educacional?</p>
-                <div class="radio-options">
-                    <label>
-                        <input type="radio" name="pregunta1" value="si" onchange="handlePregunta1()">
-                        Sí
-                    </label>
-                    <label>
-                        <input type="radio" name="pregunta1" value="no" onchange="handlePregunta1()">
-                        No
-                    </label>
+        <!-- FILTROS -->
+        <div class="filters-card">
+            <h3><i class="bi bi-funnel"></i> Filtrar casos</h3>
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Tipo de requerimiento</label>
+                    <select class="filter-control" id="filterType">
+                        <option value="">Todos</option>
+                        <option value="denuncia">Denuncia</option>
+                        <option value="consulta">Consulta</option>
+                        <option value="gcc">GCC</option>
+                        <option value="sugerencia">Sugerencia</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Estado</label>
+                    <select class="filter-control" id="filterStatus">
+                        <option value="">Todos</option>
+                        <option value="review">En revisión</option>
+                        <option value="process">En trámite</option>
+                        <option value="resolved">Resuelto</option>
+                        <option value="closed">Cerrado</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Fecha desde</label>
+                    <input type="date" class="filter-control" id="filterDateFrom">
+                </div>
+                <div class="filter-group">
+                    <label>Fecha hasta</label>
+                    <input type="date" class="filter-control" id="filterDateTo">
+                </div>
+                <div class="filter-group">
+                    <label>N° de caso</label>
+                    <input type="text" class="filter-control" placeholder="Ej: 2026-001" id="filterNumber">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-filter" id="btnFiltrar">
+                        <i class="bi bi-search"></i> Filtrar
+                    </button>
+                    <button class="btn-clear" id="btnLimpiar">
+                        <i class="bi bi-x-circle"></i> Limpiar
+                    </button>
                 </div>
             </div>
-
-            <!-- PREGUNTA 2 (Aparece si P1 = Sí) -->
-            <div class="question-block hidden" id="pregunta2">
-                <h3></h3>
-                <p>¿El establecimiento respondió su solicitud?</p>
-                <div class="radio-options">
-                    <label>
-                        <input type="radio" name="pregunta2" value="si" onchange="handlePregunta2()">
-                        Sí
-                    </label>
-                    <label>
-                        <input type="radio" name="pregunta2" value="no" onchange="handlePregunta2()">
-                        No
-                    </label>
-                </div>
-            </div>
-
-            <!-- PREGUNTA 3 (Aparece si P1 = No, o P2 = No) -->
-            <div class="question-block hidden" id="pregunta3">
-                <h3></h3>
-                <p>¿Quieres intentar resolver primero la situación directamente con el establecimiento?</p>
-                <div class="radio-options">
-                    <label class="tooltip-container">
-                        <input type="radio" name="pregunta3" value="si" onchange="handlePregunta3()">
-                        Sí, quiero plantear directamente mi situación al establecimiento.
-                        <span class="tooltip-text">Te entregaremos un documento que podrás presentar al establecimiento para solicitar una respuesta o conversar sobre una posible solución. Recibirás el documento en tu correo electrónico.</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="pregunta3" value="no" onchange="handlePregunta3()">
-                        No, quiero continuar con mi denuncia.
-                    </label>
-                </div>
-            </div>
-
         </div>
 
-        <!-- BOTONES VOLVER/CONTINUAR -->
-        <div class="action-buttons">
-            <a href="info-previa.html" class="btn-action btn-volver">Volver</a>
-            <button class="btn-action btn-continuar" onclick="continuar()" id="btnContinuar" disabled>Continuar</button>
+        <!-- TABLA DE CASOS -->
+        <div class="table-card">
+            <div class="table-header">
+                <h3>Listado de casos</h3>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span class="results-count" id="resultsCount">Mostrando 5 de 5 casos</span>
+                    <a href="dashboard.html" class="btn-new-case">
+                        <i class="bi bi-plus-circle"></i> Nuevo caso
+                    </a>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° Caso</th>
+                            <th>Tipo</th>
+                            <th>Fecha de ingreso</th>
+                            <th>Establecimiento</th>
+                            <th>Estado</th>
+                            <th>Última actualización</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="casesTableBody">
+                        <tr>
+                            <td class="case-number">2026-001</td>
+                            <td><span class="case-type denuncia">Denuncia</span></td>
+                            <td>15/08/2026</td>
+                            <td>Escuela Básica N°12, Quilicura</td>
+                            <td><span class="status-badge status-process">En trámite</span></td>
+                            <td>18/08/2026</td>
+                            <td><a href="#" class="btn-detail"><i class="bi bi-eye"></i> Ver detalle</a></td>
+                        </tr>
+                        <tr>
+                            <td class="case-number">2026-002</td>
+                            <td><span class="case-type gcc">GCC</span></td>
+                            <td>10/08/2026</td>
+                            <td>Colegio San José, Santiago</td>
+                            <td><span class="status-badge status-review">En revisión</span></td>
+                            <td>12/08/2026</td>
+                            <td><a href="#" class="btn-detail"><i class="bi bi-eye"></i> Ver detalle</a></td>
+                        </tr>
+                        <tr>
+                            <td class="case-number">2026-003</td>
+                            <td><span class="case-type consulta">Consulta</span></td>
+                            <td>05/08/2026</td>
+                            <td>Liceo Técnico N°5, Valparaíso</td>
+                            <td><span class="status-badge status-resolved">Resuelto</span></td>
+                            <td>14/08/2026</td>
+                            <td><a href="#" class="btn-detail"><i class="bi bi-eye"></i> Ver detalle</a></td>
+                        </tr>
+                        <tr>
+                            <td class="case-number">2026-004</td>
+                            <td><span class="case-type denuncia">Denuncia</span></td>
+                            <td>28/07/2026</td>
+                            <td>Escuela Rural El Bosque, La Araucanía</td>
+                            <td><span class="status-badge status-review">En revisión</span></td>
+                            <td>30/07/2026</td>
+                            <td><a href="#" class="btn-detail"><i class="bi bi-eye"></i> Ver detalle</a></td>
+                        </tr>
+                        <tr>
+                            <td class="case-number">2026-005</td>
+                            <td><span class="case-type sugerencia">Sugerencia</span></td>
+                            <td>20/07/2026</td>
+                            <td>Colegio Los Aromos, Biobío</td>
+                            <td><span class="status-badge status-resolved">Resuelto</span></td>
+                            <td>02/08/2026</td>
+                            <td><a href="#" class="btn-detail"><i class="bi bi-eye"></i> Ver detalle</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PAGINACIÓN -->
+            <div class="pagination">
+                <button disabled><i class="bi bi-chevron-left"></i> Anterior</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>Siguiente <i class="bi bi-chevron-right"></i></button>
+            </div>
         </div>
 
     </main>
@@ -818,7 +1137,7 @@
 
     <script>
         // ==========================================
-        // 1. Cargar nombre del usuario
+        // 1. Cargar nombre del usuario desde localStorage
         // ==========================================
         (function() {
             var name = localStorage.getItem("userName") || "Usuario";
@@ -896,87 +1215,78 @@
         }
 
         // ==========================================
-        // 5. Lógica de preguntas previas
+        // 5. Filtrado de casos
         // ==========================================
-        var respuestas = {
-            pregunta1: null,
-            pregunta2: null,
-            pregunta3: null
-        };
+        var __el = document.getElementById(''); if (__el) __el.addEventListener("click", function() {
+            var type = document.getElementById("filterType").value;
+            var status = document.getElementById("filterStatus").value;
+            var number = document.getElementById("filterNumber").value.toLowerCase();
 
-        function handlePregunta1() {
-            var valor = document.querySelector('input[name="pregunta1"]:checked').value;
-            respuestas.pregunta1 = valor;
+            var rows = document.querySelectorAll("#casesTableBody tr");
+            var visibleCount = 0;
 
-            var pregunta2 = document.getElementById('pregunta2');
-            var pregunta3 = document.getElementById('pregunta3');
+            rows.forEach(function(row) {
+                var typeEl = row.querySelector(".case-type");
+                var statusEl = row.querySelector(".status-badge");
+                var numberEl = row.querySelector(".case-number");
 
-            // Resetear respuestas siguientes
-            respuestas.pregunta2 = null;
-            respuestas.pregunta3 = null;
-            document.querySelectorAll('input[name="pregunta2"]').forEach(function(r) { r.checked = false; });
-            document.querySelectorAll('input[name="pregunta3"]').forEach(function(r) { r.checked = false; });
+                var matchType = !type || (typeEl && typeEl.classList.contains(type));
+                var matchStatus = !status || (statusEl && statusEl.classList.contains("status-" + status));
+                var matchNumber = !number || (numberEl && numberEl.textContent.toLowerCase().indexOf(number) !== -1);
 
-            if (valor === 'si') {
-                pregunta2.classList.remove('hidden');
-                pregunta3.classList.add('hidden');
-            } else {
-                pregunta2.classList.add('hidden');
-                pregunta3.classList.remove('hidden');
-            }
+                if (matchType && matchStatus && matchNumber) {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
 
-            actualizarBoton();
-        }
+            document.getElementById("resultsCount").textContent = "Mostrando " + visibleCount + " de " + rows.length + " casos";
+        });
 
-        function handlePregunta2() {
-            var valor = document.querySelector('input[name="pregunta2"]:checked').value;
-            respuestas.pregunta2 = valor;
+        // ==========================================
+        // 6. Limpiar filtros
+        // ==========================================
+        var __el = document.getElementById(''); if (__el) __el.addEventListener("click", function() {
+            document.getElementById("filterType").value = "";
+            document.getElementById("filterStatus").value = "";
+            document.getElementById("filterDateFrom").value = "";
+            document.getElementById("filterDateTo").value = "";
+            document.getElementById("filterNumber").value = "";
 
-            var pregunta3 = document.getElementById('pregunta3');
+            var rows = document.querySelectorAll("#casesTableBody tr");
+            rows.forEach(function(row) {
+                row.style.display = "";
+            });
 
-            // Resetear P3
-            respuestas.pregunta3 = null;
-            document.querySelectorAll('input[name="pregunta3"]').forEach(function(r) { r.checked = false; });
+            document.getElementById("resultsCount").textContent = "Mostrando " + rows.length + " de " + rows.length + " casos";
+        });
 
-            if (valor === 'no') {
-                pregunta3.classList.remove('hidden');
-            } else {
-                pregunta3.classList.add('hidden');
-            }
+        // ==========================================
+        // 7. Paginación (simulada)
+        // ==========================================
+        document.querySelectorAll(".pagination button").forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                if (this.disabled) return;
+                document.querySelectorAll(".pagination button").forEach(function(b) {
+                    b.classList.remove("active");
+                });
+                this.classList.add("active");
+            });
+        });
 
-            actualizarBoton();
-        }
-
-        function handlePregunta3() {
-            var valor = document.querySelector('input[name="pregunta3"]:checked').value;
-            respuestas.pregunta3 = valor;
-            actualizarBoton();
-        }
-
-        function actualizarBoton() {
-            var btnContinuar = document.getElementById('btnContinuar');
-            var completado = false;
-
-            if (respuestas.pregunta1 === 'si' && respuestas.pregunta2 === 'si') {
-                completado = true;
-            } else if (respuestas.pregunta1 === 'si' && respuestas.pregunta2 === 'no' && respuestas.pregunta3) {
-                completado = true;
-            } else if (respuestas.pregunta1 === 'no' && respuestas.pregunta3) {
-                completado = true;
-            }
-
-            btnContinuar.disabled = !completado;
-        }
-
-        function continuar() {
-            if (respuestas.pregunta1 === 'si' && respuestas.pregunta2 === 'si') {
-                window.location.href = 'denuncia.html';
-            } else if (respuestas.pregunta3 === 'si') {
-                window.location.href = 'contacto-directo.html';
-            } else if (respuestas.pregunta3 === 'no') {
-                window.location.href = 'denuncia.html';
-            }
-        }
+        // ==========================================
+        // 8. Botón "Ver detalle" en cada fila
+        // ==========================================
+        document.querySelectorAll(".btn-detail").forEach(function(btn) {
+            btn.addEventListener("click", function(e) {
+                e.preventDefault();
+                var row = this.closest("tr");
+                var caseNum = row ? row.querySelector(".case-number").textContent : "";
+                showToast("info", "Detalle del caso", "El detalle del caso " + caseNum + " estará disponible próximamente.");
+            });
+        });
     </script>
 
 

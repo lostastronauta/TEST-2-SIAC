@@ -1,841 +1,311 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mis Notificaciones - Sistema Integral de Atención Ciudadana</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../css/site.css" />
+    <link rel="stylesheet" href="../css/internal.css" />
     <style>
-        :root {
-            --color-primary: #1B3A6B;
-            --color-secondary: #C84654;
-            --color-secondary-dark: #A83242;
-            --color-bg-light: #F4F6F9;
-            --color-text: #333333;
-            --color-text-muted: #6C757D;
-            --color-border: #DEE2E6;
-            --color-footer-bg: #0a1628;
-            --font-body: 'Roboto', sans-serif;
-            
-            /* Tipos de notificación */
-            --notif-info: #17a2b8;
-            --notif-success: #28a745;
-            --notif-warning: #ffc107;
-        }
+      /* ===== ESTILOS ESPECÍFICOS DE ESTA PÁGINA ===== */
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
 
-        body {
-            font-family: var(--font-body);
-            background-color: var(--color-bg-light);
-            color: var(--color-text);
-            line-height: 1.5;
-        }
+      .page-title {
+        color: var(--azul);
+        font-size: 1.8rem;
+        font-weight: 500;
+      }
 
-        /* HEADER AZUL */
-        .main-header {
-            background: linear-gradient(135deg, #1a2d5a 0%, #2a4a8a 100%);
-            padding: 30px 0;
-        }
+      .btn-mark-read {
+        background: var(--blanco);
+        color: var(--azul);
+        border: 1px solid var(--azul);
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: var(--font);
+        font-size: 0.9rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+      .btn-mark-read:hover {
+        background: var(--azul);
+        color: var(--blanco);
+      }
 
-        .logo-icon {
-            width: 80px;
-            height: 80px;
-            background: white;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            color: var(--color-primary);
-            text-align: center;
-            padding: 5px;
-        }
+      /* Lista de notificaciones */
+      .notifications-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
 
-        .header-title {
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-            text-align: center;
-            flex: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+      .notification-item {
+        background: var(--blanco);
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid var(--borde);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
 
-        /* TABS ROJOS */
-        .nav-tabs-custom {
-            background: white;
-            border-bottom: 1px solid var(--color-border);
-            display: flex;
-            justify-content: center;
-            gap: 4px;
-            padding: 12px 0;
-            flex-wrap: wrap;
-        }
+      .notification-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
 
-        .nav-tabs-custom .tab-btn {
-            background: var(--color-secondary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            font-family: var(--font-body);
-            font-weight: 500;
-        }
+      .notification-item.unread {
+        border-left-color: var(--azul);
+        background: #f8fbff;
+      }
 
-        .nav-tabs-custom .tab-btn:hover { background: var(--color-secondary-dark); }
+      .notification-item.type-info {
+        border-left-color: #17a2b8;
+      }
+      .notification-item.type-success {
+        border-left-color: #28a745;
+      }
+      .notification-item.type-warning {
+        border-left-color: #ffc107;
+      }
 
-        /* BARRA USUARIO */
-        .user-bar {
-            background: #D5D7DD;
-            padding: 12px 0;
-            border-bottom: 1px solid #C0C3CA;
-        }
+      .notif-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        gap: 15px;
+      }
 
-        .user-bar-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+      .notif-title {
+        font-weight: 600;
+        color: var(--texto);
+        font-size: 1.05rem;
+      }
 
-        .breadcrumb {
-            font-size: 1rem;
-            color: #5A5F6B;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+      .notif-date {
+        font-size: 0.85rem;
+        color: var(--texto-muted);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
 
-        .breadcrumb a {
-            color: #1A5FA8;
-            text-decoration: none;
-            font-weight: 500;
-        }
+      .notif-body {
+        color: var(--texto-claro);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 12px;
+      }
 
-        .user-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+      .notif-case-ref {
+        display: inline-block;
+        background: var(--azul-claro);
+        color: var(--azul);
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-right: 10px;
+      }
 
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-            color: #2C3038;
-        }
+      .notif-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
 
-        .user-profile .user-icon {
-            width: 32px;
-            height: 32px;
-            background-color: #2D7DD2;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
+      .btn-notif-action {
+        background: none;
+        border: none;
+        color: var(--azul);
+        font-size: 0.9rem;
+        cursor: pointer;
+        font-family: var(--font);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 0;
+      }
 
-        .user-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+      .btn-notif-action:hover {
+        text-decoration: underline;
+      }
 
-        .btn-user {
-            background-color: #B56B7A;
-            border: none;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-body);
-            text-decoration: none;
-        }
-
-        .btn-user:hover { background-color: #9B5565; }
-        .btn-user.btn-logout { background-color: #9B4F5E; }
-
-        /* CONTENIDO PRINCIPAL */
-        .main-content {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
+      /* Responsive */
+      @media (max-width: 768px) {
         .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 15px;
+          flex-direction: column;
+          align-items: flex-start;
         }
-
-        .page-title {
-            color: var(--color-primary);
-            font-size: 1.8rem;
-            font-weight: 500;
-        }
-
-        .btn-mark-read {
-            background: white;
-            color: var(--color-primary);
-            border: 1px solid var(--color-primary);
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-mark-read:hover {
-            background: var(--color-primary);
-            color: white;
-        }
-
-        /* LISTA DE NOTIFICACIONES */
-        .notifications-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .notification-item {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-left: 4px solid transparent;
-            transition: all 0.2s;
-            position: relative;
-        }
-
-        .notification-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        /* Estados de notificación */
-        .notification-item.unread {
-            border-left-color: var(--color-primary);
-            background: #f8fbff;
-        }
-
-        .notification-item.type-info { border-left-color: var(--notif-info); }
-        .notification-item.type-success { border-left-color: var(--notif-success); }
-        .notification-item.type-warning { border-left-color: var(--notif-warning); }
 
         .notif-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .notif-title {
-            font-weight: 600;
-            color: var(--color-text);
-            font-size: 1.05rem;
-        }
-
-        .notif-date {
-            font-size: 0.85rem;
-            color: var(--color-text-muted);
-            white-space: nowrap;
-            margin-left: 15px;
-        }
-
-        .notif-body {
-            color: #555;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .notif-case-ref {
-            display: inline-block;
-            background: #e8f0fe;
-            color: var(--color-primary);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-right: 10px;
+          flex-direction: column;
+          gap: 4px;
         }
 
         .notif-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
+          flex-direction: column;
+          gap: 8px;
         }
-
-        .btn-notif-action {
-            background: none;
-            border: none;
-            color: var(--color-primary);
-            font-size: 0.9rem;
-            cursor: pointer;
-            font-family: var(--font-body);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 0;
-        }
-
-        .btn-notif-action:hover { text-decoration: underline; }
-
-        /* ESTADO VACÍO */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--color-text-muted);
-            background: white;
-            border-radius: 8px;
-        }
-
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            color: var(--color-border);
-        }
-
-        .empty-state h3 {
-            color: var(--color-text);
-            margin-bottom: 10px;
-        }
-
-        /* SECCIÓN AZUL INFERIOR */
-        .blue-section {
-            background: var(--color-primary);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .blue-section .btn-footer {
-            background: white;
-            color: var(--color-primary);
-            border: none;
-            padding: 12px 25px;
-            margin: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            font-family: var(--font-body);
-            font-weight: 500;
-        }
-
-        .blue-section p {
-            margin: 20px 0;
-            line-height: 1.6;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* FOOTER OSCURO */
-      .footer-dark {
-        background: linear-gradient(180deg, #071c35 0%, #0a2240 100%);
-        color: white;
-        padding: 40px 20px 0;
-        border-top: 4px solid rgba(59, 130, 246, 0.7);
       }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto 28px;
-        display: grid;
-        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr);
-        gap: 32px;
-        align-items: start;
-      }
-
-      .footer-section {
-        min-width: 0;
-      }
-
-      .footer-section h5 {
-        margin: 0 0 16px;
-        color: #ffffff;
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        font-family: var(--font-heading);
-      }
-
-      .footer-section ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .footer-section ul li {
-        margin-bottom: 10px;
-      }
-
-      .footer-section ul li a,
-      .footer-section p,
-      .social-links a,
-      .footer-bottom .contact-info {
-        color: #edf2ff;
-        font-size: 0.92rem;
-        line-height: 1.6;
-        font-family: var(--font-body);
-        text-decoration: none;
-      }
-
-      .footer-section ul li a:hover,
-      .social-links a:hover {
-        color: #ffffff;
-      }
-
-      .footer-section p {
-        margin: 0 0 8px;
-      }
-
-      .social-links {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 14px;
-      }
-
-      .social-links a {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        transition: opacity 0.2s ease, color 0.2s ease;
-      }
-
-      .social-links a .social-icon {
-        background: linear-gradient(135deg, #3b82f6, #c84654);
-        width: 28px;
-        height: 28px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        font-size: 0.75rem;
-        font-weight: 700;
-        flex-shrink: 0;
-      }
-
-      .footer-bottom {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding-top: 22px;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 18px 28px;
-      }
-
-      .footer-bottom .contact-info {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 18px;
-        font-size: 0.9rem;
-        color: #edf2ff;
-      }
-
-      .footer-bottom .contact-info p {
-        margin: 0;
-        color: #edf2ff;
-      }
-
-      .footer-logo-box {
-        background: #edf2f9;
-        padding: 12px 14px;
-        border-radius: 8px;
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        color: #1f2937;
-        font-size: 0.8rem;
-        min-height: 68px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      }
-
-      .footer-logo-box .doc-icon {
-        background: linear-gradient(135deg, #3b82f6, #1b3a6b);
-        color: white;
-        width: 42px;
-        height: 42px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        flex-shrink: 0;
-      }
-
-      .supereduc-logo-footer {
-        font-weight: 700;
-        font-size: 1rem;
-        color: white;
-        font-family: var(--font-heading);
-        line-height: 1.3;
-      }
-
-      .supereduc-logo-footer .barra {
-        display: flex;
-        gap: 2px;
-        margin-bottom: 6px;
-      }
-
-      .barra-blue { background: #3b82f6; height: 6px; width: 62px; }
-      .barra-red { background: var(--color-secondary); height: 6px; width: 62px; }
-
-      .footer-orgs {
-        max-width: 1200px;
-        margin: 28px auto 0;
-        padding-top: 22px;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
-      }
-
-      .footer-orgs p {
-        margin: 0 0 16px;
-        font-size: 0.9rem;
-        color: #dfe8f7;
-        font-family: var(--font-body);
-      }
-
-      .orgs-buttons {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-        padding-bottom: 28px;
-      }
-
-      .org-btn {
-        padding: 18px 16px;
-        border-radius: 8px;
-        text-align: center;
-        color: white;
-        font-weight: 700;
-        font-size: 0.9rem;
-        line-height: 1.3;
-        font-family: var(--font-body);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .org-btn.agencia { background: linear-gradient(135deg, #5ba3d9, #3c8ec9); }
-      .org-btn.mineduc { background: linear-gradient(135deg, #e04f3f, #c73f39); }
-      .org-btn.consejo { background: linear-gradient(135deg, #f5c96b, #e9b739); color: #1f2937; }
-
-      .barra-footer-final {
-        height: 16px;
-        background: var(--color-footer-bg);
-        display: flex;
-      }
-
-      .barra-footer-final .bf-blue { background: #3b82f6; flex: 1; }
-      .barra-footer-final .bf-red { background: var(--color-secondary); flex: 1; }
-
-      @media (max-width: 1024px) {
-        .footer-content { grid-template-columns: 1fr; }
-        .footer-bottom { justify-content: flex-start; }
-      }
-
-      @media (max-width: 768px) {
-        .orgs-buttons { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; align-items: flex-start; }
-        .footer-bottom .contact-info { flex-direction: column; align-items: flex-start; }
-      }
-
-/* RESPONSIVE */
-        @media (max-width: 968px) {
-            .footer-content { grid-template-columns: 1fr; }
-            .footer-bottom { grid-template-columns: 1fr; }
-            .orgs-buttons { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            .header-title { font-size: 1.3rem; }
-            .logo-icon { width: 60px; height: 60px; }
-            .nav-tabs-custom { flex-direction: column; align-items: stretch; }
-            .nav-tabs-custom .tab-btn { width: 100%; margin-bottom: 5px; }
-            .user-bar-container { flex-direction: column; align-items: flex-start; }
-            .user-actions { width: 100%; flex-direction: column; align-items: flex-start; }
-            .user-buttons { width: 100%; flex-direction: column; }
-            .btn-user { width: 100%; justify-content: center; }
-            .page-header { flex-direction: column; align-items: flex-start; }
-        }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div id="header-container"></div>
 
-    <!-- HEADER AZUL -->
-    <header class="main-header">
-        <div class="header-content">
-            <div class="logo-icon">
-                <strong>Superintendencia<br>de Educación<br><br>Ministerio de<br>Educación<br><br>Gobierno de Chile</strong>
-            </div>
-            <h1 class="header-title">SISTEMA INTEGRAL DE<br>ATENCIÓN CIUDADANA</h1>
-            <div style="width: 80px;"></div>
-        </div>
-    </header>
+    <main class="page-wrap">
+      <div class="page-header">
+        <h1 class="page-title">Mis Notificaciones</h1>
+        <button class="btn-mark-read" id="btnMarkAllRead">
+          <i class="bi bi-check-all"></i> Marcar todas como leídas
+        </button>
+      </div>
 
-    <!-- TABS ROJOS -->
-    <nav class="nav-tabs-custom">
-        <button class="tab-btn">Competencias Supereduc</button>
-        <button class="tab-btn">Competencias de otros organismos</button>
-        <button class="tab-btn">Preguntas frecuentes</button>
-        <button class="tab-btn">Cómo fiscalizamos</button>
-        <button class="tab-btn">Proceso de requerimientos</button>
-    </nav>
-
-    <!-- BARRA USUARIO -->
-    <nav class="user-bar">
-        <div class="user-bar-container">
-            <div class="breadcrumb">
-                <a href="dashboard.html">Inicio</a> 
-                <span>&gt;</span> 
-                <span>Notificaciones</span>
-            </div>
-            
-            <div class="user-actions">
-                <div class="user-profile">
-                    <div class="user-icon"><i class="bi bi-person-fill"></i></div>
-                    <span>Jaime Alberto Galleguillos Araya</span>
-                </div>
-                <div class="user-buttons">
-                    <a href="dashboard.html" class="btn-user"><i class="bi bi-house-door-fill"></i> Inicio</a>
-                    <a href="notificaciones.html" class="btn-user"><i class="bi bi-bell-fill"></i> Notificaciones</a>
-                    <a href="actualizar-datos.html" class="btn-user"><i class="bi bi-person-lines-fill"></i> Actualizar datos</a>
-                    <a href="../index.html" class="btn-user btn-logout"><i class="bi bi-power"></i> Cerrar sesión</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-content">
-        
-        <div class="page-header">
-            <h1 class="page-title">Mis Notificaciones</h1>
-            <button class="btn-mark-read" onclick="markAllRead()">
-                <i class="bi bi-check-all"></i> Marcar todas como leídas
+      <div class="notifications-list" id="notificationsList">
+        <div class="notification-item unread type-info">
+          <div class="notif-header">
+            <span class="notif-title"
+              >Tu denuncia ha sido asignada a un profesional</span
+            >
+            <span class="notif-date">Hoy, 10:30 hrs</span>
+          </div>
+          <div class="notif-body">
+            <span class="notif-case-ref">Caso 2026-001</span>
+            Tu requerimiento de denuncia contra Escuela Básica N°12 ha sido
+            asignado al profesional María González para su análisis. El plazo
+            estimado de respuesta es de 15 días hábiles.
+          </div>
+          <div class="notif-actions">
+            <button class="btn-notif-action" data-route="seguimiento.html">
+              <i class="bi bi-eye"></i> Ver seguimiento
             </button>
+            <button class="btn-notif-action btn-mark-single">
+              <i class="bi bi-check-circle"></i> Marcar como leída
+            </button>
+          </div>
         </div>
 
-        <!-- LISTA DE NOTIFICACIONES -->
-        <div class="notifications-list" id="notificationsList">
-            
-            <!-- Notificación 1: No leída - Info -->
-            <div class="notification-item unread type-info">
-                <div class="notif-header">
-                    <span class="notif-title">Tu denuncia ha sido asignada a un profesional</span>
-                    <span class="notif-date">Hoy, 10:30 hrs</span>
-                </div>
-                <div class="notif-body">
-                    <span class="notif-case-ref">Caso 2026-001</span>
-                    Tu requerimiento de denuncia contra Escuela Básica N°12 ha sido asignado al profesional María González para su análisis. El plazo estimado de respuesta es de 15 días hábiles.
-                </div>
-                <div class="notif-actions">
-                    <button class="btn-notif-action" onclick="window.location.href='seguimiento.html'">
-                        <i class="bi bi-eye"></i> Ver seguimiento
-                    </button>
-                    <button class="btn-notif-action" onclick="markAsRead(this)">
-                        <i class="bi bi-check-circle"></i> Marcar como leída
-                    </button>
-                </div>
-            </div>
-
-            <!-- Notificación 2: No leída - Success -->
-            <div class="notification-item unread type-success">
-                <div class="notif-header">
-                    <span class="notif-title">Consulta respondida exitosamente</span>
-                    <span class="notif-date">Ayer, 16:45 hrs</span>
-                </div>
-                <div class="notif-body">
-                    <span class="notif-case-ref">Caso 2026-003</span>
-                    Hemos respondido tu consulta sobre normativa educacional. Puedes revisar la respuesta completa en el detalle de tu caso o en tu correo electrónico registrado.
-                </div>
-                <div class="notif-actions">
-                    <button class="btn-notif-action" onclick="window.location.href='seguimiento.html'">
-                        <i class="bi bi-file-text"></i> Ver respuesta
-                    </button>
-                    <button class="btn-notif-action" onclick="markAsRead(this)">
-                        <i class="bi bi-check-circle"></i> Marcar como leída
-                    </button>
-                </div>
-            </div>
-
-            <!-- Notificación 3: Leída - Warning -->
-            <div class="notification-item type-warning">
-                <div class="notif-header">
-                    <span class="notif-title">Documentos adicionales solicitados</span>
-                    <span class="notif-date">18/08/2026</span>
-                </div>
-                <div class="notif-body">
-                    <span class="notif-case-ref">Caso 2026-002</span>
-                    Para continuar con la Gestión Colaborativa de Conflictos, necesitamos que adjuntes el reglamento interno del establecimiento. Por favor sube los documentos antes del 25/08/2026.
-                </div>
-                <div class="notif-actions">
-                    <button class="btn-notif-action" onclick="window.location.href='gcc.html'">
-                        <i class="bi bi-upload"></i> Subir documentos
-                    </button>
-                </div>
-            </div>
-
-            <!-- Notificación 4: Leída - Info -->
-            <div class="notification-item type-info">
-                <div class="notif-header">
-                    <span class="notif-title">Actualización de datos personales</span>
-                    <span class="notif-date">15/08/2026</span>
-                </div>
-                <div class="notif-body">
-                    Tus datos de contacto han sido actualizados correctamente. Recuerda mantener siempre vigente tu correo electrónico para recibir comunicaciones importantes.
-                </div>
-            </div>
-
+        <div class="notification-item unread type-success">
+          <div class="notif-header">
+            <span class="notif-title">Consulta respondida exitosamente</span>
+            <span class="notif-date">Ayer, 16:45 hrs</span>
+          </div>
+          <div class="notif-body">
+            <span class="notif-case-ref">Caso 2026-003</span>
+            Hemos respondido tu consulta sobre normativa educacional. Puedes
+            revisar la respuesta completa en el detalle de tu caso o en tu
+            correo electrónico registrado.
+          </div>
+          <div class="notif-actions">
+            <button class="btn-notif-action" data-route="seguimiento.html">
+              <i class="bi bi-file-text"></i> Ver respuesta
+            </button>
+            <button class="btn-notif-action btn-mark-single">
+              <i class="bi bi-check-circle"></i> Marcar como leída
+            </button>
+          </div>
         </div>
 
+        <div class="notification-item type-warning">
+          <div class="notif-header">
+            <span class="notif-title">Documentos adicionales solicitados</span>
+            <span class="notif-date">18/08/2026</span>
+          </div>
+          <div class="notif-body">
+            <span class="notif-case-ref">Caso 2026-002</span>
+            Para continuar con la Gestión Colaborativa de Conflictos,
+            necesitamos que adjuntes el reglamento interno del establecimiento.
+            Por favor sube los documentos antes del 25/08/2026.
+          </div>
+          <div class="notif-actions">
+            <button class="btn-notif-action" data-route="gcc.html">
+              <i class="bi bi-upload"></i> Subir documentos
+            </button>
+          </div>
+        </div>
+
+        <div class="notification-item type-info">
+          <div class="notif-header">
+            <span class="notif-title">Actualización de datos personales</span>
+            <span class="notif-date">15/08/2026</span>
+          </div>
+          <div class="notif-body">
+            Tus datos de contacto han sido actualizados correctamente. Recuerda
+            mantener siempre vigente tu correo electrónico para recibir
+            comunicaciones importantes.
+          </div>
+        </div>
+      </div>
     </main>
 
-    <!-- SECCIÓN AZUL INFERIOR -->
-    <section class="blue-section">
-        <button class="btn-footer">Preguntas frecuentes</button>
-        <p>Si tienes dudas respecto a la normativa educacional vigente, no olvides que puedes revisar toda la información de forma simple en nuestra sección de preguntas frecuentes.</p>
-        <button class="btn-footer">Busca tu oficina regional más cercana</button>
-        <p>Si tienes consultas, puedes contactarnos a nuestro servicio telefónico al <strong>600 3600 390</strong><br>Atención telefónica de lunes a viernes de 09:00 a 13:00 horas.</p>
-    </section>
+    <div id="footer-container"></div>
 
-    <!-- FOOTER OSCURO -->
-    <footer class="footer-dark">
-        <div class="footer-content">
-            <div class="footer-section">
-                <ul>
-                    <li><a href="#">Preguntas frecuentes</a></li>
-                    <li><a href="#">Mapa del Sitio</a></li>
-                    <li><a href="#">Políticas de privacidad</a></li>
-                    <li><a href="#">Políticas de Seguridad de la Información</a></li>
-                    <li><a href="#">Trabaja con nosotros</a></li>
-                    <li><a href="#">Estados Financieros</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h5>Síganos en redes sociales</h5>
-                <div class="social-links">
-                    <a href="#"><span class="social-icon">f</span> Facebook / supereducCL</a>
-                    <a href="#"><span class="social-icon"></span> Twitter / supereduc_cl</a>
-                    <a href="#"><span class="social-icon">▶</span> Youtube / Superintendencia Educación</a>
-                    <a href="#"><span class="social-icon"></span> Instagram / supereduc_cl</a>
-                    <a href="#"><span class="social-icon">in</span> Linkedin / Superintendencia de Educación</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h5>Sitios Relacionados</h5>
-                <ul>
-                    <li><a href="#">Ayuda Mineduc</a></li>
-                    <li><a href="#">JUNJI</a></li>
-                    <li><a href="#">Integra</a></li>
-                    <li><a href="#">CONICYT</a></li>
-                    <li><a href="#">Empleos Públicos</a></li>
-                    <li><a href="#">Chile Atiende</a></li>
-                    <li><a href="#">Ciudadanía y Escuela</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="contact-info">
-                <p><strong>Contáctenos 600 3600 390</strong></p>
-                <p>Versión 1.1.5</p>
-                <div class="supereduc-logo-footer">
-                    <div class="barra">
-                        <span class="barra-blue"></span>
-                        <span class="barra-red"></span>
-                    </div>
-                    Superintendencia<br>de Educación
-                </div>
-            </div>
-            <div class="footer-logo-box">
-                <div class="doc-icon"></div>
-                <div>Registro de<br><strong>Trámites Digitales</strong></div>
-            </div>
-            <div class="footer-logo-box">
-                <div class="doc-icon">📋</div>
-                <div>Solicitud de datos<br><strong>Ley de Transparencia</strong></div>
-            </div>
-            <div class="footer-logo-box" style="background: white; color: var(--color-primary); font-weight: bold;">
-                ayuda MINEDUC<br><small>atención ciudadana</small>
-            </div>
-        </div>
-
-        <div class="footer-orgs">
-            <p>Sistema de Aseguramiento de la Calidad de la Educación</p>
-            <div class="orgs-buttons">
-                <div class="org-btn agencia">Agencia de la Calidad<br>de la Educación</div>
-                <div class="org-btn mineduc">Ministerio de<br>de Educación</div>
-                <div class="org-btn consejo">Consejo Nacional<br>de Educación</div>
-            </div>
-        </div>
-    </footer>
-
-    <div class="barra-footer-final">
-        <div class="bf-blue"></div>
-        <div class="bf-red"></div>
-    </div>
-
+    <script src="../js/components.js"></script>
+    <script src="../js/main.js"></script>
     <script>
-        // Función para marcar una notificación como leída
-        function markAsRead(btn) {
-            const item = btn.closest('.notification-item');
-            item.classList.remove('unread');
-            // Remover botones de acción de "marcar como leída"
-            const markBtn = item.querySelector('.btn-notif-action:last-child');
-            if (markBtn && markBtn.innerHTML.includes('Marcar como leída')) {
-                markBtn.remove();
+      document.addEventListener("DOMContentLoaded", function () {
+        // Marcar una notificación como leída
+        document.querySelectorAll(".btn-mark-single").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var item = btn.closest(".notification-item");
+            if (item) {
+              item.classList.remove("unread");
+              btn.remove();
             }
-        }
+          });
+        });
 
-        // Función para marcar todas como leídas
-        function markAllRead() {
-            const unreadItems = document.querySelectorAll('.notification-item.unread');
-            unreadItems.forEach(item => {
-                item.classList.remove('unread');
-                const markBtn = item.querySelector('.btn-notif-action:last-child');
-                if (markBtn && markBtn.innerHTML.includes('Marcar como leída')) {
-                    markBtn.remove();
-                }
-            });
-            alert('Todas las notificaciones han sido marcadas como leídas.');
+        // Marcar todas como leídas
+        var btnMarkAll = document.getElementById("btnMarkAllRead");
+        if (btnMarkAll) {
+          btnMarkAll.addEventListener("click", function () {
+            document
+              .querySelectorAll(".notification-item.unread")
+              .forEach(function (item) {
+                item.classList.remove("unread");
+                var singleBtn = item.querySelector(".btn-mark-single");
+                if (singleBtn) singleBtn.remove();
+              });
+
+            // Toast en vez de alert
+            if (window.showToast) {
+              window.showToast &&
+                showToast(
+                  "Notificaciones",
+                  "Todas han sido marcadas como leídas",
+                  "success",
+                );
+            } else {
+              alert("Todas las notificaciones han sido marcadas como leídas.");
+            }
+          });
         }
+      });
     </script>
-
-</body>
+  </body>
 </html>

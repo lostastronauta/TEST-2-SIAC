@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Denuncia - Paso 5 - Confirmación - Sistema Integral de Atención Ciudadana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/site.css">
+    <link rel="stylesheet" href="../css/internal.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <main class="container">
+        <div class="stepper">
+            <div class="step-item completed"><div class="step-circle">1</div><div class="step-label">Relato</div></div>
+            <div class="step-item completed"><div class="step-circle">2</div><div class="step-label">Identificación</div></div>
+            <div class="step-item completed"><div class="step-circle">3</div><div class="step-label">Afectado</div></div>
+            <div class="step-item completed"><div class="step-circle">4</div><div class="step-label">Establecimiento</div></div>
+            <div class="step-item active"><div class="step-circle">5</div><div class="step-label">Confirmación requerimiento</div></div>
+        </div>
+
+        <h2>Paso 5: Confirmación</h2>
+        <p>En este paso confirma cómo deseas que gestionemos tu denuncia.</p>
+
+        <!-- RESUMEN DE DATOS (editable) -->
+        <div id="resumenDatos" style="margin-bottom:18px;padding:14px;border:1px solid #e6eef9;border-radius:6px;background:#fafcff">
+            <h4 style="margin:0 0 8px 0">Resumen de la denuncia</h4>
+            <div style="display:flex;flex-direction:column;gap:8px">
+                <div><strong>Descripción:</strong> <span id="res_descripcion">(no ingresada)</span> <a id="editPaso1" href="#" style="margin-left:10px;font-size:0.9rem">Editar</a></div>
+                <div><strong>Materia:</strong> <span id="res_materia">(no ingresada)</span> <a id="editPaso2" href="#" style="margin-left:10px;font-size:0.9rem">Editar</a></div>
+                <div><strong>Afectado:</strong> <span id="res_afectado">(no ingresada)</span> <a id="editPaso3" href="#" style="margin-left:10px;font-size:0.9rem">Editar</a></div>
+                <div><strong>Establecimiento:</strong> <span id="res_establecimiento">(no ingresada)</span> <a id="editPaso4" href="#" style="margin-left:10px;font-size:0.9rem">Editar</a></div>
+                <div><strong>Archivos adjuntos:</strong> <span id="res_archivos">0</span></div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: RESOLUCIÓN TEMPRANA (SOLO EN PASO 5) -->
+        <div class="resolucion-temprana">
+            <h3><i class="bi bi-lightning-fill"></i> Resolución temprana de conflictos</h3>
+            <p>Selecciona cómo prefieres que gestionemos tu denuncia:</p>
+
+            <div class="rt-options-container">
+                <div class="rt-option">
+                    <div class="rt-option-header">
+                        <input type="radio" name="gestionDenuncia" id="optResolucionTemprana" value="resolucion_temprana">
+                        <div>
+                            <label for="optResolucionTemprana" class="rt-option-title">Opción 1. Resolución temprana de conflictos</label>
+                            <p class="rt-option-desc">Facilitamos una reunión directa entre tú y el establecimiento para abordar las situaciones que te preocupan y buscar acuerdos sin recurrir a una fiscalización. Antes de la reunión, la Superintendencia te orientará sobre lo que establece la normativa educacional y sobre los aspectos que pueden ser abordados con el establecimiento.</p>
+                            <div class="plazo-badge"><i class="bi bi-clock-fill"></i> Plazo estimado de resolución: 5 a 10 días hábiles</div>
+                            <div class="rt-importante"><strong>Importante:</strong> Esta alternativa no debe seleccionarse si los hechos denunciados constituyen delito o vulneración grave de derechos.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rt-option">
+                    <div class="rt-option-header">
+                        <input type="radio" name="gestionDenuncia" id="optRevisionNormativa" value="revision_normativa">
+                        <div>
+                            <label for="optRevisionNormativa" class="rt-option-title">Opción 2. Revisión del cumplimiento de la normativa y evaluación de gestión colaborativa de conflictos (GCC)</label>
+                            <p class="rt-option-desc">La Superintendencia solicitará información y antecedentes al establecimiento educacional para revisar si ha cumplido con las obligaciones que establece la normativa educacional.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="radio-error-rt" id="errGestion">Debes seleccionar una de las dos opciones de gestión.</div>
+        </div>
+
+        <div class="actions">
+            <a href="denuncia-paso4.html" class="btn btn-secondary">Volver al Paso 4</a>
+            <button id="btnConfirmar" class="btn btn-primary">Confirmar y Enviar</button>
+        </div>
+    </main>
+
+    <script>
+        // Llenar resumen con datos guardados y permitir edición
+        function poblarResumen() {
+            try {
+                var paso1 = sessionStorage.getItem('denunciaPaso1');
+                var paso2 = sessionStorage.getItem('denunciaPaso2');
+                var paso3 = sessionStorage.getItem('denunciaPaso3');
+                var paso4 = sessionStorage.getItem('denunciaPaso4');
+                var gestionSel = sessionStorage.getItem('denunciaGestionSeleccion');
+
+                var obj1 = paso1 ? JSON.parse(paso1) : null;
+                var obj2 = paso2 ? JSON.parse(paso2) : null;
+                var obj3 = paso3 ? JSON.parse(paso3) : null;
+                var obj4 = paso4 ? JSON.parse(paso4) : null;
+
+                document.getElementById('res_descripcion').innerText = obj1 && obj1.descripcion ? obj1.descripcion : '(no ingresada)';
+                document.getElementById('res_archivos').innerText = obj1 && obj1.archivos ? obj1.archivos : '0';
+                document.getElementById('res_materia').innerText = obj2 && obj2.materia ? obj2.materia : '(no ingresada)';
+                document.getElementById('res_afectado').innerText = obj3 && obj3.afectado ? obj3.afectado : '(no ingresada)';
+                document.getElementById('res_establecimiento').innerText = obj4 && obj4.establecimiento ? obj4.establecimiento : '(no ingresada)';
+
+                // Preseleccionar opción de gestión si existe
+                if (gestionSel) {
+                    var radio = document.querySelector('input[name="gestionDenuncia"][value="' + gestionSel + '"]');
+                    if (radio) {
+                        radio.checked = true;
+                        if (radio.closest('.rt-option')) radio.closest('.rt-option').style.borderColor = '#ffc107';
+                    }
+                }
+            } catch (e) { console.warn('Error al poblar resumen', e); }
+        }
+
+        var editPaso1 = document.getElementById('editPaso1'); if (editPaso1) editPaso1.addEventListener('click', function(e){ e.preventDefault(); window.location.href = 'denuncia.html'; });
+        var editPaso2 = document.getElementById('editPaso2'); if (editPaso2) editPaso2.addEventListener('click', function(e){ e.preventDefault(); window.location.href = 'denuncia-paso2.html'; });
+        var editPaso3 = document.getElementById('editPaso3'); if (editPaso3) editPaso3.addEventListener('click', function(e){ e.preventDefault(); window.location.href = 'denuncia-paso3.html'; });
+        var editPaso4 = document.getElementById('editPaso4'); if (editPaso4) editPaso4.addEventListener('click', function(e){ e.preventDefault(); window.location.href = 'denuncia-paso4.html'; });
+
+        // Resalta la opción seleccionada y oculta el error si cambian
+        document.querySelectorAll('input[name="gestionDenuncia"]').forEach(function(r) {
+            r.addEventListener('change', function() {
+                var err = document.getElementById('errGestion'); if (err) err.classList.remove('visible');
+                document.querySelectorAll('.rt-option').forEach(function(opt) { opt.style.borderColor = 'rgba(0,0,0,0.06)'; });
+                if (this.closest('.rt-option')) this.closest('.rt-option').style.borderColor = '#ffc107';
+            });
+        });
+
+        // Poblar resumen al cargar
+        poblarResumen();
+
+        var btnConfirmarEl = document.getElementById('btnConfirmar'); if (btnConfirmarEl) btnConfirmarEl.addEventListener('click', function(e) {
+            var sel = document.querySelector('input[name="gestionDenuncia"]:checked');
+            var err = document.getElementById('errGestion');
+            if (!sel) { if (err) err.classList.add('visible'); window.scrollTo({top: document.querySelector('.resolucion-temprana').offsetTop - 60, behavior:'smooth'}); return; }
+            if (err) err.classList.remove('visible');
+
+            // Guardar elección en sessionStorage
+            sessionStorage.setItem('denunciaGestionSeleccion', sel.value);
+
+            // Recolectar todos los pasos guardados y preparar el objeto final
+            var paso1 = sessionStorage.getItem('denunciaPaso1');
+            var paso2 = sessionStorage.getItem('denunciaPaso2');
+            var paso3 = sessionStorage.getItem('denunciaPaso3');
+            var paso4 = sessionStorage.getItem('denunciaPaso4');
+            var gestion = sel.value;
+
+            var finalObj = {
+                paso1: paso1 ? JSON.parse(paso1) : null,
+                paso2: paso2 ? JSON.parse(paso2) : null,
+                paso3: paso3 ? JSON.parse(paso3) : null,
+                paso4: paso4 ? JSON.parse(paso4) : null,
+                gestion: gestion,
+                enviadoAt: new Date().toISOString()
+            };
+
+            // Guardar resumen final (simulación) y redirigir a página de confirmación
+            sessionStorage.setItem('denunciaFinal', JSON.stringify(finalObj));
+
+            // Redirigir a página final
+            window.location.href = 'denuncia-final.html';
+        });
+    </script>
+
+    <div id="footer-container"></div>
+    <script src="../js/components.js" defer></script>
+</body>
+</html>

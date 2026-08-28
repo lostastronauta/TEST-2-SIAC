@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Cómo quieres que te ayudemos? - Sistema Integral de Atención Ciudadana</title>
+    <title>Mis Notificaciones - Sistema Integral de Atención Ciudadana</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
@@ -18,11 +18,10 @@
             --color-footer-bg: #0a1628;
             --font-body: 'Roboto', sans-serif;
             
-            /* Colores de las 4 cajas */
-            --box-contacto: #1a6fa8;      /* Azul claro - Contacto Directo */
-            --box-conciliacion: #2a4a8a;  /* Azul medio - Conciliación */
-            --box-mediacion: #1a2d5a;     /* Azul oscuro - Mediación */
-            --box-verificacion: #0d5a9e;  /* Azul - Verificación */
+            /* Tipos de notificación */
+            --notif-info: #17a2b8;
+            --notif-success: #28a745;
+            --notif-warning: #ffc107;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -178,148 +177,156 @@
 
         /* CONTENIDO PRINCIPAL */
         .main-content {
-            max-width: 1100px;
+            max-width: 900px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
         .page-title {
-            text-align: center;
             color: var(--color-primary);
             font-size: 1.8rem;
             font-weight: 500;
-            margin-bottom: 35px;
         }
 
-        /* GRID DE 4 CAJAS 2x2 */
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .option-card {
-            padding: 30px;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        /* Caja 1: Contacto Directo - Azul claro */
-        .option-card.contacto {
-            background: var(--box-contacto);
-        }
-
-        /* Caja 2: Conciliación - Azul medio */
-        .option-card.conciliacion {
-            background: var(--box-conciliacion);
-        }
-
-        /* Caja 3: Mediación - Azul oscuro */
-        .option-card.mediacion {
-            background: var(--box-mediacion);
-        }
-
-        /* Caja 4: Verificación - Azul */
-        .option-card.verificacion {
-            background: var(--box-verificacion);
-        }
-
-        .option-card h3 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .option-card p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            opacity: 0.95;
-            margin-bottom: 20px;
-        }
-
-        .option-card .plazo {
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding-top: 15px;
-            border-top: 1px solid rgba(255,255,255,0.3);
-        }
-
-        .option-card .plazo strong {
-            font-weight: 700;
-        }
-
-        /* Tooltip personalizado */
-        .option-card .tooltip-text {
-            display: none;
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            width: 90%;
-            z-index: 100;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        .option-card:hover .tooltip-text {
-            display: block;
-        }
-
-        /* BOTONES VOLVER/CONTINUAR */
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .btn-action {
-            padding: 12px 30px;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            text-decoration: none;
-            font-family: var(--font-body);
-            border: none;
-        }
-
-        .btn-volver {
+        .btn-mark-read {
             background: white;
             color: var(--color-primary);
-            border: 2px solid var(--color-primary);
+            border: 1px solid var(--color-primary);
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .btn-volver:hover {
+        .btn-mark-read:hover {
             background: var(--color-primary);
             color: white;
         }
 
-        .btn-continuar {
-            background: var(--color-primary);
-            color: white;
+        /* LISTA DE NOTIFICACIONES */
+        .notifications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .btn-continuar:hover {
-            background: #152D55;
+        .notification-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid transparent;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .notification-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Estados de notificación */
+        .notification-item.unread {
+            border-left-color: var(--color-primary);
+            background: #f8fbff;
+        }
+
+        .notification-item.type-info { border-left-color: var(--notif-info); }
+        .notification-item.type-success { border-left-color: var(--notif-success); }
+        .notification-item.type-warning { border-left-color: var(--notif-warning); }
+
+        .notif-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .notif-title {
+            font-weight: 600;
+            color: var(--color-text);
+            font-size: 1.05rem;
+        }
+
+        .notif-date {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+            margin-left: 15px;
+        }
+
+        .notif-body {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .notif-case-ref {
+            display: inline-block;
+            background: #e8f0fe;
+            color: var(--color-primary);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 10px;
+        }
+
+        .notif-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-notif-action {
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 0;
+        }
+
+        .btn-notif-action:hover { text-decoration: underline; }
+
+        /* ESTADO VACÍO */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--color-text-muted);
+            background: white;
+            border-radius: 8px;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: var(--color-border);
+        }
+
+        .empty-state h3 {
+            color: var(--color-text);
+            margin-bottom: 10px;
         }
 
         /* SECCIÓN AZUL INFERIOR */
@@ -570,10 +577,6 @@
 
 /* RESPONSIVE */
         @media (max-width: 968px) {
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .footer-content { grid-template-columns: 1fr; }
             .footer-bottom { grid-template-columns: 1fr; }
             .orgs-buttons { grid-template-columns: 1fr; }
@@ -588,8 +591,7 @@
             .user-actions { width: 100%; flex-direction: column; align-items: flex-start; }
             .user-buttons { width: 100%; flex-direction: column; }
             .btn-user { width: 100%; justify-content: center; }
-            .option-card { padding: 25px; }
-            .option-card h3 { font-size: 1.1rem; }
+            .page-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -612,7 +614,7 @@
             <div class="breadcrumb">
                 <a href="dashboard.html">Inicio</a> 
                 <span>&gt;</span> 
-                <span>¿Cómo te ayudamos?</span>
+                <span>Notificaciones</span>
             </div>
             
             <div class="user-actions">
@@ -622,9 +624,9 @@
                 </div>
                 <div class="user-buttons">
                     <a href="dashboard.html" class="btn-user"><i class="bi bi-house-door-fill"></i> Inicio</a>
-                    <a href="#" class="btn-user"><i class="bi bi-bell-fill"></i> Notificaciones</a>
+                    <a href="notificaciones.html" class="btn-user"><i class="bi bi-bell-fill"></i> Notificaciones</a>
                     <a href="actualizar-datos.html" class="btn-user"><i class="bi bi-person-lines-fill"></i> Actualizar datos</a>
-                    <a href="login.html" class="btn-user btn-logout"><i class="bi bi-power"></i> Cerrar sesión</a>
+                    <a href="../index.html" class="btn-user btn-logout"><i class="bi bi-power"></i> Cerrar sesión</a>
                 </div>
             </div>
         </div>
@@ -633,61 +635,87 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="main-content">
         
-        <h2 class="page-title">¿Cómo quieres que te ayudemos a resolver tu problema?</h2>
-
-        <!-- GRID DE 4 CAJAS -->
-        <div class="options-grid">
-            
-            <!-- Caja 1: Contacto Directo -->
-            <a href="contacto-directo.html" class="option-card contacto">
-                <div class="tooltip-text">
-                    Te entregaremos un documento que podrás presentar al establecimiento para solicitar una respuesta o conversar sobre una posible solución. Recibirás el documento en tu correo electrónico.
-                </div>
-                <h3>¿Quieres que te entreguemos un documento para acercarte al establecimiento a plantear tu problema?</h3>
-                <p>Con el <strong>Formulario de Contacto Directo</strong> podrás comunicarte directamente con tu establecimiento educacional para buscar una solución conjunta y oportuna.</p>
-                <div class="plazo"><strong>Plazo:</strong> entrega inmediata</div>
-            </a>
-
-            <!-- Caja 2: Conciliación -->
-            <a href="conciliacion.html" class="option-card conciliacion">
-                <div class="tooltip-text">
-                    Un profesional de la Superintendencia intentará resolver la situación con acciones concretas en el corto plazo.
-                </div>
-                <h3>¿Quieres que te acompañemos en una Conciliación para resolver tu problema?</h3>
-                <p>Nos comunicamos con el establecimiento para atender la situación que le afecta, a través de acciones concretas en el corto plazo.</p>
-                <div class="plazo"><strong>Plazo:</strong> entre 5 y 10 días hábiles</div>
-            </a>
-
-            <!-- Caja 3: Mediación -->
-            <a href="mediacion.html" class="option-card mediacion">
-                <div class="tooltip-text">
-                    Te ayudamos a resolver el conflicto con el establecimiento, con el apoyo de un mediador que facilita la comunicación entre las partes para lograr acuerdos y soluciones.
-                </div>
-                <h3>¿Quieres que te en una Mediación para resolver tu problema?</h3>
-                <p>Te ayudamos a resolver el conflicto con el establecimiento, con el apoyo de un mediador que facilita la comunicación entre las partes para lograr acuerdos y soluciones.</p>
-                <div class="plazo"><strong>Plazo:</strong> entre 15 y 20 días hábiles</div>
-            </a>
-
-            <!-- Caja 4: Verificación -->
-            <a href="verificacion.html" class="option-card verificacion">
-                <div class="tooltip-text">
-                    Solicitamos antecedentes al Establecimiento Educacional y verificamos si cumple con la normativa educacional vigente.
-                </div>
-                <h3>¿Quieres que realicemos una verificación de cumplimiento de la normativa educacional para resolver tu problema?</h3>
-                <p>Solicitamos antecedentes al Establecimiento Educacional y verificamos si cumple con la normativa educacional vigente.</p>
-                <div class="plazo"><strong>Plazo:</strong> entre 15 días y 2 años, dependiendo del resultado.</div>
-            </a>
-
+        <div class="page-header">
+            <h1 class="page-title">Mis Notificaciones</h1>
+            <button class="btn-mark-read" onclick="markAllRead()">
+                <i class="bi bi-check-all"></i> Marcar todas como leídas
+            </button>
         </div>
 
-        <!-- BOTONES VOLVER/CONTINUAR -->
-        <div class="action-buttons">
-            <a href="info-previa.html" class="btn-action btn-volver">Volver</a>
-            <a href="dashboard.html" class="btn-action btn-continuar">Volver al Inicio</a>
+        <!-- LISTA DE NOTIFICACIONES -->
+        <div class="notifications-list" id="notificationsList">
+            
+            <!-- Notificación 1: No leída - Info -->
+            <div class="notification-item unread type-info">
+                <div class="notif-header">
+                    <span class="notif-title">Tu denuncia ha sido asignada a un profesional</span>
+                    <span class="notif-date">Hoy, 10:30 hrs</span>
+                </div>
+                <div class="notif-body">
+                    <span class="notif-case-ref">Caso 2026-001</span>
+                    Tu requerimiento de denuncia contra Escuela Básica N°12 ha sido asignado al profesional María González para su análisis. El plazo estimado de respuesta es de 15 días hábiles.
+                </div>
+                <div class="notif-actions">
+                    <button class="btn-notif-action" onclick="window.location.href='seguimiento.html'">
+                        <i class="bi bi-eye"></i> Ver seguimiento
+                    </button>
+                    <button class="btn-notif-action" onclick="markAsRead(this)">
+                        <i class="bi bi-check-circle"></i> Marcar como leída
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notificación 2: No leída - Success -->
+            <div class="notification-item unread type-success">
+                <div class="notif-header">
+                    <span class="notif-title">Consulta respondida exitosamente</span>
+                    <span class="notif-date">Ayer, 16:45 hrs</span>
+                </div>
+                <div class="notif-body">
+                    <span class="notif-case-ref">Caso 2026-003</span>
+                    Hemos respondido tu consulta sobre normativa educacional. Puedes revisar la respuesta completa en el detalle de tu caso o en tu correo electrónico registrado.
+                </div>
+                <div class="notif-actions">
+                    <button class="btn-notif-action" onclick="window.location.href='seguimiento.html'">
+                        <i class="bi bi-file-text"></i> Ver respuesta
+                    </button>
+                    <button class="btn-notif-action" onclick="markAsRead(this)">
+                        <i class="bi bi-check-circle"></i> Marcar como leída
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notificación 3: Leída - Warning -->
+            <div class="notification-item type-warning">
+                <div class="notif-header">
+                    <span class="notif-title">Documentos adicionales solicitados</span>
+                    <span class="notif-date">18/08/2026</span>
+                </div>
+                <div class="notif-body">
+                    <span class="notif-case-ref">Caso 2026-002</span>
+                    Para continuar con la Gestión Colaborativa de Conflictos, necesitamos que adjuntes el reglamento interno del establecimiento. Por favor sube los documentos antes del 25/08/2026.
+                </div>
+                <div class="notif-actions">
+                    <button class="btn-notif-action" onclick="window.location.href='gcc.html'">
+                        <i class="bi bi-upload"></i> Subir documentos
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notificación 4: Leída - Info -->
+            <div class="notification-item type-info">
+                <div class="notif-header">
+                    <span class="notif-title">Actualización de datos personales</span>
+                    <span class="notif-date">15/08/2026</span>
+                </div>
+                <div class="notif-body">
+                    Tus datos de contacto han sido actualizados correctamente. Recuerda mantener siempre vigente tu correo electrónico para recibir comunicaciones importantes.
+                </div>
+            </div>
+
         </div>
 
     </main>
-
 
 
     <!-- FOOTER OSCURO -->
@@ -695,6 +723,32 @@
         <div class="bf-blue"></div>
         <div class="bf-red"></div>
     </div>
+
+    <script>
+        // Función para marcar una notificación como leída
+        function markAsRead(btn) {
+            const item = btn.closest('.notification-item');
+            item.classList.remove('unread');
+            // Remover botones de acción de "marcar como leída"
+            const markBtn = item.querySelector('.btn-notif-action:last-child');
+            if (markBtn && markBtn.innerHTML.includes('Marcar como leída')) {
+                markBtn.remove();
+            }
+        }
+
+        // Función para marcar todas como leídas
+        function markAllRead() {
+            const unreadItems = document.querySelectorAll('.notification-item.unread');
+            unreadItems.forEach(item => {
+                item.classList.remove('unread');
+                const markBtn = item.querySelector('.btn-notif-action:last-child');
+                if (markBtn && markBtn.innerHTML.includes('Marcar como leída')) {
+                    markBtn.remove();
+                }
+            });
+            alert('Todas las notificaciones han sido marcadas como leídas.');
+        }
+    </script>
 
 
 <div id="footer-container"></div>
