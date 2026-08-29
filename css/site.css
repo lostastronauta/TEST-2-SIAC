@@ -382,6 +382,13 @@ h6 {
   margin: 0 0 24px;
 }
 
+.main-footer .footer-institution {
+  margin: 0 0 24px;
+  color: #d7e5f5;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
 .main-footer .footer-content ul {
   list-style: none;
   padding: 0;
@@ -413,6 +420,22 @@ h6 {
 
 .main-footer .footer-content p i {
   font-size: 1rem;
+}
+
+.main-footer .footer-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  color: var(--blanco);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.main-footer .footer-contact-link:hover,
+.main-footer .footer-contact-link:focus-visible {
+  color: #cfe3ff;
 }
 
 /* Social links — círculos */

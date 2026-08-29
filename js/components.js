@@ -123,6 +123,7 @@ const FOOTER_HTML = `
     <div class="footer-content">
         <div class="footer-section">
       <img class="footer-logo" src="${resolveAssetPath("img/logo-supereduc-rojo.svg")}" alt="Superintendencia de Educación">
+            <p class="footer-institution">Superintendencia de Educación<br>Ministerio de Educación<br>Gobierno de Chile</p>
             <h5>Enlaces Rápidos</h5>
             <ul>
                 <li><a href="javascript:void(0)" data-route="pages/preguntas-previas.html">Preguntas frecuentes</a></li>
@@ -135,6 +136,7 @@ const FOOTER_HTML = `
             <h5>Contacto</h5>
             <p><i class="bi bi-telephone"></i> 600 3600 390</p>
             <p><i class="bi bi-clock"></i> Lunes a Viernes 09:00 - 13:00</p>
+          <a class="footer-contact-link" href="javascript:void(0)" data-route="pages/contacto-directo.html"><i class="bi bi-envelope"></i> Formulario de contacto</a>
             <div class="social-links">
                 <a href="javascript:void(0)" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
                 <a href="javascript:void(0)" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
@@ -152,7 +154,7 @@ const FOOTER_HTML = `
             </ul>
         </div>
     </div>
-        <a class="footer-contact-callout" href="javascript:void(0)">
+        <a class="footer-contact-callout" href="javascript:void(0)" data-route="pages/contacto-directo.html">
           Si necesitas contactarte con la administración de este sitio, haz clic aquí
         </a>
     <div class="footer-bottom">
