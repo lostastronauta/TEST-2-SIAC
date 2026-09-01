@@ -176,40 +176,128 @@ h6 {
   background: linear-gradient(90deg, var(--rojo) 0%, var(--azul) 100%);
 }
 
-/* --- Navegación pública (tabs sobre banner) --- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Navegación pública (menú principal) --- */
+.main-nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 20px;
+  background: var(--azul-oscuro);
+  color: var(--blanco);
+  border: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+.main-nav-toggle-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.main-nav-toggle.open .main-nav-toggle-icon::before {
+  content: "\2715";
+}
+
 .public-nav {
   display: flex;
-  gap: 12px;
-  padding: 12px 20px;
-  justify-content: center;
-  background: linear-gradient(180deg, #0d2a5b 0%, #1b3a6b 100%);
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background: var(--azul-oscuro);
 }
 
 .public-nav .nav-tab {
-  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: var(--azul-medio);
   border: none;
-  padding: 8px 14px;
-  border-radius: 999px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 16px 20px;
   color: var(--blanco);
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
-  opacity: 0.95;
   font-family: var(--font);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  text-align: center;
   transition:
     background 0.2s,
     opacity 0.2s;
 }
 
+.public-nav .nav-tab--home {
+  background: var(--azul-link);
+}
+
+.public-nav .nav-tab--horarios {
+  background: var(--azul-profundo);
+}
+
 .public-nav .nav-tab:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   opacity: 1;
 }
 
 .public-nav .nav-tab.active {
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.5);
   opacity: 1;
+}
+
+/* Menú colapsado en móvil hasta que se despliegue */
+@media (max-width: 991px) {
+  .main-nav-toggle {
+    display: flex;
+  }
+
+  .public-nav {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .public-nav.open {
+    max-height: 600px;
+  }
+}
+
+/* Tablet / desktop: menú horizontal tipo pill */
+@media (min-width: 992px) {
+  .public-nav {
+    flex-direction: row;
+    gap: 10px;
+    padding: 12px 20px;
+    justify-content: center;
+    background: linear-gradient(180deg, #0d2a5b 0%, #1b3a6b 100%);
+  }
+
+  .public-nav .nav-tab {
+    width: auto;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 18px;
+  }
+
+  .public-nav .nav-tab--home {
+    padding: 10px 14px;
+  }
 }
 
 /* --- Navegación de usuario --- */
@@ -439,30 +527,38 @@ h6 {
 }
 
 /* Social links — círculos */
-.main-footer .social-links {
-  display: flex;
-  gap: 10px;
+.main-footer .social-links,
+.footer .social-links,
+.social-links {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
   margin-top: 12px;
   padding-bottom: 24px;
 }
 
-.main-footer .social-links a {
-  width: 36px;
-  height: 36px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--blanco);
-  font-size: 0.95rem;
-  text-decoration: none;
+.main-footer .social-links a,
+.footer .social-links a,
+.social-links a {
+  width: 36px !important;
+  height: 36px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: var(--blanco) !important;
+  font-size: 0.95rem !important;
+  text-decoration: none !important;
   transition: background 0.2s;
 }
 
-.main-footer .social-links a:hover {
-  background: rgba(255, 255, 255, 0.2);
+.main-footer .social-links a:hover,
+.footer .social-links a:hover,
+.social-links a:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
 }
 
 .main-footer .footer-contact-callout {
@@ -542,18 +638,6 @@ h6 {
   .banner-fallback {
     min-height: 140px;
     padding: 20px;
-  }
-
-  .public-nav {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding: 10px 12px;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .public-nav .nav-tab {
-    white-space: nowrap;
-    flex-shrink: 0;
   }
 
   .user-profile .user-name {

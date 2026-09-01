@@ -126,40 +126,127 @@ label {
 
 /* --- Resolución temprana --- */
 .resolucion-temprana {
-  background: var(--rt-bg);
-  border: 1px solid var(--rt-border);
-  padding: 18px;
-  border-radius: 8px;
-  color: var(--rt-text);
+  background: #f8fafc;
+  border: 1px solid #d9e2ec;
+  border-top: 4px solid var(--azul);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(15, 34, 64, 0.05);
+  color: var(--texto);
+}
+
+.resolucion-temprana h3 {
+  color: var(--azul);
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.resolucion-temprana h3 i {
+  color: #f59e0b;
+  font-size: 1.3rem;
+}
+
+.resolucion-temprana > p {
+  color: #486581;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
 }
 
 .rt-options-container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 10px;
+  gap: 14px;
+  margin-top: 12px;
 }
 
 .rt-option {
-  border-radius: 8px;
-  padding: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 18px 20px;
+  border: 2px solid #e2e8f0;
   background: var(--blanco);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.rt-option:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 14px rgba(27, 58, 107, 0.08);
+}
+
+.rt-option.selected,
+.rt-option:has(input[type="radio"]:checked) {
+  border-color: var(--azul);
+  background: #f0f6ff;
+  box-shadow: 0 4px 16px rgba(27, 58, 107, 0.12);
+}
+
+.rt-option-header {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.rt-option-header input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  accent-color: var(--azul);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.rt-option-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--azul);
+  margin-bottom: 8px;
+  display: block;
+  cursor: pointer;
+}
+
+.rt-option-desc {
+  color: #486581;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin-bottom: 12px;
 }
 
 .plazo-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #fff5d6;
-  padding: 8px 10px;
-  border-radius: 8px;
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
 }
 
 .rt-importante {
-  background: #fff3e0;
-  padding: 10px;
-  border-radius: 8px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-left: 4px solid #f59e0b;
+  padding: 12px 14px;
+  border-radius: 6px;
+  color: #92400e;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  margin-top: 10px;
+}
+
+.radio-error-rt {
+  color: #dc2626;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: 12px;
 }
 
 /* =========================================
