@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <div class="radio-error-rt" id="errGestion">Debes seleccionar una de las dos opciones de gestión.</div>
+            <div class="radio-error-rt" id="errGestion" style="display:none;">Debes seleccionar una de las dos opciones de gestión.</div>
         </div>
 
         <div class="actions">
@@ -99,10 +99,21 @@
                     var radio = document.querySelector('input[name="gestionDenuncia"][value="' + gestionSel + '"]');
                     if (radio) {
                         radio.checked = true;
-                        if (radio.closest('.rt-option')) radio.closest('.rt-option').style.borderColor = '#ffc107';
+                        updateOptionStyles();
                     }
                 }
             } catch (e) { console.warn('Error al poblar resumen', e); }
+        }
+
+        function updateOptionStyles() {
+            document.querySelectorAll('.rt-option').forEach(function(opt) {
+                var r = opt.querySelector('input[name="gestionDenuncia"]');
+                if (r && r.checked) {
+                    opt.classList.add('selected');
+                } else {
+                    opt.classList.remove('selected');
+                }
+            });
         }
 
         var editPaso1 = document.getElementById('editPaso1'); if (editPaso1) editPaso1.addEventListener('click', function(e){ e.preventDefault(); window.location.href = 'denuncia.html'; });
@@ -110,12 +121,24 @@
         var editPaso3 = document.getElementById('editPaso3'); if (editPaso3) editPaso3.addEventListener('click', function(e){ e.preventDefault(); window.location.href = 'denuncia-paso3.html'; });
         var editPaso4 = document.getElementById('editPaso4'); if (editPaso4) editPaso4.addEventListener('click', function(e){ e.preventDefault(); window.location.href = 'denuncia-paso4.html'; });
 
+        // Permitir click en toda la tarjeta para seleccionar
+        document.querySelectorAll('.rt-option').forEach(function(opt) {
+            opt.addEventListener('click', function(e) {
+                var radio = opt.querySelector('input[name="gestionDenuncia"]');
+                if (radio && e.target !== radio) {
+                    radio.checked = true;
+                    var event = new Event('change');
+                    radio.dispatchEvent(event);
+                }
+            });
+        });
+
         // Resalta la opción seleccionada y oculta el error si cambian
         document.querySelectorAll('input[name="gestionDenuncia"]').forEach(function(r) {
             r.addEventListener('change', function() {
-                var err = document.getElementById('errGestion'); if (err) err.classList.remove('visible');
-                document.querySelectorAll('.rt-option').forEach(function(opt) { opt.style.borderColor = 'rgba(0,0,0,0.06)'; });
-                if (this.closest('.rt-option')) this.closest('.rt-option').style.borderColor = '#ffc107';
+                var err = document.getElementById('errGestion');
+                if (err) err.style.display = 'none';
+                updateOptionStyles();
             });
         });
 
@@ -125,8 +148,12 @@
         var btnConfirmarEl = document.getElementById('btnConfirmar'); if (btnConfirmarEl) btnConfirmarEl.addEventListener('click', function(e) {
             var sel = document.querySelector('input[name="gestionDenuncia"]:checked');
             var err = document.getElementById('errGestion');
-            if (!sel) { if (err) err.classList.add('visible'); window.scrollTo({top: document.querySelector('.resolucion-temprana').offsetTop - 60, behavior:'smooth'}); return; }
-            if (err) err.classList.remove('visible');
+            if (!sel) {
+                if (err) err.style.display = 'block';
+                window.scrollTo({top: document.querySelector('.resolucion-temprana').offsetTop - 60, behavior:'smooth'});
+                return;
+            }
+            if (err) err.style.display = 'none';
 
             // Guardar elección en sessionStorage
             sessionStorage.setItem('denunciaGestionSeleccion', sel.value);

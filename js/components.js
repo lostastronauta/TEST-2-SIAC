@@ -17,10 +17,14 @@ function goToRoute(route) {
 window.setLoginState = function (isLoggedIn) {
   const publicNav = document.getElementById("publicNav");
   const userNav = document.getElementById("userNav");
+  const mainNavToggle = document.getElementById("mainNavToggle");
 
   if (publicNav && userNav) {
-    publicNav.style.display = isLoggedIn ? "none" : "flex";
+    publicNav.style.display = isLoggedIn ? "none" : "";
     userNav.style.display = isLoggedIn ? "block" : "none";
+  }
+  if (mainNavToggle) {
+    mainNavToggle.style.display = isLoggedIn ? "none" : "";
   }
 };
 
@@ -44,27 +48,40 @@ window.logout = function () {
 const HEADER_HTML = `
 <header class="main-header">
     <div class="top-banner">
-        <img id="bannerImage"
-       src="${resolveAssetPath("img/banner-sie.png")}"
-             alt="Superintendencia de Educación - Sistema Integral de Atención Ciudadana"
-             class="banner-img"
-             onerror="this.style.display='none'; document.getElementById('bannerFallback').style.display='flex';">
+        <a href="javascript:void(0)" data-route="index.html" style="display:block; text-decoration:none; cursor:pointer;" title="Volver al inicio">
+            <img id="bannerImage"
+                 src="${resolveAssetPath("img/banner-sie.png")}"
+                 alt="Superintendencia de Educación - Sistema Integral de Atención Ciudadana"
+                 class="banner-img"
+                 onerror="this.style.display='none'; document.getElementById('bannerFallback').style.display='flex';">
+        </a>
      <div id="bannerFallback" class="banner-fallback" style="display:none;">
+            <a href="javascript:void(0)" data-route="index.html" style="display:block; text-decoration:none; color:inherit; cursor:pointer;" title="Volver al inicio">
             <div class="fallback-content">
                 <div class="inst-label">Superintendencia de Educación</div>
                 <div class="inst-title">Sistema Integral de Atención Ciudadana</div>
                 <div class="inst-sub">Ley N.° 20.529 — Aseguramiento de la Calidad de la Educación</div>
             </div>
+            </a>
             <div class="fallback-bar"></div>
         </div>
     </div>
 
+    <button type="button" class="main-nav-toggle" id="mainNavToggle" aria-expanded="false" aria-controls="publicNav">
+        <span class="main-nav-toggle-icon" aria-hidden="true">&#9776;</span>
+        <span class="main-nav-toggle-label">Menú</span>
+    </button>
+
     <nav class="public-nav" id="publicNav">
-        <button type="button" class="nav-tab active" data-page="competencias">Competencias Supereduc</button>
-        <button type="button" class="nav-tab" data-page="otros-organismos">Competencias de otros organismos</button>
-        <button type="button" class="nav-tab" data-page="preguntas">Preguntas frecuentes</button>
-        <button type="button" class="nav-tab" data-page="fiscalizamos">Cómo fiscalizamos</button>
-        <button type="button" class="nav-tab" data-page="requerimientos">Proceso de requerimientos</button>
+        <a href="javascript:void(0)" class="nav-tab nav-tab--home" data-route="index.html" title="Inicio">
+          <i class="bi bi-house-door-fill" aria-hidden="true"></i>
+          <span class="visually-hidden">Inicio</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-tab" data-route="index.html#competencias">Nuestras Competencias</a>
+        <a href="javascript:void(0)" class="nav-tab" data-route="pages/denuncias.html">Proceso de Denuncias</a>
+        <a href="javascript:void(0)" class="nav-tab" data-route="pages/mediacion.html">Proceso de Mediación</a>
+        <a href="javascript:void(0)" class="nav-tab" data-route="pages/consultas.html">Proceso de Consultas</a>
+        <a href="javascript:void(0)" class="nav-tab nav-tab--horarios" data-route="pages/horarios.html">Horarios de Atención</a>
     </nav>
 
     <nav class="user-nav" id="userNav" style="display: none;">
@@ -110,13 +127,13 @@ const HEADER_HTML = `
 const FOOTER_HTML = `
 <footer class="main-footer">
   <div class="footer-institutional-banners">
-    <a href="javascript:void(0)" class="footer-institutional-banner">
+    <a href="https://transparencia.supereduc.cl/iris_gplus/Transparencia/index_minisitio.jsp?id=11" target="_blank" rel="noopener" class="footer-institutional-banner">
       <span></span><strong>Solicitud de información<br>Ley de Transparencia</strong>
     </a>
-    <a href="javascript:void(0)" class="footer-institutional-banner">
+    <a href="https://transparencia.supereduc.cl/IRIS_FILES/_T.ACTIVA/3025/28-12-2018-12-24-11.078754999999999.html" target="_blank" rel="noopener" class="footer-institutional-banner">
       <span></span><strong>Compromisos de<br>Gestión Institucional</strong>
     </a>
-    <a href="javascript:void(0)" class="footer-institutional-banner">
+    <a href="https://www.supereduc.cl/registro-de-tramites-digitales/" target="_blank" rel="noopener" class="footer-institutional-banner">
       <span></span><strong>Gobierno<br>Transparente</strong>
     </a>
   </div>
@@ -126,31 +143,32 @@ const FOOTER_HTML = `
             <p class="footer-institution">Superintendencia de Educación<br>Ministerio de Educación<br>Gobierno de Chile</p>
             <h5>Enlaces Rápidos</h5>
             <ul>
-                <li><a href="javascript:void(0)" data-route="pages/preguntas-previas.html">Preguntas frecuentes</a></li>
+                <li><a href="https://www.supereduc.cl/consultas/" target="_blank" rel="noopener">Preguntas frecuentes</a></li>
                 <li><a href="javascript:void(0)" data-route="index.html">Mapa del Sitio</a></li>
-                <li><a href="javascript:void(0)" data-route="index.html">Políticas de privacidad</a></li>
-                <li><a href="javascript:void(0)" data-route="index.html">Trabaja con nosotros</a></li>
+                <li><a href="https://www.supereduc.cl/politicas-privacidad/" target="_blank" rel="noopener">Políticas de privacidad</a></li>
+                <li><a href="https://www.supereduc.cl/trabaja-con-nosotros/" target="_blank" rel="noopener">Trabaja con nosotros</a></li>
             </ul>
         </div>
         <div class="footer-section">
             <h5>Contacto</h5>
             <p><i class="bi bi-telephone"></i> 600 3600 390</p>
             <p><i class="bi bi-clock"></i> Lunes a Viernes 09:00 - 13:00</p>
-          <a class="footer-contact-link" href="javascript:void(0)" data-route="pages/contacto-directo.html"><i class="bi bi-envelope"></i> Formulario de contacto</a>
+          <a class="footer-contact-link" href="https://siac.supereduc.cl/autoatencion/formulario.php" target="_blank" rel="noopener"><i class="bi bi-envelope"></i> Formulario de contacto</a>
             <div class="social-links">
-                <a href="javascript:void(0)" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                <a href="javascript:void(0)" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-                <a href="javascript:void(0)" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-                <a href="javascript:void(0)" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/supereducCL/timeline" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                <a href="https://x.com/supereduc_cl" target="_blank" rel="noopener" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.youtube.com/channel/UCWzV9xpJrHWpB-VT2mx9HKg" target="_blank" rel="noopener" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                <a href="https://www.instagram.com/supereduc_cl/" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/superintendencia-de-educacion/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
             </div>
         </div>
         <div class="footer-section">
             <h5>Sitios Relacionados</h5>
             <ul>
-                <li><a href="javascript:void(0)" data-route="index.html">Ayuda Mineduc</a></li>
-                <li><a href="javascript:void(0)" data-route="index.html">JUNJI</a></li>
-                <li><a href="javascript:void(0)" data-route="index.html">Integra</a></li>
-                <li><a href="javascript:void(0)" data-route="index.html">Agencia de Calidad</a></li>
+                <li><a href="https://www.ayudamineduc.cl/" target="_blank" rel="noopener">Ayuda Mineduc</a></li>
+                <li><a href="https://junji.cl/" target="_blank" rel="noopener">JUNJI</a></li>
+                <li><a href="https://integra.cl/" target="_blank" rel="noopener">Integra</a></li>
+                <li><a href="https://www.agenciaeducacion.cl/" target="_blank" rel="noopener">Agencia de Calidad</a></li>
             </ul>
         </div>
     </div>
@@ -165,13 +183,46 @@ const FOOTER_HTML = `
 `;
 
 function bindComponentInteractions() {
+  var mainNavToggle = document.getElementById("mainNavToggle");
+  var publicNav = document.getElementById("publicNav");
+
+  if (mainNavToggle && publicNav) {
+    mainNavToggle.addEventListener("click", function () {
+      var isOpen = publicNav.classList.toggle("open");
+      mainNavToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      mainNavToggle.classList.toggle("open", isOpen);
+    });
+  }
+
   var publicTabs = document.querySelectorAll("#publicNav .nav-tab");
+  var currentFileForNav =
+    window.location.pathname.split("/").pop() || "index.html";
+  var currentHashForNav = window.location.hash;
+
   publicTabs.forEach(function (tab) {
+    var route = tab.getAttribute("data-route") || "";
+    var routeFile = route.split("#")[0].split("/").pop();
+    var routeHash = route.includes("#") ? "#" + route.split("#")[1] : "";
+    var isCurrent =
+      routeFile === currentFileForNav &&
+      (routeHash === "" || routeHash === currentHashForNav);
+
+    tab.classList.toggle("active", isCurrent);
+
     tab.addEventListener("click", function () {
       publicTabs.forEach(function (t) {
         t.classList.remove("active");
       });
       tab.classList.add("active");
+
+      // Cierra el menú móvil al seleccionar una opción
+      if (publicNav && publicNav.classList.contains("open")) {
+        publicNav.classList.remove("open");
+        if (mainNavToggle) {
+          mainNavToggle.setAttribute("aria-expanded", "false");
+          mainNavToggle.classList.remove("open");
+        }
+      }
     });
   });
 
@@ -320,6 +371,74 @@ function injectComponents() {
   }
 }
 
+function injectChatbotNorma() {
+  if (document.getElementById("cn-widget")) return;
+
+  // El widget interno posiciona sus elementos (ícono, burbuja de diálogo y chat
+  // al abrirse) con position:fixed dentro de su propio documento. Por eso el
+  // iframe contenedor debe ser lo bastante grande y transparente para que nada
+  // se recorte, sin importar si el chat está cerrado o abierto.
+  var style = document.createElement("style");
+  style.textContent =
+    "#cn-widget{" +
+    "position:fixed;" +
+    "bottom:0;" +
+    "right:0;" +
+    "width:420px;" +
+    "max-width:100vw;" +
+    "height:720px;" +
+    "max-height:100vh;" +
+    "border:none;" +
+    "background:transparent;" +
+    "z-index:9998;" +
+    "pointer-events:none;" +
+    "}";
+  document.head.appendChild(style);
+
+  var iframe = document.createElement("iframe");
+  iframe.id = "cn-widget";
+  iframe.src = "https://d1dj24jd5hi6da.cloudfront.net/super_educa/index.html";
+  iframe.setAttribute("frameborder", "0");
+  iframe.setAttribute("title", "Chatbot Norma");
+  iframe.setAttribute("allow", "autoplay; camera; microphone");
+  iframe.setAttribute("scrolling", "no");
+  document.body.appendChild(iframe);
+
+  // El iframe es transparente y mucho más grande que el ícono visible, por lo
+  // que sin esto bloquearía clics en el menú y en botones cercanos al borde
+  // derecho/inferior de la pantalla. Solo habilitamos los clics del iframe
+  // cuando el cursor está sobre la zona donde realmente aparece el ícono o la
+  // burbuja de Norma (esquina inferior derecha); el resto del tiempo los
+  // clics "atraviesan" el iframe hacia el contenido del sitio.
+  var HOTZONE_WIDTH = 170;
+  var HOTZONE_HEIGHT = 220;
+
+  function isInHotzone(x, y) {
+    return (
+      x >= window.innerWidth - HOTZONE_WIDTH &&
+      y >= window.innerHeight - HOTZONE_HEIGHT
+    );
+  }
+
+  document.addEventListener("mousemove", function (event) {
+    iframe.style.pointerEvents = isInHotzone(event.clientX, event.clientY)
+      ? "auto"
+      : "none";
+  });
+
+  document.addEventListener(
+    "touchstart",
+    function (event) {
+      var touch = event.touches && event.touches[0];
+      if (!touch) return;
+      iframe.style.pointerEvents = isInHotzone(touch.clientX, touch.clientY)
+        ? "auto"
+        : "none";
+    },
+    { passive: true }
+  );
+}
+
 function initializeComponents() {
   if (
     document.getElementById("header-container") ||
@@ -327,6 +446,7 @@ function initializeComponents() {
   ) {
     injectComponents();
   }
+  injectChatbotNorma();
 }
 
 if (document.readyState === "loading") {

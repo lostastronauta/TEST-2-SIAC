@@ -227,25 +227,33 @@ document.addEventListener("DOMContentLoaded", function () {
       switch (page) {
         case "competencias": {
           var el = document.getElementById("competencias");
-          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else if (window.goToRoute) {
+            window.goToRoute("index.html#competencias");
+          }
           break;
         }
         case "otros-organismos": {
           var el2 = document.getElementById("otros-organismos");
           if (el2) {
             el2.scrollIntoView({ behavior: "smooth", block: "start" });
-          } else {
-            showToast(
-              "En desarrollo",
-              "La sección de otros organismos estará disponible pronto",
-              "info",
-            );
+          } else if (window.goToRoute) {
+            window.goToRoute("index.html#otros-organismos");
           }
+          break;
+        }
+        case "preguntas": {
+          window.open("https://www.supereduc.cl/consultas/", "_blank");
           break;
         }
         case "requerimientos": {
           var el3 = document.getElementById("competencias");
-          if (el3) el3.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (el3) {
+            el3.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else if (window.goToRoute) {
+            window.goToRoute("index.html#competencias");
+          }
           break;
         }
         default: {
@@ -304,10 +312,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // ==========================================
-  // AJUSTE INICIAL DE PADDING
+  // AJUSTE INICIAL DE PADDING Y SCROLL POR HASH
   // ==========================================
   setTimeout(adjustPadding, 200);
   setTimeout(adjustPadding, 500);
+  if (window.location.hash) {
+    var targetHash = window.location.hash.substring(1);
+    var targetEl = document.getElementById(targetHash);
+    if (targetEl) {
+      setTimeout(function () {
+        targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 300);
+    }
+  }
   window.addEventListener("load", adjustPadding);
   window.addEventListener("resize", adjustPadding);
 });
