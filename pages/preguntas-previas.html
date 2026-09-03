@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Previas - Denuncia - Sistema Integral de Atención Ciudadana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --color-primary: #1B3A6B;
+            --color-secondary: #C84654;
+            --color-secondary-dark: #A83242;
+            --color-bg-light: #F4F6F9;
+            --color-text: #333333;
+            --color-text-muted: #6C757D;
+            --color-border: #DEE2E6;
+            --color-footer-bg: #0a1628;
+            --color-box: #2a4a8a;
+            --font-body: 'Roboto', sans-serif;
+            --font-heading: 'Roboto', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg-light);
+            color: var(--color-text);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* =========================================
+           BANNER MAQUETA
+           ========================================= */
+        .mockup-banner {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: #ff9800;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            z-index: 9999;
+            font-size: 0.9rem;
+            font-family: var(--font-body);
+        }
+
+        /* =========================================
+           HEADER (igual que dashboard)
+           ========================================= */
+        .main-header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 34px;
+        }
+
+        .top-banner {
+            position: relative;
+            width: 100%;
+            background-color: var(--color-primary);
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 280px;
+            object-fit: cover;
+            object-position: center top;
+            min-height: 180px;
+        }
+
+        .banner-fallback {
+            display: none;
+            width: 100%;
+            min-height: 140px;
+            max-height: 200px;
+            background: linear-gradient(135deg, #0d2247 0%, #1b3a6b 50%, #254a85 100%);
+            position: relative;
+            padding: 25px 40px;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        .banner-fallback .fallback-content { color: white; }
+        .banner-fallback .fallback-content .inst-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-bottom: 6px; }
+        .banner-fallback .fallback-content .inst-title { font-size: 1.4rem; font-weight: 700; line-height: 1.3; margin-bottom: 4px; }
+        .banner-fallback .fallback-content .inst-sub { font-size: 0.8rem; font-weight: 300; opacity: 0.8; }
+        .banner-fallback .fallback-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 100%); }
+
+        .user-nav {
+            background-color: #d5d7dd;
+            padding: 10px 0;
+            border-bottom: 1px solid #c0c3ca;
+        }
+
+        .user-nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .breadcrumb {
+            font-size: 1rem;
+            color: #5A5F6B;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
+            font-family: var(--font-body);
+        }
+
+        .breadcrumb a { color: #1A5FA8; text-decoration: none; font-weight: 500; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb .separator { color: #8a8f99; font-size: 0.9rem; }
+        .breadcrumb .current-page { color: #5a5f6b; font-weight: 400; }
+
+        .user-actions { display: flex; align-items: center; gap: 25px; flex-wrap: wrap; }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #2C3038;
+            font-size: 1rem;
+            font-family: var(--font-body);
+        }
+
+        .user-profile .user-icon {
+            width: 32px; height: 32px;
+            background-color: #2D7DD2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .user-profile .user-name { font-size: 0.95rem; color: #2C3038; }
+
+        .user-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+
+        .btn-user {
+            background-color: #B56B7A; border: none; color: white;
+            padding: 10px 18px; border-radius: 6px;
+            font-size: 0.9rem; font-weight: 500; cursor: pointer;
+            display: flex; align-items: center; gap: 8px;
+            transition: all 0.2s ease; font-family: var(--font-body);
+            box-shadow: 0 2px 4px rgba(181, 107, 122, 0.2); text-decoration: none;
+        }
+
+        .btn-user:hover {
+            background-color: #9B5565;
+            box-shadow: 0 3px 6px rgba(181, 107, 122, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-user i { font-size: 1rem; }
+
+        .btn-user.btn-logout {
+            background-color: #9B4F5E;
+            box-shadow: 0 2px 4px rgba(155, 79, 94, 0.2);
+        }
+
+        .btn-user.btn-logout:hover {
+            background-color: #7D3D4B;
+            box-shadow: 0 3px 6px rgba(155, 79, 94, 0.3);
+        }
+
+        /* =========================================
+           CONTENIDO PRINCIPAL
+           ========================================= */
+        .main-content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* CAJA INFORMATIVA */
+        .info-box {
+            background: #f0f4ff;
+            border-left: 5px solid var(--color-primary);
+            padding: 30px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h2 {
+            color: var(--color-primary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .info-box p {
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .info-box .highlight {
+            font-weight: 500;
+            color: var(--color-primary);
+            margin: 20px 0;
+        }
+
+        /* FORMULARIO DE PREGUNTAS */
+        .questions-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid var(--color-border);
+        }
+
+        .question-block {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .question-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .question-block h3 {
+            color: var(--color-primary);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .question-block p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .radio-options {
+            display: flex;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        .radio-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+
+        .radio-options input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .hidden { display: none; }
+
+        /* TOOLTIP */
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 300px;
+            background-color: rgba(0,0,0,0.9);
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 12px;
+            position: absolute;
+            z-index: 100;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -150px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* BOTONES */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-action {
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: var(--font-body);
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn-volver {
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-volver:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-continuar {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-continuar:hover {
+            background: #152D55;
+        }
+
+        .btn-continuar:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+        }
+
+        /* =========================================
+           TOASTS
+           ========================================= */
+        .toast-container {
+            position: fixed;
+            top: 50px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            padding: 14px 18px;
+            min-width: 320px;
+            max-width: 420px;
+            transform: translateX(120%);
+            transition: transform 0.35s ease;
+            pointer-events: auto;
+            border-left: 4px solid #28a745;
+        }
+
+        .toast.show { transform: translateX(0); }
+        .toast.toast-info { border-left-color: #17a2b8; }
+        .toast.toast-warning { border-left-color: #ffc107; }
+        .toast.toast-error { border-left-color: #dc3545; }
+
+        .toast-icon {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+            color: white;
+        }
+
+        .toast-icon.success { background: #28a745; }
+        .toast-icon.info { background: #17a2b8; }
+        .toast-icon.warning { background: #ffc107; color: #333; }
+        .toast-icon.error { background: #dc3545; }
+
+        .toast-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .toast-body strong { font-size: 0.9rem; color: #333; }
+        .toast-body span { font-size: 0.82rem; color: #666; }
+
+        .toast-close {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #999;
+            padding: 0 2px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .toast-close:hover { color: #333; }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        .blue-section {
+            background: var(--color-primary);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .blue-section .btn-footer {
+            background: white;
+            color: var(--color-primary);
+            border: none;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-family: var(--font-body);
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .blue-section .btn-footer:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .blue-section p {
+            margin: 20px 0;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+/* =========================================
+           RESPONSIVE
+           ========================================= */
+        @media (max-width: 1200px) {
+            .user-nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 0 15px;
+            }
+            .user-actions { width: 100%; flex-direction: column; align-items: flex-start; gap: 12px; }
+            .user-buttons { width: 100%; flex-wrap: wrap; }
+            .btn-user { flex: 1; min-width: 140px; justify-content: center; }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+            .footer-bottom { grid-template-columns: repeat(2, 1fr); }
+            .banner-img { max-height: 240px; }
+        }
+
+        @media (max-width: 968px) {
+            .footer-content { grid-template-columns: 1fr; }
+            .footer-bottom { grid-template-columns: 1fr; text-align: center; }
+            .orgs-buttons { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .banner-img { max-height: 180px; object-position: center 30%; }
+            .user-profile .user-name { display: none; }
+            .user-buttons { flex-direction: column; }
+            .btn-user { min-width: 100%; justify-content: center; font-size: 0.85rem; padding: 8px 12px; }
+            .breadcrumb { font-size: 0.9rem; }
+            .radio-options { flex-direction: column; gap: 15px; }
+            .questions-card { padding: 20px; }
+            .action-buttons { flex-direction: column; align-items: center; }
+            .btn-action { width: 100%; max-width: 280px; text-align: center; justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .banner-img { max-height: 140px; }
+            .user-profile .user-icon { width: 28px; height: 28px; font-size: 0.9rem; }
+            .info-box { padding: 20px; }
+            .info-box h2 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+<div id="header-container"></div>
+
+    <!-- Banner de maqueta -->
+    <div class="mockup-banner">MAQUETA DE PRUEBA / PROTOTIPO — No es el sitio oficial</div>
+
+    <!-- Contenedor de toasts -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ==========================================
+         HEADER
+         ========================================== -->
+<!-- ==========================================
+         CONTENIDO PRINCIPAL
+         ========================================== -->
+    <main class="main-content">
+
+        <!-- CAJA INFORMATIVA -->
+        <div class="info-box">
+            <h2>La Superintendencia de Educación te informa lo siguiente:</h2>
+            <p>Puedes presentar una denuncia cuando consideres que existe un posible incumplimiento de la normativa educacional. Un profesional de la Superintendencia analizará los antecedentes y determinará las acciones que correspondan.</p>
+            <p>El tiempo de tramitación dependerá de la naturaleza y complejidad del caso.</p>
+            <p class="highlight">Antes de continuar, queremos preguntarte:</p>
+        </div>
+
+        <!-- FORMULARIO DE PREGUNTAS -->
+        <div class="questions-card">
+
+            <!-- PREGUNTA 1 -->
+            <div class="question-block" id="pregunta1">
+                <h3></h3>
+                <p>¿Informó la situación que le afecta al establecimiento educacional?</p>
+                <div class="radio-options">
+                    <label>
+                        <input type="radio" name="pregunta1" value="si" onchange="handlePregunta1()">
+                        Sí
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta1" value="no" onchange="handlePregunta1()">
+                        No
+                    </label>
+                </div>
+            </div>
+
+            <!-- PREGUNTA 2 (Aparece si P1 = Sí) -->
+            <div class="question-block hidden" id="pregunta2">
+                <h3></h3>
+                <p>¿El establecimiento respondió su solicitud?</p>
+                <div class="radio-options">
+                    <label>
+                        <input type="radio" name="pregunta2" value="si" onchange="handlePregunta2()">
+                        Sí
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta2" value="no" onchange="handlePregunta2()">
+                        No
+                    </label>
+                </div>
+            </div>
+
+            <!-- PREGUNTA 3 (Aparece si P1 = No, o P2 = No) -->
+            <div class="question-block hidden" id="pregunta3">
+                <h3></h3>
+                <p>¿Quieres detener la denuncia e intentar resolver primero la situación directamente con el establecimiento?</p>
+                <div class="radio-options">
+                    <label class="tooltip-container">
+                        <input type="radio" name="pregunta3" value="si" onchange="handlePregunta3()">
+                        Sí, quiero plantear directamente mi situación al establecimiento.
+                        <span class="tooltip-text">Te entregaremos un documento que podrás presentar al establecimiento para solicitar una respuesta o conversar sobre una posible solución. Recibirás el documento en tu correo electrónico.</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta3" value="no" onchange="handlePregunta3()">
+                        No, quiero continuar con mi denuncia.
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BOTONES VOLVER/CONTINUAR -->
+        <div class="action-buttons">
+            <a href="info-previa.html" class="btn-action btn-volver">Volver</a>
+            <button class="btn-action btn-continuar" onclick="continuar()" id="btnContinuar" disabled>Continuar</button>
+        </div>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+<div class="barra-footer-final">
+        <div class="bf-blue"></div>
+        <div class="bf-red"></div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. Cargar nombre del usuario
+        // ==========================================
+        (function() {
+            var name = localStorage.getItem("userName") || "Usuario";
+            var nameEl = document.getElementById("userName");
+            if (nameEl) nameEl.textContent = name;
+        })();
+
+        // ==========================================
+        // 2. Funciones de toast
+        // ==========================================
+        function showToast(type, title, message) {
+            var container = document.getElementById("toastContainer");
+            if (!container) return;
+
+            var toast = document.createElement("div");
+            var className = "toast";
+            if (type && type !== "success") {
+                className += " toast-" + type;
+            }
+            toast.className = className;
+
+            var iconChar = type === "info" ? "i" : "\u2713";
+
+            toast.innerHTML =
+                '<div class="toast-icon ' + (type || "success") + '">' + iconChar + '</div>' +
+                '<div class="toast-body"><strong>' + title + '</strong><span>' + message + '</span></div>' +
+                '<button class="toast-close" aria-label="Cerrar">&times;</button>';
+
+            container.appendChild(toast);
+
+            requestAnimationFrame(function() {
+                toast.classList.add("show");
+            });
+
+            toast.querySelector(".toast-close").addEventListener("click", function() {
+                removeToast(toast);
+            });
+
+            setTimeout(function() { removeToast(toast); }, 5000);
+        }
+
+        function removeToast(toast) {
+            if (!toast || !toast.parentNode) return;
+            toast.classList.remove("show");
+            setTimeout(function() {
+                if (toast.parentNode) toast.parentNode.removeChild(toast);
+            }, 400);
+        }
+
+        // ==========================================
+        // 3. Cerrar sesión
+        // ==========================================
+        var btnLogoutEl = document.getElementById("btnLogout");
+        if (btnLogoutEl) {
+            btnLogoutEl.addEventListener("click", function(e) {
+                e.preventDefault();
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("userName");
+                localStorage.removeItem("userRut");
+                localStorage.removeItem("userDatos");
+                localStorage.removeItem("loginMethod");
+                window.location.href = "../index.html";
+            });
+        }
+
+        // ==========================================
+        // 4. Notificaciones
+        // ==========================================
+        var btnNotificacionesEl = document.getElementById("btnNotificaciones");
+        if (btnNotificacionesEl) {
+            btnNotificacionesEl.addEventListener("click", function(e) {
+                e.preventDefault();
+                showToast("info", "Notificaciones", "No tiene notificaciones pendientes.");
+            });
+        }
+
+        // ==========================================
+        // 5. Lógica de preguntas previas
+        // ==========================================
+        var respuestas = {
+            pregunta1: null,
+            pregunta2: null,
+            pregunta3: null
+        };
+
+        function handlePregunta1() {
+            var valor = document.querySelector('input[name="pregunta1"]:checked').value;
+            respuestas.pregunta1 = valor;
+
+            var pregunta2 = document.getElementById('pregunta2');
+            var pregunta3 = document.getElementById('pregunta3');
+
+            // Resetear respuestas siguientes
+            respuestas.pregunta2 = null;
+            respuestas.pregunta3 = null;
+            document.querySelectorAll('input[name="pregunta2"]').forEach(function(r) { r.checked = false; });
+            document.querySelectorAll('input[name="pregunta3"]').forEach(function(r) { r.checked = false; });
+
+            if (valor === 'si') {
+                pregunta2.classList.remove('hidden');
+                pregunta3.classList.add('hidden');
+            } else {
+                pregunta2.classList.add('hidden');
+                pregunta3.classList.remove('hidden');
+            }
+
+            actualizarBoton();
+        }
+
+        function handlePregunta2() {
+            var valor = document.querySelector('input[name="pregunta2"]:checked').value;
+            respuestas.pregunta2 = valor;
+
+            var pregunta3 = document.getElementById('pregunta3');
+
+            // Resetear P3
+            respuestas.pregunta3 = null;
+            document.querySelectorAll('input[name="pregunta3"]').forEach(function(r) { r.checked = false; });
+
+            if (valor === 'no') {
+                pregunta3.classList.remove('hidden');
+            } else {
+                pregunta3.classList.add('hidden');
+            }
+
+            actualizarBoton();
+        }
+
+        function handlePregunta3() {
+            var valor = document.querySelector('input[name="pregunta3"]:checked').value;
+            respuestas.pregunta3 = valor;
+            actualizarBoton();
+        }
+
+        function actualizarBoton() {
+            var btnContinuar = document.getElementById('btnContinuar');
+            var completado = false;
+
+            if (respuestas.pregunta1 === 'si' && respuestas.pregunta2 === 'si') {
+                completado = true;
+            } else if (respuestas.pregunta1 === 'si' && respuestas.pregunta2 === 'no' && respuestas.pregunta3) {
+                completado = true;
+            } else if (respuestas.pregunta1 === 'no' && respuestas.pregunta3) {
+                completado = true;
+            }
+
+            btnContinuar.disabled = !completado;
+        }
+
+        function continuar() {
+            if (respuestas.pregunta1 === 'si' && respuestas.pregunta2 === 'si') {
+                window.location.href = 'denuncia.html';
+            } else if (respuestas.pregunta3 === 'si') {
+                window.location.href = 'contacto-directo.html';
+            } else if (respuestas.pregunta3 === 'no') {
+                window.location.href = 'denuncia.html';
+            }
+        }
+    </script>
+
+
+<div id="footer-container"></div>
+<script src="../js/components.js?v=20260829" defer></script>
+</body>
+</html>

@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Actualizar Datos - Sistema Integral de Atención Ciudadana</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../css/site.css" />
+    <link rel="stylesheet" href="../css/internal.css" />
+    <style>
+      /* ===== ESTILOS ESPECÍFICOS DE ESTA PÁGINA ===== */
+
+      .form-content {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px;
+        flex: 1;
+      }
+
+      /* Alerta informativa */
+      .alert-info {
+        background: #e8f0fe;
+        border-left: 4px solid var(--azul);
+        padding: 20px 25px;
+        border-radius: 4px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .alert-info .icon {
+        width: 28px;
+        height: 28px;
+        background: var(--azul);
+        color: var(--blanco);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 0.95rem;
+        flex-shrink: 0;
+        font-weight: 700;
+        font-style: italic;
+      }
+
+      .alert-info h4 {
+        color: var(--azul);
+        font-size: 1rem;
+        margin-bottom: 5px;
+        font-weight: 500;
+      }
+
+      .alert-info p {
+        color: #444;
+        font-size: 0.9rem;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      /* Card del formulario */
+      .form-card {
+        background: var(--blanco);
+        border-radius: 8px;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid var(--borde);
+      }
+
+      .form-card > h2 {
+        color: var(--azul);
+        font-size: 1.3rem;
+        margin-bottom: 25px;
+        font-weight: 500;
+        border-bottom: 2px solid var(--borde);
+        padding-bottom: 10px;
+      }
+
+      .form-section-title {
+        color: var(--azul);
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin: 30px 0 15px 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--borde);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--texto);
+        font-size: 0.9rem;
+      }
+
+      .form-group label .required {
+        color: var(--rojo);
+      }
+
+      .form-control {
+        padding: 10px 14px;
+        border: 1px solid var(--borde);
+        border-radius: 4px;
+        font-size: 0.95rem;
+        font-family: var(--font);
+        background: var(--blanco);
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--azul);
+        box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.1);
+      }
+
+      .form-control[readonly] {
+        background: #f5f5f5;
+        color: #666;
+        cursor: not-allowed;
+      }
+
+      .form-control.error {
+        border-color: var(--rojo);
+        box-shadow: 0 0 0 3px rgba(200, 70, 84, 0.15);
+      }
+
+      .field-error {
+        color: var(--rojo);
+        font-size: 0.8rem;
+        margin-top: 4px;
+        display: none;
+      }
+
+      .field-error.visible {
+        display: block;
+      }
+
+      .radio-group {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        padding: 10px 0;
+      }
+
+      .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        font-weight: 400;
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .radio-group input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: var(--azul);
+      }
+
+      .phone-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      .phone-group .form-control {
+        flex: 1;
+      }
+
+      .phone-group .form-control.prefix {
+        flex: 0 0 80px;
+        text-align: center;
+      }
+
+      /* Botones */
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid var(--borde);
+      }
+
+      .btn-actualizar {
+        background: #ae5f6d;
+        color: var(--blanco);
+        border: none;
+        padding: 12px 30px;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: var(--font);
+        transition:
+          background 0.2s,
+          transform 0.1s;
+      }
+
+      .btn-actualizar:hover {
+        background: #9b5565;
+      }
+
+      .btn-actualizar:active {
+        transform: scale(0.98);
+      }
+
+      .btn-actualizar:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .btn-cancelar {
+        background: var(--blanco);
+        color: #555;
+        border: 1px solid var(--borde);
+        padding: 12px 30px;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: var(--font);
+        transition: background 0.2s;
+      }
+
+      .btn-cancelar:hover {
+        background: #f5f5f5;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .form-card {
+          padding: 20px;
+        }
+
+        .form-actions {
+          flex-direction: column;
+        }
+
+        .form-actions button {
+          width: 100%;
+        }
+
+        .radio-group {
+          flex-direction: column;
+          gap: 10px;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-container"></div>
+
+    <main class="page-wrap">
+      <!-- Alerta informativa -->
+      <div class="alert-info">
+        <div class="icon">i</div>
+        <div>
+          <h4 id="alertTitle">Datos Personales</h4>
+          <p>
+            Mantenga actualizados sus datos. Es importante que ingrese en forma
+            correcta su correo electrónico, pues será el principal canal de
+            contacto ante sus requerimientos.
+          </p>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="form-card">
+        <h2>Datos Personales</h2>
+
+        <form id="datosForm" novalidate>
+          <!-- Tipo y RUT -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tipo <span class="required">(*)</span></label>
+              <select class="form-control" id="tipoDoc">
+                <option value="RUT" selected>RUT</option>
+                <option value="Pasaporte">Pasaporte</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>RUT / Pasaporte</label>
+              <input
+                type="text"
+                class="form-control"
+                id="rutInput"
+                value=""
+                readonly
+              />
+            </div>
+          </div>
+
+          <!-- Nombres y Apellidos -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombres"
+                >Nombres <span class="required">(*)</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="nombres"
+                value="Veronica"
+              />
+              <span class="field-error" id="errorNombres"
+                >Este campo es obligatorio</span
+              >
+            </div>
+            <div class="form-group">
+              <label for="apPaterno"
+                >Apellido Paterno <span class="required">(*)</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="apPaterno"
+                value="Olate"
+              />
+              <span class="field-error" id="errorApPaterno"
+                >Este campo es obligatorio</span
+              >
+            </div>
+            <div class="form-group">
+              <label for="apMaterno"
+                >Apellido Materno <span class="required">(*)</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="apMaterno"
+                value="Aguilar"
+              />
+              <span class="field-error" id="errorApMaterno"
+                >Este campo es obligatorio</span
+              >
+            </div>
+          </div>
+
+          <!-- Nacionalidad, Fecha nacimiento, Sexo -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nacionalidad"
+                >Nacionalidad <span class="required">(*)</span></label
+              >
+              <select class="form-control" id="nacionalidad">
+                <option value="Chilena" selected>Chilena</option>
+                <option value="Argentina">Argentina</option>
+                <option value="Peruana">Peruana</option>
+                <option value="Boliviana">Boliviana</option>
+                <option value="Colombiana">Colombiana</option>
+                <option value="Otra">Otra</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fechaNac"
+                >Fecha de nacimiento <span class="required">(*)</span></label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="fechaNac"
+                value="1982-09-28"
+              />
+              <span class="field-error" id="errorFechaNac"
+                >Ingrese una fecha válida</span
+              >
+            </div>
+            <div class="form-group">
+              <label>Sexo Registral <span class="required">(*)</span></label>
+              <div class="radio-group">
+                <label
+                  ><input type="radio" name="sexo" value="M" checked />
+                  Mujer</label
+                >
+                <label
+                  ><input type="radio" name="sexo" value="H" /> Hombre</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Género -->
+          <div class="form-group" style="margin-bottom: 20px">
+            <label>Género</label>
+            <div class="radio-group">
+              <label
+                ><input type="radio" name="genero" value="F" checked />
+                Femenino</label
+              >
+              <label
+                ><input type="radio" name="genero" value="M" /> Masculino</label
+              >
+              <label><input type="radio" name="genero" value="O" /> Otro</label>
+            </div>
+          </div>
+
+          <!-- DATOS DE CONTACTO -->
+          <h3 class="form-section-title">Datos de Contacto</h3>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email"
+                >Correo Electrónico <span class="required">(*)</span></label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                value="v.olate.mineduc@gmail.com"
+              />
+              <span class="field-error" id="errorEmail"
+                >Ingrese un correo electrónico válido</span
+              >
+            </div>
+            <div class="form-group">
+              <label>Teléfono <span class="required">(*)</span></label>
+              <div class="phone-group">
+                <input
+                  type="text"
+                  class="form-control prefix"
+                  id="phonePrefix"
+                  value="+56"
+                  readonly
+                />
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="telefono"
+                  value="954088713"
+                  placeholder="9 1234 5678"
+                />
+              </div>
+              <span class="field-error" id="errorTelefono"
+                >Ingrese un número de teléfono válido</span
+              >
+            </div>
+            <div class="form-group">
+              <label for="nivelEstudios"
+                >Nivel de Estudios <span class="required">(*)</span></label
+              >
+              <select class="form-control" id="nivelEstudios">
+                <option value="">Seleccione</option>
+                <option value="basica">Básica completa</option>
+                <option value="media">Media completa</option>
+                <option value="tecnica">Técnica superior</option>
+                <option value="universitaria" selected>Universitaria</option>
+                <option value="postgrado">Postgrado</option>
+              </select>
+              <span class="field-error" id="errorNivelEstudios"
+                >Seleccione una opción</span
+              >
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="region"
+                >Región <span class="required">(*)</span></label
+              >
+              <select class="form-control" id="region">
+                <option value="">Seleccione</option>
+                <option value="RM" selected>Metropolitana de Santiago</option>
+                <option value="V">Valparaíso</option>
+                <option value="VIII">Biobío</option>
+                <option value="IX">La Araucanía</option>
+                <option value="II">Antofagasta</option>
+                <option value="I">Tarapacá</option>
+                <option value="III">Atacama</option>
+                <option value="IV">Coquimbo</option>
+                <option value="VI">Libertador B. O'Higgins</option>
+                <option value="VII">Maule</option>
+                <option value="X">Los Lagos</option>
+                <option value="XI">Aysén</option>
+                <option value="XII">Magallanes</option>
+                <option value="XIV">Los Ríos</option>
+                <option value="XV">Arica y Parinacota</option>
+                <option value="XVI">Ñuble</option>
+              </select>
+              <span class="field-error" id="errorRegion"
+                >Seleccione una región</span
+              >
+            </div>
+            <div class="form-group">
+              <label for="comuna"
+                >Comuna <span class="required">(*)</span></label
+              >
+              <select class="form-control" id="comuna">
+                <option value="">Seleccione</option>
+                <option value="quilicura" selected>Quilicura</option>
+                <option value="santiago">Santiago</option>
+                <option value="providencia">Providencia</option>
+                <option value="las-condes">Las Condes</option>
+                <option value="nuñoa">Ñuñoa</option>
+                <option value="la-reina">La Reina</option>
+                <option value="puente-alto">Puente Alto</option>
+                <option value="maipu">Maipú</option>
+              </select>
+              <span class="field-error" id="errorComuna"
+                >Seleccione una comuna</span
+              >
+            </div>
+            <div class="form-group">
+              <label for="direccion"
+                >Dirección (calle y número)
+                <span class="required">(*)</span></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="direccion"
+                value="Agua Dulce 1590"
+              />
+              <span class="field-error" id="errorDireccion"
+                >Este campo es obligatorio</span
+              >
+            </div>
+          </div>
+
+          <!-- Botones -->
+          <div class="form-actions">
+            <button type="button" class="btn-cancelar" id="btnCancelar">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-actualizar" id="btnActualizar">
+              Actualizar
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="../js/components.js?v=20260829"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // ==========================================
+        // Cargar RUT desde localStorage
+        // ==========================================
+        var rut = localStorage.getItem("userRut") || "";
+        var rutEl = document.getElementById("rutInput");
+
+        if (rutEl && rut) {
+          var clean = rut.replace(/[^0-9kK]/g, "");
+          if (clean.length > 1) {
+            var body = clean.slice(0, -1);
+            var dv = clean.slice(-1);
+            rutEl.value = body.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "-" + dv;
+          } else {
+            rutEl.value = rut;
+          }
+        } else if (rutEl) {
+          rutEl.value = "No disponible";
+        }
+
+        // Ajustar título si viene de ClaveÚnica
+        var method = localStorage.getItem("loginMethod");
+        var alertTitle = document.getElementById("alertTitle");
+        if (alertTitle && method === "clave_unica") {
+          alertTitle.textContent = "Identidad verificada con ClaveÚnica";
+        }
+
+        // ==========================================
+        // Toast simple (para esta página)
+        // ==========================================
+        function showToast(type, title, message) {
+          var container = document.getElementById("toastContainer");
+          if (!container) return;
+
+          var toast = document.createElement("div");
+          toast.className =
+            "toast" + (type !== "success" ? " toast-" + type : "");
+          var iconChar = type === "info" ? "i" : "\u2713";
+          toast.innerHTML =
+            '<div class="toast-icon ' +
+            type +
+            '">' +
+            iconChar +
+            "</div>" +
+            '<div class="toast-body"><strong>' +
+            title +
+            "</strong><span>" +
+            message +
+            "</span></div>" +
+            '<button class="toast-close" aria-label="Cerrar">&times;</button>';
+
+          container.appendChild(toast);
+          requestAnimationFrame(function () {
+            toast.classList.add("show");
+          });
+          toast
+            .querySelector(".toast-close")
+            .addEventListener("click", function () {
+              removeToast(toast);
+            });
+          setTimeout(function () {
+            removeToast(toast);
+          }, 5000);
+        }
+
+        function removeToast(toast) {
+          if (!toast || !toast.parentNode) return;
+          toast.classList.remove("show");
+          setTimeout(function () {
+            if (toast.parentNode) toast.parentNode.removeChild(toast);
+          }, 400);
+        }
+
+        // ==========================================
+        // Validación
+        // ==========================================
+        function clearErrors() {
+          document.querySelectorAll(".field-error").forEach(function (el) {
+            el.classList.remove("visible");
+          });
+          document
+            .querySelectorAll(".form-control.error")
+            .forEach(function (el) {
+              el.classList.remove("error");
+            });
+        }
+
+        function showFieldError(inputId, errorId) {
+          var input = document.getElementById(inputId);
+          var error = document.getElementById(errorId);
+          if (input) input.classList.add("error");
+          if (error) error.classList.add("visible");
+        }
+
+        // Quitar error al escribir
+        document
+          .querySelectorAll(".form-card .form-control")
+          .forEach(function (input) {
+            if (input.readOnly) return;
+            input.addEventListener("input", function () {
+              this.classList.remove("error");
+              var err = this.parentNode.querySelector(".field-error");
+              if (err) err.classList.remove("visible");
+            });
+          });
+
+        // Submit
+        var datosFormEl = document.getElementById("datosForm");
+        if (datosFormEl) {
+          datosFormEl.addEventListener("submit", function (e) {
+            e.preventDefault();
+            clearErrors();
+
+            var valid = true;
+            var nombres =
+              (document.getElementById("nombres") || {}).value || "";
+            var apPaterno =
+              (document.getElementById("apPaterno") || {}).value || "";
+            var apMaterno =
+              (document.getElementById("apMaterno") || {}).value || "";
+            var fechaNac =
+              (document.getElementById("fechaNac") || {}).value || "";
+            var email = (document.getElementById("email") || {}).value || "";
+            var telefono =
+              (document.getElementById("telefono") || {}).value || "";
+            var nivelEstudios =
+              (document.getElementById("nivelEstudios") || {}).value || "";
+            var region = (document.getElementById("region") || {}).value || "";
+            var comuna = (document.getElementById("comuna") || {}).value || "";
+            var direccion =
+              (document.getElementById("direccion") || {}).value || "";
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!nombres.trim()) {
+              showFieldError("nombres", "errorNombres");
+              valid = false;
+            }
+            if (!apPaterno.trim()) {
+              showFieldError("apPaterno", "errorApPaterno");
+              valid = false;
+            }
+            if (!apMaterno.trim()) {
+              showFieldError("apMaterno", "errorApMaterno");
+              valid = false;
+            }
+            if (!fechaNac.trim()) {
+              showFieldError("fechaNac", "errorFechaNac");
+              valid = false;
+            }
+            if (!email.trim() || !emailRegex.test(email)) {
+              showFieldError("email", "errorEmail");
+              valid = false;
+            }
+            if (!telefono.trim()) {
+              showFieldError("telefono", "errorTelefono");
+              valid = false;
+            }
+            if (!nivelEstudios.trim()) {
+              showFieldError("nivelEstudios", "errorNivelEstudios");
+              valid = false;
+            }
+            if (!region.trim()) {
+              showFieldError("region", "errorRegion");
+              valid = false;
+            }
+            if (!comuna.trim()) {
+              showFieldError("comuna", "errorComuna");
+              valid = false;
+            }
+            if (!direccion.trim()) {
+              showFieldError("direccion", "errorDireccion");
+              valid = false;
+            }
+
+            if (!valid) {
+              showToast(
+                "info",
+                "Campos incompletos",
+                "Por favor complete los campos obligatorios resaltados.",
+              );
+              var firstError = document.querySelector(".form-control.error");
+              if (firstError) {
+                firstError.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
+                firstError.focus();
+              }
+              return;
+            }
+
+            // Simular guardado
+            var btnActualizar = document.getElementById("btnActualizar");
+            if (btnActualizar) {
+              btnActualizar.disabled = true;
+              btnActualizar.textContent = "Guardando...";
+            }
+
+            setTimeout(function () {
+              if (btnActualizar) {
+                btnActualizar.disabled = false;
+                btnActualizar.textContent = "Actualizar";
+              }
+
+              localStorage.setItem("profileUpdated", "true");
+              showToast(
+                "success",
+                "Datos actualizados",
+                "Sus datos han sido actualizados correctamente.",
+              );
+
+              setTimeout(function () {
+                if (window.goToRoute) {
+                  window.goToRoute("notificaciones.html");
+                } else {
+                  window.location.href = "notificaciones.html";
+                }
+              }, 1200);
+            }, 900);
+          });
+        }
+
+        // Cancelar
+        var btnCancelar = document.getElementById("btnCancelar");
+        if (btnCancelar) {
+          btnCancelar.addEventListener("click", function () {
+            if (window.goToRoute) {
+              window.goToRoute("notificaciones.html");
+            } else {
+              window.location.href = "notificaciones.html";
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

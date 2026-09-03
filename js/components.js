@@ -286,7 +286,7 @@ function updateCurrentPage() {
     "preguntas-previas.html": "Gestión Previa",
     "mediacion.html": "Gestión Colaborativa de Conflictos",
     "consulta.html": "Consulta",
-    "gcc.html": "Mediación (GCC)",
+    "gcc.html": "Gestión Colaborativa de Conflictos",
     "sugerencias.html": "Sugerencias y reclamos",
     "contacto-directo.html": "Contacto directo"
   };
