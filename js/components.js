@@ -97,17 +97,11 @@ const HEADER_HTML = `
                   <button type="button" class="btn-user" data-route="pages/dashboard.html" data-nav="home">
                         <i class="bi bi-house-door-fill"></i> Inicio
                     </button>
-                  <button type="button" class="btn-user" data-route="pages/dashboard.html" data-nav="dashboard">
-                    <i class="bi bi-grid-3x3-gap-fill"></i> Dashboard
-                  </button>
                     <button type="button" class="btn-user" data-route="pages/notificaciones.html">
                         <i class="bi bi-bell-fill"></i> Notificaciones
                     </button>
-                  <button type="button" class="btn-user" data-route="pages/seguimiento.html">
-                    <i class="bi bi-clock-history"></i> Seguimiento
-                  </button>
                   <button type="button" class="btn-user" data-route="pages/actualizar-datos.html">
-                    <i class="bi bi-person-lines-fill"></i> Mis datos
+                    <i class="bi bi-person-lines-fill"></i> Actualizar datos
                   </button>
                     <button type="button" class="btn-user btn-logout" id="btnLogout">
                         <i class="bi bi-power"></i> Cerrar sesión
@@ -280,11 +274,17 @@ function ensureSharedStyles() {
 function updateCurrentPage() {
   var currentFile = window.location.pathname.split("/").pop() || "index.html";
   var pageNames = {
-    "dashboard.html": "Mi panel",
+    "dashboard.html": "Inicio",
     "notificaciones.html": "Notificaciones",
     "seguimiento.html": "Seguimiento",
     "actualizar-datos.html": "Mis datos",
-    "denuncia.html": "Nuevo requerimiento",
+    "denuncia.html": "Ingreso requerimiento",
+    "denuncia-paso2.html": "Ingreso requerimiento",
+    "denuncia-paso3.html": "Ingreso requerimiento",
+    "denuncia-paso4.html": "Ingreso requerimiento",
+    "denuncia-paso5.html": "Ingreso requerimiento",
+    "preguntas-previas.html": "Gestión Previa",
+    "mediacion.html": "Gestión Colaborativa de Conflictos",
     "consulta.html": "Consulta",
     "gcc.html": "Mediación (GCC)",
     "sugerencias.html": "Sugerencias y reclamos",
@@ -300,7 +300,7 @@ function updateCurrentPage() {
     button.classList.toggle(
       "active-page-btn",
       isDashboard
-        ? button.dataset.nav === "dashboard"
+        ? button.dataset.nav === "home"
         : button.dataset.route === route,
     );
   });
