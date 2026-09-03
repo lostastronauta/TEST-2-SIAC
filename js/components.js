@@ -276,7 +276,7 @@ function updateCurrentPage() {
   var pageNames = {
     "dashboard.html": "Inicio",
     "notificaciones.html": "Notificaciones",
-    "seguimiento.html": "Seguimiento",
+    "seguimiento.html": "Consultar Requerimientos",
     "actualizar-datos.html": "Mis datos",
     "denuncia.html": "Ingreso requerimiento",
     "denuncia-paso2.html": "Ingreso requerimiento",
