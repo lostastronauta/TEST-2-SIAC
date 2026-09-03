@@ -73,15 +73,10 @@ const HEADER_HTML = `
     </button>
 
     <nav class="public-nav" id="publicNav">
-        <a href="javascript:void(0)" class="nav-tab nav-tab--home" data-route="index.html" title="Inicio">
-          <i class="bi bi-house-door-fill" aria-hidden="true"></i>
-          <span class="visually-hidden">Inicio</span>
-        </a>
-        <a href="javascript:void(0)" class="nav-tab" data-route="index.html#competencias">Nuestras Competencias</a>
-        <a href="javascript:void(0)" class="nav-tab" data-route="pages/denuncias.html">Proceso de Denuncias</a>
-        <a href="javascript:void(0)" class="nav-tab" data-route="pages/mediacion.html">Proceso de Mediación</a>
-        <a href="javascript:void(0)" class="nav-tab" data-route="pages/consultas.html">Proceso de Consultas</a>
-        <a href="javascript:void(0)" class="nav-tab nav-tab--horarios" data-route="pages/horarios.html">Horarios de Atención</a>
+        <a href="javascript:void(0)" class="nav-tab" data-route="index.html#t-si">Competencias Supereduc</a>
+        <a href="javascript:void(0)" class="nav-tab" data-route="index.html#otros-organismos">Competencias de otros organismos</a>
+        <a href="https://www.supereduc.cl/contenidos-de-interes/como-fiscaliza-la-superintendencia-de-educacion/" class="nav-tab" target="_blank" rel="noopener">Cómo fiscalizamos</a>
+        <a href="https://www.supereduc.cl/contenidos-de-interes/nuevo-procedimiento-de-requerimientos-ciudadanos-de-la-superintendencia-de-educacion/" class="nav-tab" target="_blank" rel="noopener">Proceso de requerimientos</a>
     </nav>
 
     <nav class="user-nav" id="userNav" style="display: none;">
@@ -291,7 +286,7 @@ function updateCurrentPage() {
     "actualizar-datos.html": "Mis datos",
     "denuncia.html": "Nuevo requerimiento",
     "consulta.html": "Consulta",
-    "gcc.html": "Gestión de conflictos",
+    "gcc.html": "Mediación (GCC)",
     "sugerencias.html": "Sugerencias y reclamos",
     "contacto-directo.html": "Contacto directo"
   };

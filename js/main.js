@@ -99,6 +99,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // ==========================================
+  // HERO: pestañas Ciudadano / Establecimiento y form decorativo
+  // ==========================================
+  var heroTabs = document.querySelectorAll(".login-tab");
+  heroTabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      heroTabs.forEach(function (t) {
+        t.classList.remove("active");
+      });
+      tab.classList.add("active");
+    });
+  });
+
+  var heroLoginForm = document.getElementById("heroLoginForm");
+  if (heroLoginForm) {
+    heroLoginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && cuModal && cuModal.classList.contains("active")) {
       closeModal();
