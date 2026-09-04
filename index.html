@@ -201,6 +201,26 @@
         font-size: 0.95rem;
       }
 
+      /* --- Otros organismos: título más sutil y sin separación de los logos --- */
+      .otros-header {
+        margin-top: 2rem;
+        gap: 0.9rem;
+      }
+      .titulo-grande {
+        font-size: clamp(1.05rem, 3vw, 1.4rem);
+        font-weight: 500;
+        text-transform: none;
+        margin-bottom: 0.4rem;
+      }
+      .facultades__intro {
+        font-size: 0.95rem;
+        margin-bottom: 1.1rem;
+        text-align: center;
+      }
+      .organismos {
+        margin-top: 1rem;
+      }
+
       @media (max-width: 900px) {
         .hero-grid {
           grid-template-columns: 1fr;
@@ -643,20 +663,13 @@
       <section aria-labelledby="t-otros">
         <div class="otros-header">
           <h2 class="titulo-grande" id="t-otros">
-            Denuncias que son competencia de otros organismos
+            ¿Qué temas puede revisar o denunciar en otros organismos?
           </h2>
-          <img
-            class="otros-header__icono"
-            src="img/icono-organismos.svg"
-            alt=""
-            loading="lazy"
-          />
         </div>
-        <div class="divisor" aria-hidden="true"></div>
+
         <p class="facultades__intro">
-          Antes de ingresar su requerimiento, revise la siguiente información
-          para confirmar si los hechos a ingresar son de competencia de otros
-          organismos.
+          Antes de continuar con su solicitud, revise esta información y
+          confirme si su requerimiento debe ser atendido por otra institución.
         </p>
 
         <div class="organismos">
