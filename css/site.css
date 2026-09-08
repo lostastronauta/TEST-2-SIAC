@@ -33,7 +33,7 @@
   --negro: #111111;
   --oscuro: #0a1628;
 
-  --verde: #2d717c;
+  --verde: #7DA55C;
 
   --rt-bg: #fff7de;
   --rt-border: #f0c95d;
@@ -88,8 +88,9 @@ h6 {
   line-height: 1.25;
 }
 
-/* --- BANNER DE MAQUETA --- */
+/* --- BANNER DE MAQUETA (oculto) --- */
 .mockup-banner {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -218,7 +219,7 @@ h6 {
   flex-direction: column;
   gap: 0;
   padding: 0;
-  background: var(--azul-oscuro);
+  background: linear-gradient(357deg, #2d7dd2 0%, #1d54b9 100%);
 }
 
 .public-nav .nav-tab {
@@ -285,7 +286,7 @@ h6 {
     gap: 10px;
     padding: 12px 20px;
     justify-content: center;
-    background: linear-gradient(180deg, #0d2a5b 0%, #1b3a6b 100%);
+    background: linear-gradient(357deg, #2d7dd2 0%, #1d54b9 100%);
   }
 
   .public-nav .nav-tab {

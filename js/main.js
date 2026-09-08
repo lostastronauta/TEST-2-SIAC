@@ -131,8 +131,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==========================================
   function adjustPadding() {
     var mockupBanner = document.querySelector(".mockup-banner");
-    if (mockupBanner) {
-      document.body.style.paddingTop = (mockupBanner.offsetHeight || 44) + "px";
+    if (mockupBanner && mockupBanner.offsetHeight > 0) {
+      document.body.style.paddingTop = mockupBanner.offsetHeight + "px";
+    } else {
+      document.body.style.paddingTop = "0";
     }
   }
 
@@ -230,64 +232,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   updateTestButton();
-
-  // ==========================================
-  // TABS DE NAVEGACIÓN PÚBLICA
-  // ==========================================
-  var publicTabs = document.querySelectorAll("#publicNav .nav-tab");
-
-  publicTabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      var page = tab.getAttribute("data-page");
-
-      publicTabs.forEach(function (t) {
-        t.classList.remove("active");
-      });
-      tab.classList.add("active");
-
-      switch (page) {
-        case "competencias": {
-          var el = document.getElementById("competencias");
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "start" });
-          } else if (window.goToRoute) {
-            window.goToRoute("index.html#competencias");
-          }
-          break;
-        }
-        case "otros-organismos": {
-          var el2 = document.getElementById("otros-organismos");
-          if (el2) {
-            el2.scrollIntoView({ behavior: "smooth", block: "start" });
-          } else if (window.goToRoute) {
-            window.goToRoute("index.html#otros-organismos");
-          }
-          break;
-        }
-        case "preguntas": {
-          window.open("https://www.supereduc.cl/consultas/", "_blank");
-          break;
-        }
-        case "requerimientos": {
-          var el3 = document.getElementById("competencias");
-          if (el3) {
-            el3.scrollIntoView({ behavior: "smooth", block: "start" });
-          } else if (window.goToRoute) {
-            window.goToRoute("index.html#competencias");
-          }
-          break;
-        }
-        default: {
-          showToast(
-            "En desarrollo",
-            "Esta sección estará disponible pronto",
-            "info",
-          );
-          break;
-        }
-      }
-    });
-  });
 
   // ==========================================
   // BANNER FALLBACK + BREADCRUMB (solo interno)

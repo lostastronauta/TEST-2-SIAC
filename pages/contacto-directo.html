@@ -29,8 +29,9 @@
             line-height: 1.5;
         }
 
-        /* Banner de maqueta */
+        /* Banner de maqueta (oculto) */
         .mockup-banner {
+            display: none;
             position: fixed;
             top: 0; left: 0; right: 0;
             background: #ff9800;
@@ -49,7 +50,6 @@
         .main-header {
             background-color: #ffffff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            margin-top: 34px;
         }
 
         .top-banner {
@@ -527,39 +527,12 @@
 <div id="header-container"></div>
 
     <!-- Banner de maqueta -->
-    <div class="mockup-banner">MAQUETA DE PRUEBA / PROTOTIPO — No es el sitio oficial</div>
-
     <!-- Toast container -->
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- ========================================== -->
     <!-- HEADER — Consistente con index.html         -->
     <!-- ========================================== -->
-<!-- BARRA USUARIO -->
-    <nav class="user-bar">
-        <div class="user-bar-container">
-            <div class="breadcrumb">
-                <a href="dashboard.html">Inicio</a> 
-                <span>&gt;</span> 
-                <a href="preguntas-denuncia.html">Preguntas Previas</a>
-                <span>&gt;</span> 
-                <span>Contacto Directo</span>
-            </div>
-            
-            <div class="user-actions">
-                <div class="user-profile">
-                    <div class="user-icon"><i class="bi bi-person-fill"></i></div>
-                    <span>Jaime Alberto Galleguillos Araya</span>
-                </div>
-                <div class="user-buttons">
-                    <a href="dashboard.html" class="btn-user"><i class="bi bi-house-door-fill"></i> Inicio</a>
-                    <a href="#" class="btn-user"><i class="bi bi-bell-fill"></i> Notificaciones</a>
-                    <a href="actualizar-datos.html" class="btn-user"><i class="bi bi-person-lines-fill"></i> Actualizar datos</a>
-                    <a href="login.html" class="btn-user btn-logout" id="btnLogout"><i class="bi bi-power"></i> Cerrar sesión</a>
-                </div>
-            </div>
-        </div>
-    </nav>
 
     <!-- CONTENIDO FORMULARIO -->
     <main class="form-content">

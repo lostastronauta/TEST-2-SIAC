@@ -161,11 +161,11 @@ const FOOTER_HTML = `
             </ul>
         </div>
     </div>
-        <a class="footer-contact-callout" href="javascript:void(0)" data-route="pages/contacto-directo.html">
+        <a class="footer-contact-callout" href="mailto:jaime.galleguillos@supereduc.cl">
           Si necesitas contactarte con la administración de este sitio, haz clic aquí
         </a>
     <div class="footer-bottom">
-        <p>&copy; 2025 Superintendencia de Educación — Gobierno de Chile</p>
+        <p>&copy; 2026 Superintendencia de Educación - Gobierno de Chile</p>
     </div>
         <img class="footer-tricolor-star" src="${resolveAssetPath("img/tricolor estrella.png")}" alt="">
 </footer>
@@ -243,8 +243,10 @@ function bindComponentInteractions() {
 
 function adjustBodyPadding() {
   var mockupBanner = document.querySelector(".mockup-banner");
-  if (mockupBanner) {
-    document.body.style.paddingTop = (mockupBanner.offsetHeight || 44) + "px";
+  if (mockupBanner && mockupBanner.offsetHeight > 0) {
+    document.body.style.paddingTop = mockupBanner.offsetHeight + "px";
+  } else {
+    document.body.style.paddingTop = "0";
   }
 }
 
