@@ -133,7 +133,7 @@ const FOOTER_HTML = `
             <h5>Enlaces Rápidos</h5>
             <ul>
                 <li><a href="https://www.supereduc.cl/consultas/" target="_blank" rel="noopener">Preguntas frecuentes</a></li>
-                <li><a href="javascript:void(0)" data-route="index.html">Mapa del Sitio</a></li>
+                <li><a href="javascript:void(0)" data-route="pages/mapa-del-sitio.html">Mapa del Sitio</a></li>
                 <li><a href="https://www.supereduc.cl/politicas-privacidad/" target="_blank" rel="noopener">Políticas de privacidad</a></li>
                 <li><a href="https://www.supereduc.cl/trabaja-con-nosotros/" target="_blank" rel="noopener">Trabaja con nosotros</a></li>
             </ul>
@@ -290,7 +290,8 @@ function updateCurrentPage() {
     "consulta.html": "Consulta",
     "gcc.html": "Gestión Colaborativa de Conflictos",
     "sugerencias.html": "Sugerencias y reclamos",
-    "contacto-directo.html": "Contacto directo"
+    "contacto-directo.html": "Contacto directo",
+    "mapa-del-sitio.html": "Mapa del Sitio"
   };
   var route = "pages/" + currentFile;
   var currentPage = pageNames[currentFile] || document.title.split(" - ")[0];

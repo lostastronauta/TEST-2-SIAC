@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mapa del Sitio - Sistema Integral de Atención Ciudadana</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="../css/site.css" />
+    <link rel="stylesheet" href="../css/internal.css" />
+    <style>
+      .sitemap-content {
+        max-width: 1100px;
+        width: 100%;
+        margin: 40px auto;
+        padding: 0 20px;
+        flex: 1;
+      }
+
+      .sitemap-title {
+        color: var(--azul);
+        font-size: 1.6rem;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      .sitemap-subtitle {
+        color: var(--texto-muted);
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+      }
+
+      .sitemap-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+      }
+
+      .sitemap-section {
+        background: var(--blanco);
+        border-radius: var(--radio);
+        box-shadow: 0 8px 24px rgba(33, 47, 93, 0.08);
+        padding: 22px 26px;
+      }
+
+      .sitemap-section h3 {
+        color: var(--azul);
+        font-size: 1.05rem;
+        font-weight: 500;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--borde);
+      }
+
+      .sitemap-section ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .sitemap-section a {
+        color: var(--azul-link);
+        text-decoration: none;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .sitemap-section a:hover { text-decoration: underline; }
+      .sitemap-section a i { color: var(--texto-muted); font-size: 0.9rem; }
+    </style>
+  </head>
+  <body>
+    <div id="header-container"></div>
+
+    <main class="sitemap-content">
+      <h1 class="sitemap-title">Mapa del Sitio</h1>
+      <p class="sitemap-subtitle">
+        Encuentra rápidamente todas las secciones del Sistema Integral de Atención Ciudadana.
+      </p>
+
+      <div class="sitemap-grid">
+        <div class="sitemap-section">
+          <h3>Inicio</h3>
+          <ul>
+            <li><a href="../index.html" data-route="index.html"><i class="bi bi-house-door"></i> Página principal</a></li>
+            <li><a href="dashboard.html" data-route="pages/dashboard.html"><i class="bi bi-speedometer2"></i> Mi Panel</a></li>
+          </ul>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>Requerimientos</h3>
+          <ul>
+            <li><a href="preguntas-previas.html" data-route="pages/preguntas-previas.html"><i class="bi bi-question-circle"></i> Gestión Previa</a></li>
+            <li><a href="info-previa.html" data-route="pages/info-previa.html"><i class="bi bi-info-circle"></i> Información Previa</a></li>
+            <li><a href="denuncia.html" data-route="pages/denuncia.html"><i class="bi bi-file-earmark-text"></i> Ingresar requerimiento</a></li>
+            <li><a href="contacto-directo.html" data-route="pages/contacto-directo.html"><i class="bi bi-envelope"></i> Contacto Directo</a></li>
+            <li><a href="denuncia-final.html" data-route="pages/denuncia-final.html"><i class="bi bi-check2-circle"></i> Confirmación de requerimiento</a></li>
+            <li><a href="seguimiento.html" data-route="pages/seguimiento.html"><i class="bi bi-search"></i> Consultar Requerimientos</a></li>
+          </ul>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>Gestión Colaborativa de Conflictos</h3>
+          <ul>
+            <li><a href="gcc.html" data-route="pages/gcc.html"><i class="bi bi-people"></i> Solicitar GCC</a></li>
+          </ul>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>Mi cuenta</h3>
+          <ul>
+            <li><a href="actualizar-datos.html" data-route="pages/actualizar-datos.html"><i class="bi bi-person-lines-fill"></i> Actualizar datos</a></li>
+            <li><a href="notificaciones.html" data-route="pages/notificaciones.html"><i class="bi bi-bell"></i> Notificaciones</a></li>
+          </ul>
+        </div>
+
+        <div class="sitemap-section">
+          <h3>Otros</h3>
+          <ul>
+            <li><a href="sugerencias.html" data-route="pages/sugerencias.html"><i class="bi bi-chat-square-text"></i> Sugerencias, felicitaciones o reclamos</a></li>
+            <li><a href="horarios.html" data-route="pages/horarios.html"><i class="bi bi-geo-alt"></i> Horarios y direcciones de oficinas</a></li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="../js/components.js?v=20260908"></script>
+  </body>
+</html>
