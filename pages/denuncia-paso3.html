@@ -6,18 +6,171 @@
     <title>Denuncia - Paso 3 - Identificación de afectado</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../css/site.css">
-    <link rel="stylesheet" href="../css/internal.css">
+    
+    <!-- ESTILOS INTEGRADOS PARA CONSISTENCIA VISUAL -->
+    <style>
+        :root {
+            --color-primary: #1B3A6B;
+            --color-primary-strong: #0E2D57;
+            --color-secondary: #C84654;
+            --color-bg-light: #F4F6F9;
+            --color-text: #2E3B4A;
+            --color-text-muted: #677589;
+            --color-border: #D9DEE5;
+            --color-surface: #F5F7FA;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg-light);
+            color: var(--color-text);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-size: 14px;
+        }
+
+        /* CONTENIDO ANCHO (1400px) */
+        .container {
+            max-width: 1400px; 
+            margin: 32px auto 60px;
+            padding: 0 20px; 
+            flex: 1; 
+            width: 100%;
+        }
+
+        /* STEPPER OPTIMIZADO */
+        .stepper {
+            display: flex; align-items: stretch; justify-content: stretch;
+            margin-bottom: 28px; padding: 0; border: 1px solid var(--color-border);
+            background: var(--color-surface);
+            border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(13, 31, 58, 0.04);
+        }
+        .step-item {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            flex: 1 1 0; min-height: 56px; padding: 0 8px;
+            background: #F0F3F7;
+            border-right: 1px solid rgba(27, 58, 107, 0.08);
+            transition: all 0.2s ease; text-align: center;
+        }
+        .step-item:last-child { border-right: none; }
+        .step-item.active {
+            background: linear-gradient(90deg, var(--color-primary-strong), var(--color-primary));
+            box-shadow: inset 0 -2px 0 rgba(255,255,255,0.1);
+        }
+        .step-item.completed { background: #E7EDF7; }
+        
+        .step-circle {
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
+            transition: all 0.3s ease; background: #2B3F5F; color: white;
+            border: 2px solid rgba(255,255,255,0.15);
+        }
+        .step-item.active .step-circle {
+            background: white; border-color: rgba(255,255,255,0.5); color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.12);
+        }
+        .step-item.completed .step-circle {
+            background: var(--color-primary); border-color: rgba(255,255,255,0.15); color: white;
+        }
+        
+        .step-label {
+            font-size: 0.85rem; color: var(--color-text-muted);
+            font-weight: 500; white-space: normal;
+            transition: color 0.3s; line-height: 1.2; text-align: center;
+        }
+        .step-item.active .step-label { color: white; font-weight: 600; }
+        .step-item.completed .step-label { color: var(--color-primary); }
+
+        /* FORMULARIO Y TÍTULOS */
+        h2 {
+            color: var(--color-primary); font-size: 1.3rem;
+            margin-bottom: 8px; font-weight: 700;
+        }
+        p { margin-bottom: 24px; color: #555; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { 
+            display: block; margin-bottom: 8px; font-weight: 500; 
+            color: var(--color-text); font-size: 0.95rem; 
+        }
+        .form-control {
+            width: 100%; padding: 10px 12px; border: 1px solid var(--color-border);
+            border-radius: 6px; font-size: 1rem; font-family: var(--font-body);
+            background: white; transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-control:focus { 
+            outline: none; border-color: var(--color-primary); 
+            box-shadow: 0 0 0 3px rgba(27, 58, 107, 0.1); 
+        }
+        .field-error { 
+            color: var(--color-secondary); font-size: 0.82rem; 
+            margin-top: 4px; display: none; 
+        }
+        .field-error.visible { display: block; }
+
+        /* BOTONES DE ACCIÓN */
+        .actions {
+            display: flex; justify-content: flex-end; align-items: center;
+            margin-top: 30px; padding-top: 18px; 
+            border-top: 1px solid var(--color-border); gap: 12px;
+        }
+        .btn {
+            padding: 12px 24px; border-radius: 6px; font-size: 0.95rem;
+            font-weight: 700; cursor: pointer; font-family: var(--font-body);
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.2s; border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, var(--color-primary), #1F4F8F); 
+            color: white; box-shadow: 0 4px 10px rgba(27, 58, 107, 0.18);
+        }
+        .btn-primary:hover { background: linear-gradient(90deg, var(--color-primary), var(--color-primary-strong)); }
+        
+        .btn-secondary {
+            background: #F3F5F8; color: var(--color-text); 
+            border: 1px solid var(--color-border);
+        }
+        .btn-secondary:hover { border-color: var(--color-primary); color: var(--color-primary); background: white; }
+
+        /* RESPONSIVE BÁSICO */
+        @media (max-width: 768px) {
+            .stepper { flex-wrap: wrap; gap: 8px; justify-content: center; }
+            .actions { flex-direction: column; gap: 12px; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
 </head>
 <body>
     <div id="header-container"></div>
+    
     <main class="container">
+        <!-- STEPPER ACTUALIZADO CON ETIQUETAS COMPLETAS -->
         <div class="stepper">
-            <div class="step-item completed"><div class="step-circle">1</div><div class="step-label">Relato</div></div>
-            <div class="step-item completed"><div class="step-circle">2</div><div class="step-label">Identificación</div></div>
-            <div class="step-item active"><div class="step-circle">3</div><div class="step-label">Afectado</div></div>
-            <div class="step-item"><div class="step-circle">4</div><div class="step-label">Establecimiento</div></div>
-            <div class="step-item"><div class="step-circle">5</div><div class="step-label">Confirmación</div></div>
+            <div class="step-item completed">
+                <div class="step-circle">1</div>
+                <div class="step-label">Relato de la situación y expectativas</div>
+            </div>
+            <div class="step-item completed">
+                <div class="step-circle">2</div>
+                <div class="step-label">Identificación de la materia</div>
+            </div>
+            <div class="step-item active">
+                <div class="step-circle">3</div>
+                <div class="step-label">Identificación de afectado</div>
+            </div>
+            <div class="step-item">
+                <div class="step-circle">4</div>
+                <div class="step-label">Ingresar datos establecimiento</div>
+            </div>
+            <div class="step-item">
+                <div class="step-circle">5</div>
+                <div class="step-label">Confirmación requerimiento</div>
+            </div>
         </div>
 
         <h2>Paso 3: Identificación de afectado</h2>
@@ -26,30 +179,61 @@
         <form id="formPaso3" novalidate>
             <div class="form-group">
                 <label for="afectado">Nombre o descripción del afectado <span style="color:#b32">*</span></label>
-                <input id="afectado" name="afectado" class="form-control" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px" placeholder="Ej: Estudiante X, Apoderado Y, Docente Z" required>
+                <input id="afectado" name="afectado" class="form-control" placeholder="Ej: Estudiante X, Apoderado Y, Docente Z" required>
                 <div class="field-error" id="errAfectado">Este campo es obligatorio.</div>
             </div>
 
             <div class="actions">
-                <a href="denuncia-paso2.html" class="btn btn-secondary">Volver</a>
-                <button class="btn btn-primary" id="btnSiguiente3" type="submit">Siguiente</button>
+                <a href="denuncia-paso2.html" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Volver
+                </a>
+                <button class="btn btn-primary" id="btnSiguiente3" type="submit">
+                    Siguiente <i class="bi bi-arrow-right"></i>
+                </button>
             </div>
         </form>
     </main>
 
     <script>
+        // Cargar valores previos si existen
         var saved = sessionStorage.getItem('denunciaPaso3');
-        if (saved) { try { var obj = JSON.parse(saved); if (obj.afectado) document.getElementById('afectado').value = obj.afectado; } catch(e){} }
+        if (saved) { 
+            try { 
+                var obj = JSON.parse(saved); 
+                if (obj.afectado) document.getElementById('afectado').value = obj.afectado; 
+            } catch(e){} 
+        }
 
-        var formPaso3El = document.getElementById('formPaso3'); if (formPaso3El) formPaso3El.addEventListener('submit', function(e){
-            e.preventDefault();
-            var afectado = document.getElementById('afectado').value.trim();
-            var err = document.getElementById('errAfectado');
-            if (!afectado) { err.classList.add('visible'); document.getElementById('afectado').focus(); return; }
-            if (err) err.classList.remove('visible');
-            sessionStorage.setItem('denunciaPaso3', JSON.stringify({ afectado: afectado }));
-            window.location.href = 'denuncia-paso4.html';
-        });
+        var formPaso3El = document.getElementById('formPaso3'); 
+        if (formPaso3El) {
+            formPaso3El.addEventListener('submit', function(e){
+                e.preventDefault();
+                var afectado = document.getElementById('afectado').value.trim();
+                var err = document.getElementById('errAfectado');
+                
+                if (!afectado) { 
+                    err.classList.add('visible'); 
+                    document.getElementById('afectado').focus(); 
+                    return; 
+                }
+                
+                if (err) err.classList.remove('visible');
+                
+                // Guardar en sesión
+                sessionStorage.setItem('denunciaPaso3', JSON.stringify({ afectado: afectado }));
+                
+                // Feedback visual al botón
+                var btn = document.getElementById("btnSiguiente3");
+                if(btn) {
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="bi bi-arrow-right"></i> Guardando...';
+                }
+
+                setTimeout(function() {
+                    window.location.href = 'denuncia-paso4.html';
+                }, 800);
+            });
+        }
     </script>
 
     <div id="footer-container"></div>

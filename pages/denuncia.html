@@ -146,14 +146,15 @@
         .btn-user.btn-logout:hover { background-color: #7D3D4B; }
 
         /* =========================================
-           CONTENIDO
+           CONTENIDO (ANCHO AUMENTADO A 1400PX)
            ========================================= */
         .form-content {
-            max-width: 1100px; margin: 32px auto 60px;
+            max-width: 1400px; /* CAMBIO CLAVE PARA DAR ESPACIO AL STEPPER */
+            margin: 32px auto 60px;
             padding: 0 20px; flex: 1; width: 100%;
         }
 
-        /* STEPPER */
+        /* STEPPER OPTIMIZADO */
         .stepper {
             display: flex; align-items: stretch; justify-content: stretch;
             margin-bottom: 28px; padding: 0; border: 1px solid var(--color-border);
@@ -161,10 +162,11 @@
             border-radius: 8px; overflow: hidden; box-shadow: 0 1px 2px rgba(13, 31, 58, 0.04);
         }
         .step-item {
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            flex: 1 1 0; min-height: 56px; padding: 0 14px; background: #F0F3F7;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            flex: 1 1 0; min-height: 56px; padding: 0 8px; /* PADDING REDUCIDO */
+            background: #F0F3F7;
             border-right: 1px solid rgba(27, 58, 107, 0.08);
-            transition: all 0.2s ease;
+            transition: all 0.2s ease; text-align: center;
         }
         .step-item:last-child { border-right: none; }
         .step-item.active {
@@ -189,8 +191,10 @@
             background: var(--color-primary); border-color: rgba(255,255,255,0.15); color: white;
         }
         .step-label {
-            font-size: 0.9rem; color: var(--color-text-muted);
-            font-weight: 500; white-space: nowrap; transition: color 0.3s;
+            font-size: 0.85rem; /* LIGERAMENTE MÁS PEQUEÑO PARA MEJOR AJUSTE */
+            color: var(--color-text-muted);
+            font-weight: 500; white-space: normal; /* PERMITE SALTO DE LÍNEA */
+            transition: color 0.3s;
             line-height: 1.2; text-align: center;
         }
         .step-item.active .step-label { color: white; font-weight: 600; }
@@ -651,52 +655,40 @@
       .barra-footer-final .bf-blue { background: #3b82f6; flex: 1; }
       .barra-footer-final .bf-red { background: var(--color-secondary); flex: 1; }
 
-      @media (max-width: 1024px) {
+      @media (max-width: 1200px) {
+        .user-nav-container { flex-direction: column; align-items: flex-start; gap: 12px; padding: 0 15px; }
+        .user-actions { width: 100%; flex-direction: column; align-items: flex-start; gap: 12px; }
+        .user-buttons { width: 100%; flex-wrap: wrap; }
+        .btn-user { flex: 1; min-width: 140px; justify-content: center; }
+        .footer-content { grid-template-columns: repeat(2, 1fr); }
+        .footer-bottom { grid-template-columns: repeat(2, 1fr); }
+        .banner-img { max-height: 240px; }
+      }
+      @media (max-width: 968px) {
         .footer-content { grid-template-columns: 1fr; }
-        .footer-bottom { justify-content: flex-start; }
-      }
-
-      @media (max-width: 768px) {
+        .footer-bottom { grid-template-columns: 1fr; text-align: center; }
         .orgs-buttons { grid-template-columns: 1fr; }
-        .footer-bottom { flex-direction: column; align-items: flex-start; }
-        .footer-bottom .contact-info { flex-direction: column; align-items: flex-start; }
+        .step-label { font-size: 0.78rem; }
+        .step-line { width: 30px; }
       }
-
-/* RESPONSIVE */
-        @media (max-width: 1200px) {
-            .user-nav-container { flex-direction: column; align-items: flex-start; gap: 12px; padding: 0 15px; }
-            .user-actions { width: 100%; flex-direction: column; align-items: flex-start; gap: 12px; }
-            .user-buttons { width: 100%; flex-wrap: wrap; }
-            .btn-user { flex: 1; min-width: 140px; justify-content: center; }
-            .footer-content { grid-template-columns: repeat(2, 1fr); }
-            .footer-bottom { grid-template-columns: repeat(2, 1fr); }
-            .banner-img { max-height: 240px; }
-        }
-        @media (max-width: 968px) {
-            .footer-content { grid-template-columns: 1fr; }
-            .footer-bottom { grid-template-columns: 1fr; text-align: center; }
-            .orgs-buttons { grid-template-columns: 1fr; }
-            .step-label { font-size: 0.78rem; }
-            .step-line { width: 30px; }
-        }
-        @media (max-width: 768px) {
-            .banner-img { max-height: 180px; object-position: center 30%; }
-            .user-profile .user-name { display: none; }
-            .user-buttons { flex-direction: column; }
-            .btn-user { min-width: 100%; justify-content: center; font-size: 0.85rem; padding: 8px 12px; }
-            .breadcrumb { font-size: 0.9rem; }
-            .form-card { padding: 20px; }
-            .stepper { flex-wrap: wrap; gap: 8px; justify-content: center; }
-            .step-line { width: 20px; margin: 0 6px; }
-            .step-actions { flex-direction: column; gap: 12px; }
-            .btn-siguiente, .btn-volver-paso { width: 100%; justify-content: center; }
-        }
-        @media (max-width: 480px) {
-            .banner-img { max-height: 140px; }
-            .user-profile .user-icon { width: 28px; height: 28px; font-size: 0.9rem; }
-            .step-label { display: none; }
-            .step-circle { width: 34px; height: 34px; font-size: 0.85rem; }
-        }
+      @media (max-width: 768px) {
+        .banner-img { max-height: 180px; object-position: center 30%; }
+        .user-profile .user-name { display: none; }
+        .user-buttons { flex-direction: column; }
+        .btn-user { min-width: 100%; justify-content: center; font-size: 0.85rem; padding: 8px 12px; }
+        .breadcrumb { font-size: 0.9rem; }
+        .form-card { padding: 20px; }
+        .stepper { flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .step-line { width: 20px; margin: 0 6px; }
+        .step-actions { flex-direction: column; gap: 12px; }
+        .btn-siguiente, .btn-volver-paso { width: 100%; justify-content: center; }
+      }
+      @media (max-width: 480px) {
+        .banner-img { max-height: 140px; }
+        .user-profile .user-icon { width: 28px; height: 28px; font-size: 0.9rem; }
+        .step-label { display: none; }
+        .step-circle { width: 34px; height: 34px; font-size: 0.85rem; }
+      }
     </style>
 </head>
 <body>
