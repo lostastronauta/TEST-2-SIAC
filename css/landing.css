@@ -1493,3 +1493,45 @@
     display: none;
   }
 }
+
+/* ==========================================
+   AJUSTES PARA ENLACES EN NAV PÚBLICO
+   (Restauración de color Azul Oscuro Original)
+   ========================================== */
+
+/* 1. Estilo base: Fondo Azul Oscuro Sólido */
+.public-nav .nav-tab {
+  text-decoration: none !important;
+  color: #ffffff !important; 
+  cursor: pointer;
+  border-bottom: none !important; /* Sin filetes */
+  
+  /* RESTAURAMOS EL COLOR ORIGINAL DEL BOTÓN */
+  background-color: var(--azul-medio) !important; 
+  
+  /* Si quieres que sean redondos como en la captura, asegúrate de tener esto: */
+  border-radius: 999px; 
+}
+
+/* 2. Estado visitado: Mantiene el blanco y el fondo oscuro */
+.public-nav .nav-tab:visited {
+  color: #ffffff !important;
+  background-color: var(--azul-medio) !important;
+}
+
+/* 3. Estado Activo: Idéntico a los demás (Azul Oscuro) */
+.public-nav .nav-tab.active {
+  border-bottom: none !important; 
+  font-weight: 700;
+  color: #ffffff !important;
+  /* Mismo fondo que los inactivos para uniformidad */
+  background-color: var(--azul-medio) !important; 
+}
+
+/* 4. Efecto hover: Solo un ligero aclarado al pasar el mouse */
+.public-nav .nav-tab:hover {
+  opacity: 0.9;
+  /* Opcional: un tono ligeramente más claro al hover */
+  background-color: #3a4b95 !important; 
+  color: #ffffff !important;
+}

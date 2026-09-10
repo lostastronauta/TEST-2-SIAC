@@ -45,6 +45,9 @@ window.logout = function () {
   goToRoute("index.html");
 };
 
+// ==========================================
+// HEADER HTML ACTUALIZADO CON NUEVO MENÚ
+// ==========================================
 const HEADER_HTML = `
 <header class="main-header">
     <div class="top-banner">
@@ -72,11 +75,35 @@ const HEADER_HTML = `
         <span class="main-nav-toggle-label">Menú</span>
     </button>
 
+    <!-- NUEVO MENÚ PÚBLICO CON ENLACES EXTERNOS -->
     <nav class="public-nav" id="publicNav">
-        <a href="javascript:void(0)" class="nav-tab" data-route="index.html#t-si">Competencias Supereduc</a>
-        <a href="javascript:void(0)" class="nav-tab" data-route="index.html#otros-organismos">Competencias de otros organismos</a>
-        <a href="https://www.supereduc.cl/contenidos-de-interes/como-fiscaliza-la-superintendencia-de-educacion/" class="nav-tab" target="_blank" rel="noopener">Cómo fiscalizamos</a>
-        <a href="https://www.supereduc.cl/contenidos-de-interes/nuevo-procedimiento-de-requerimientos-ciudadanos-de-la-superintendencia-de-educacion/" class="nav-tab" target="_blank" rel="noopener">Proceso de requerimientos</a>
+        <a href="https://www.supereduc.cl/competencias-supereduc/" 
+           class="nav-tab active" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          Nuestras Competencias
+        </a>
+
+        <a href="https://www.supereduc.cl/contenidos-de-interes/gcc-y-atencion-ciudadana/" 
+           class="nav-tab" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          Gestión Colaborativa de Conflictos
+        </a>
+
+        <a href="https://www.supereduc.cl/contenidos-de-interes/nuevo-procedimiento-de-requerimientos-ciudadanos-de-la-superintendencia-de-educacion/" 
+           class="nav-tab" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          Requerimientos Ciudadanos
+        </a>
+       
+        <a href="https://www.supereduc.cl/horarios-de-atencion/" 
+           class="nav-tab" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          Horarios de Atención
+        </a>
     </nav>
 
     <nav class="user-nav" id="userNav" style="display: none;">
@@ -175,6 +202,7 @@ function bindComponentInteractions() {
   var mainNavToggle = document.getElementById("mainNavToggle");
   var publicNav = document.getElementById("publicNav");
 
+  // Lógica del botón hamburguesa (móvil)
   if (mainNavToggle && publicNav) {
     mainNavToggle.addEventListener("click", function () {
       var isOpen = publicNav.classList.toggle("open");
@@ -183,38 +211,11 @@ function bindComponentInteractions() {
     });
   }
 
-  var publicTabs = document.querySelectorAll("#publicNav .nav-tab");
-  var currentFileForNav =
-    window.location.pathname.split("/").pop() || "index.html";
-  var currentHashForNav = window.location.hash;
+  // NOTA: Se eliminó la lógica antigua de "active tab" basada en data-route 
+  // para el menú público, ya que ahora son enlaces externos directos.
+  // El estado "active" se maneja directamente en el HTML del HEADER_HTML.
 
-  publicTabs.forEach(function (tab) {
-    var route = tab.getAttribute("data-route") || "";
-    var routeFile = route.split("#")[0].split("/").pop();
-    var routeHash = route.includes("#") ? "#" + route.split("#")[1] : "";
-    var isCurrent =
-      routeFile === currentFileForNav &&
-      (routeHash === "" || routeHash === currentHashForNav);
-
-    tab.classList.toggle("active", isCurrent);
-
-    tab.addEventListener("click", function () {
-      publicTabs.forEach(function (t) {
-        t.classList.remove("active");
-      });
-      tab.classList.add("active");
-
-      // Cierra el menú móvil al seleccionar una opción
-      if (publicNav && publicNav.classList.contains("open")) {
-        publicNav.classList.remove("open");
-        if (mainNavToggle) {
-          mainNavToggle.setAttribute("aria-expanded", "false");
-          mainNavToggle.classList.remove("open");
-        }
-      }
-    });
-  });
-
+  // Lógica para botones de usuario (mantener activo visualmente)
   var userButtons = document.querySelectorAll(".btn-user:not(.btn-logout)");
   userButtons.forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -225,18 +226,25 @@ function bindComponentInteractions() {
     });
   });
 
+  // Interceptador global de [data-route] para navegación interna
   document.querySelectorAll("[data-route]").forEach(function (el) {
     var route = el.dataset.route;
     if (!route) return;
 
     el.addEventListener("click", function (event) {
+      // Si es logout, usar la función dedicada
       if (el.classList.contains("btn-logout")) {
         event.preventDefault();
         window.logout();
         return;
       }
-      event.preventDefault();
-      goToRoute(route);
+      
+      // Solo prevenir default si NO es un enlace externo (target="_blank")
+      // Esto asegura que los enlaces internos sigan funcionando vía JS
+      if (!el.hasAttribute("target") || el.getAttribute("target") !== "_blank") {
+          event.preventDefault();
+          goToRoute(route);
+      }
     });
   });
 }
@@ -372,10 +380,6 @@ function injectComponents() {
 function injectChatbotNorma() {
   if (document.getElementById("cn-widget")) return;
 
-  // El widget interno posiciona sus elementos (ícono, burbuja de diálogo y chat
-  // al abrirse) con position:fixed dentro de su propio documento. Por eso el
-  // iframe contenedor debe ser lo bastante grande y transparente para que nada
-  // se recorte, sin importar si el chat está cerrado o abierto.
   var style = document.createElement("style");
   style.textContent =
     "#cn-widget{" +
@@ -402,12 +406,6 @@ function injectChatbotNorma() {
   iframe.setAttribute("scrolling", "no");
   document.body.appendChild(iframe);
 
-  // El iframe es transparente y mucho más grande que el ícono visible, por lo
-  // que sin esto bloquearía clics en el menú y en botones cercanos al borde
-  // derecho/inferior de la pantalla. Solo habilitamos los clics del iframe
-  // cuando el cursor está sobre la zona donde realmente aparece el ícono o la
-  // burbuja de Norma (esquina inferior derecha); el resto del tiempo los
-  // clics "atraviesan" el iframe hacia el contenido del sitio.
   var HOTZONE_WIDTH = 170;
   var HOTZONE_HEIGHT = 220;
 

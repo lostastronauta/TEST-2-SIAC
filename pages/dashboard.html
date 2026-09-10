@@ -239,6 +239,61 @@
         opacity: 1;
       }
 
+      /* ===== NUEVOS ESTILOS PARA EL TOOLTIP ===== */
+      .tooltip-container {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .custom-tooltip {
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        bottom: 110%; /* Posición sobre la tarjeta */
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 12px 16px;
+        border-radius: 6px;
+        z-index: 100;
+        width: 280px;
+        font-size: 0.85rem;
+        line-height: 1.4;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        pointer-events: none; /* Evita que el tooltip interfiera con clicks */
+      }
+
+      /* Flechita del tooltip */
+      .custom-tooltip::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -6px;
+        border-width: 6px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+      }
+
+      /* Mostrar tooltip al pasar el mouse sobre el contenedor */
+      .tooltip-container:hover .custom-tooltip {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      
+      /* Ajuste para móviles: ocultar tooltip o mostrarlo diferente si es necesario */
+      @media (max-width: 768px) {
+         .custom-tooltip {
+            display: none; /* En móviles a veces estorba, mejor ocultarlo */
+         }
+      }
+
       @media (max-width: 968px) {
         .options-primary {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -374,7 +429,7 @@
           &times;
         </button>
         <div class="info-previa-title">
-          Antes de ingresar tu requerimiento, te recomendamos:
+          Antes de ingresar tu requerimiento, te sugerimos:
         </div>
         <ol>
           <li>
@@ -385,11 +440,7 @@
             ayudar de la siguiente forma:
           </li>
         </ol>
-        <div class="info-importante">
-          <strong>*Importante:</strong> Ten presente que, en las denuncias
-          referidas a convivencia escolar, se priorizará siempre la gestión
-          colaborativa para gestionar el conflicto planteado.
-        </div>
+       
       </div>
 
       <div class="options-primary">
@@ -416,11 +467,20 @@
             <h3>Hacer seguimiento a mi caso</h3>
             <div class="subtitle">Revisa el estado de tus requerimientos</div>
           </a>
-          <a href="sugerencias.html" class="option-box secondary" data-route="pages/sugerencias.html">
-            <div class="card-icon"><i class="bi bi-star-fill"></i></div>
-            <h3>Sugerencias, felicitaciones o reclamos</h3>
-            <div class="subtitle">a la Superintendencia de Educación</div>
-          </a>
+          
+          <!-- INICIO DEL BLOQUE CON TOOLTIP INTEGRADO -->
+          <div class="tooltip-container">
+             <a href="sugerencias.html" class="option-box secondary" data-route="pages/sugerencias.html">
+                <div class="card-icon"><i class="bi bi-star-fill"></i></div>
+                <h3>Sugerencias, felicitaciones o reclamos</h3>
+                <div class="subtitle">a la Superintendencia de Educación</div>
+             </a>
+             <div class="custom-tooltip">
+                Ayúdanos a mejorar. Completa el formulario para enviar una sugerencia, felicitación o reclamo sobre la atención recibida en la Superintendencia de Educación.
+             </div>
+          </div>
+          <!-- FIN DEL BLOQUE CON TOOLTIP INTEGRADO -->
+
         </div>
       </div>
     </main>
