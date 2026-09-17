@@ -66,6 +66,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var btnClaveUnica = document.getElementById("btnClaveUnicaOficial");
   var btnDemoLogin = document.getElementById("btn-demo-login");
   var btnDenunciaCU = document.getElementById("btnDenunciaCU");
+  var selectedRole = "ciudadano";
+  var heroIdentificador = document.getElementById("heroIdentificador");
+  var heroIdentificadorLabel = document.getElementById("heroIdentificadorLabel");
 
   function openModal() {
     if (cuModal) {
@@ -103,14 +106,52 @@ document.addEventListener("DOMContentLoaded", function () {
   // HERO: pestañas Ciudadano / Establecimiento y form decorativo
   // ==========================================
   var heroTabs = document.querySelectorAll(".login-tab");
+  var heroTipoOption = document.getElementById("heroTipoOption");
+  var institutionalRoleField = document.getElementById("institutionalRoleField");
+  var institutionalRole = document.getElementById("institutionalRole");
+  var roleNames = {
+    ciudadano: "Ciudadano",
+    establecimiento: "Establecimiento",
+    sostenedor: "Sostenedor",
+  };
+
+  function updateLoginFields() {
+    var identifierType = selectedRole === "establecimiento" ? "RBD" : "RUT";
+    if (heroTipoOption) heroTipoOption.textContent = identifierType;
+    if (heroIdentificadorLabel) heroIdentificadorLabel.textContent = identifierType;
+    if (heroIdentificador) {
+      heroIdentificador.placeholder = "Ingrese su " + identifierType;
+      heroIdentificador.inputMode = identifierType === "RBD" ? "numeric" : "text";
+    }
+    if (btnDemoLogin) {
+      btnDemoLogin.textContent =
+        "Simular login " + (roleNames[selectedRole] || "Ciudadano");
+    }
+    if (institutionalRoleField) {
+      institutionalRoleField.hidden = selectedRole === "ciudadano";
+    }
+  }
+
   heroTabs.forEach(function (tab) {
     tab.addEventListener("click", function () {
       heroTabs.forEach(function (t) {
         t.classList.remove("active");
       });
       tab.classList.add("active");
+      selectedRole = tab.getAttribute("data-role") || "ciudadano";
+      if (selectedRole === "institucional") {
+        selectedRole = institutionalRole ? institutionalRole.value : "establecimiento";
+      }
+      updateLoginFields();
     });
   });
+  if (institutionalRole) {
+    institutionalRole.addEventListener("change", function () {
+      selectedRole = institutionalRole.value;
+      updateLoginFields();
+    });
+  }
+  updateLoginFields();
 
   var heroLoginForm = document.getElementById("heroLoginForm");
   if (heroLoginForm) {
@@ -141,11 +182,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==========================================
   // SIMULAR LOGIN → redirige a dashboard
   // ==========================================
-  function doLogin() {
+  function doLogin(role) {
+    role = role || selectedRole;
+    var identifier = heroIdentificador ? heroIdentificador.value.trim() : "";
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userName", "Jaime Alberto Galleguillos Araya");
     localStorage.setItem("userRut", "199777706");
     localStorage.setItem("loginMethod", "clave_unica");
+    localStorage.setItem("loginRole", role);
+    localStorage.setItem("loginIdentifier", identifier);
 
     closeModal();
 
@@ -169,6 +214,8 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.removeItem("userRut");
     localStorage.removeItem("userDatos");
     localStorage.removeItem("loginMethod");
+    localStorage.removeItem("loginRole");
+    localStorage.removeItem("loginIdentifier");
 
     showToast("Sesión cerrada", "Redirigiendo al inicio...", "info");
 
@@ -183,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (btnDemoLogin) {
     btnDemoLogin.addEventListener("click", function () {
-      doLogin();
+      doLogin(selectedRole);
     });
   }
 

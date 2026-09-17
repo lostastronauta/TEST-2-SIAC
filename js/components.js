@@ -41,6 +41,8 @@ window.logout = function () {
   localStorage.removeItem("userRut");
   localStorage.removeItem("userDatos");
   localStorage.removeItem("loginMethod");
+  localStorage.removeItem("loginRole");
+  localStorage.removeItem("loginIdentifier");
   window.setLoginState(false);
   goToRoute("index.html");
 };
@@ -53,7 +55,7 @@ const HEADER_HTML = `
     <div class="top-banner">
         <a href="javascript:void(0)" data-route="index.html" style="display:block; text-decoration:none; cursor:pointer;" title="Volver al inicio">
             <img id="bannerImage"
-                 src="${resolveAssetPath("img/banner-sie.png")}"
+                 src="${resolveAssetPath("img/banner-sie.webp")}"
                  alt="Superintendencia de Educación - Sistema Integral de Atención Ciudadana"
                  class="banner-img"
                  onerror="this.style.display='none'; document.getElementById('bannerFallback').style.display='flex';">
@@ -194,7 +196,7 @@ const FOOTER_HTML = `
     <div class="footer-bottom">
         <p>&copy; 2026 Superintendencia de Educación - Gobierno de Chile</p>
     </div>
-        <img class="footer-tricolor-star" src="${resolveAssetPath("img/tricolor estrella.png")}" alt="">
+        <img class="footer-tricolor-star" src="${resolveAssetPath("img/tricolor estrella.webp")}" alt="">
 </footer>
 `;
 

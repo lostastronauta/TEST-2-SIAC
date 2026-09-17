@@ -42,6 +42,23 @@
       .login-tabs {
         display: flex;
       }
+      .login-profile-selector {
+        padding: 14px 24px 0;
+      }
+      .login-profile-selector[hidden] {
+        display: none;
+      }
+      .access-help {
+        margin: 0;
+        padding: 12px 18px;
+        background: #f4f7fb;
+        color: var(--texto-claro);
+        font-size: 0.78rem;
+        line-height: 1.45;
+      }
+      .access-help a {
+        color: var(--azul-link);
+      }
       .login-tab {
         flex: 1;
         padding: 14px 10px;
@@ -53,6 +70,7 @@
         font-weight: 500;
         cursor: pointer;
         border-bottom: 3px solid transparent;
+        line-height: 1.2;
       }
       .login-tab.active {
         background: var(--blanco);
@@ -299,7 +317,7 @@
               class="btn-pill btn-pill--cu"
               style="width: 100%; justify-content: center"
             >
-              Simular Login Ciudadano (Nivel B)
+              Simular login según el perfil seleccionado
             </button>
           </div>
         </div>
@@ -324,20 +342,44 @@
       <div class="hero-grid">
         <div class="login-card">
           <div class="login-tabs">
-            <button type="button" class="login-tab active">Ciudadano</button>
-            <button type="button" class="login-tab">
-              Establecimiento/Sostenedor
-            </button>
+            <button type="button" class="login-tab active" data-role="ciudadano">Ciudadano</button>
+            <button type="button" class="login-tab" data-role="institucional">Establecimiento y/o Sostenedor</button>
           </div>
+          <p class="access-help">
+            Si ingresa como sostenedor o establecimiento su clave es la misma utilizada en la
+            Plataforma del Mineduc Comunidad Escolar. En caso de olvido recupérela a través del
+            sitio <a href="http://www.comunidadescolar.cl" target="_blank" rel="noopener noreferrer">www.comunidadescolar.cl</a>
+          </p>
           <form class="login-form" id="heroLoginForm">
+            <div class="login-profile-selector" id="institutionalRoleField" hidden>
+              <label for="institutionalRole">Ingresar como</label>
+              <select id="institutionalRole" class="login-control">
+                <option value="establecimiento">Establecimiento</option>
+                <option value="sostenedor">Sostenedor</option>
+              </select>
+            </div>
             <div class="login-field">
               <label for="heroTipo"
                 >Tipo <span class="required">(*)</span></label
               >
               <select id="heroTipo" class="login-control">
                 <option>Seleccione</option>
-                <option selected>RUT</option>
+                <option id="heroTipoOption" selected>RUT</option>
               </select>
+            </div>
+            <div class="login-field">
+              <label for="heroIdentificador"
+                ><span id="heroIdentificadorLabel">RUT</span>
+                <span class="required">(*)</span></label
+              >
+              <input
+                type="text"
+                id="heroIdentificador"
+                class="login-control"
+                placeholder="Ingrese su RUT"
+                autocomplete="username"
+                required
+              />
             </div>
             <div class="login-field">
               <label for="heroClave">Clave</label>
@@ -366,12 +408,12 @@
         </div>
 
         <div class="hero-info">
-          <h1>Sistema Integral de Atención Ciudadana</h1>
+          <h1><strong>Sistema Integral de Atención Ciudadana</strong></h1>
           <p class="hero-intro">
             La Superintendencia de Educación tiene como misión contribuir al
             aseguramiento de la calidad y equidad de la educación parvularia y
-            escolar, resguardando los derechos de la comunidad educativa a
-            través de la promoción del cumplimiento de la normativa educacional.
+            escolar, resguardando los derechos de las comunidades educativas y
+            promoviendo el cumplimiento de la normativa educacional.
           </p>
           <p class="hero-subtitulo">
             <strong>En este portal usted podrá:</strong>
@@ -390,19 +432,23 @@
               <span
                 >Solicitar una
                 <strong>Gestión Colaborativa de Conflictos (GCC),</strong>
-                orientada a generar espacios de diálogo y buscar soluciones
-                conjuntas a conflictos dentro de la comunidad educativa,
-                mediante mecanismos como la mediación, la conciliación y la
-                facilitación.</span
+                orientada a generar espacios de diálogo y favorecer la búsqueda
+                de soluciones conjuntas frente a conflictos en las comunidades
+                educativas, a través de los mecanismos establecidos para estos
+                efectos.</span
               >
             </li>
             <li>
               <i class="bi bi-check-circle-fill"></i>
               <span
-                ><strong>Ingresar denuncias </strong>para solicitar la
+                ><strong>Ingresar denuncias</strong> para solicitar la
                 investigación o fiscalización de hechos que puedan constituir
                 incumplimientos de la normativa educacional.</span
               >
+            </li>
+            <li>
+              <i class="bi bi-check-circle-fill"></i>
+              <span><strong>Registrar expedientes</strong> de expulsión y/o cancelación de matrícula (exclusivo para establecimientos).</span>
             </li>
             <li>
               <i class="bi bi-check-circle-fill"></i>
@@ -414,15 +460,14 @@
             <li>
               <i class="bi bi-check-circle-fill"></i>
               <span
-                >Presentar
-                <strong>sugerencias, felicitaciones y reclamos</strong>
+                >Presentar <strong>sugerencias, felicitaciones y reclamos</strong>
                 relacionados con la atención o los servicios de la
                 Superintendencia.</span
               >
             </li>
           </ul>
           <div class="hero-recuerda">
-            <strong>Recuerda:</strong> Los establecimientos educacionales deben
+            <strong>Recuerde:</strong> Los establecimientos educacionales deben
             contar con procedimientos para la atención de las consultas y
             reclamos de las y los integrantes de las comunidades educativas,
             procurando el resguardo de los derechos de las y los estudiantes.

@@ -453,9 +453,9 @@
           <h3>Solicitar Gestión Colaborativa de Conflictos</h3>
           <div class="subtitle">Mediación – Conciliación – Facilitación</div>
         </a>
-        <a href="preguntas-previas.html" class="option-box box-denuncia" data-route="pages/preguntas-previas.html">
+        <a id="dashboardPrimaryAction" href="preguntas-previas.html" class="option-box box-denuncia" data-route="pages/preguntas-previas.html">
           <div class="card-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
-          <h3>Ingresar denuncia al establecimiento y/o al sostenedor</h3>
+          <h3 id="dashboardPrimaryActionTitle">Ingresar denuncia al establecimiento y/o al sostenedor</h3>
         </a>
       </div>
 
@@ -499,6 +499,21 @@
               var name = localStorage.getItem("userName") || "Usuario";
               var nameEl = document.getElementById("userName");
               if (nameEl) nameEl.textContent = name;
+          })();
+
+          (function () {
+              var role = localStorage.getItem("loginRole") || "ciudadano";
+              var action = document.getElementById("dashboardPrimaryAction");
+              var title = document.getElementById("dashboardPrimaryActionTitle");
+              if (role === "establecimiento" && action && title) {
+                  action.href = "https://atencionsie.supereduc.cl/expulsionesYCancelaciones365";
+                  action.target = "_blank";
+                  action.rel = "noopener noreferrer";
+                  action.dataset.route = "";
+                  title.textContent = "Ingresar expedientes de expulsión y/o cancelación de matrícula";
+              } else if (role === "sostenedor" && action) {
+                  action.remove();
+              }
           })();
 
           // 2. Cerrar mensaje de información previa
@@ -563,6 +578,7 @@
                   localStorage.removeItem("userRut");
                   localStorage.removeItem("userDatos");
                   localStorage.removeItem("loginMethod");
+                  localStorage.removeItem("loginRole");
                   showToast("info", "Sesión cerrada", "Redirigiendo al inicio...");
                   setTimeout(function () {
                       if (window.goToRoute) {
