@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // HERO: pestañas Ciudadano / Establecimiento y form decorativo
   // ==========================================
   var heroTabs = document.querySelectorAll(".login-tab");
-  var heroTipoOption = document.getElementById("heroTipoOption");
+  var heroTipo = document.getElementById("heroTipo");
   var institutionalRoleField = document.getElementById("institutionalRoleField");
   var institutionalRole = document.getElementById("institutionalRole");
   var roleNames = {
@@ -117,7 +117,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateLoginFields() {
     var identifierType = selectedRole === "establecimiento" ? "RBD" : "RUT";
-    if (heroTipoOption) heroTipoOption.textContent = identifierType;
+    if (heroTipo) heroTipo.value = selectedRole;
+    if (heroTipo) {
+      Array.prototype.forEach.call(heroTipo.options, function (option) {
+        option.hidden =
+          selectedRole === "ciudadano"
+            ? option.value !== "ciudadano"
+            : option.value === "ciudadano";
+      });
+    }
     if (heroIdentificadorLabel) heroIdentificadorLabel.textContent = identifierType;
     if (heroIdentificador) {
       heroIdentificador.placeholder = "Ingrese su " + identifierType;
@@ -148,6 +156,15 @@ document.addEventListener("DOMContentLoaded", function () {
   if (institutionalRole) {
     institutionalRole.addEventListener("change", function () {
       selectedRole = institutionalRole.value;
+      updateLoginFields();
+    });
+  }
+  if (heroTipo) {
+    heroTipo.addEventListener("change", function () {
+      selectedRole = heroTipo.value;
+      if (institutionalRole && selectedRole !== "ciudadano") {
+        institutionalRole.value = selectedRole;
+      }
       updateLoginFields();
     });
   }
